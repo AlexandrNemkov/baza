@@ -1,0 +1,236 @@
+/* Full-screen layer holding overlay + bottom sheet. */
+.layer {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  border: 0;
+  width: 100%;
+  height: 100%;
+  cursor: default;
+}
+
+/* Bottom-anchored sheet, slides up. Sharp corners. */
+.panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  max-height: 88vh;
+  border-top: 1px solid var(--line);
+  animation: sheet-up 0.22s ease-out;
+}
+
+.panel:focus {
+  outline: none;
+}
+
+@keyframes sheet-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel {
+    animation: none;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-4) var(--space-3);
+  border-bottom: 1px solid var(--line);
+}
+
+.closeBtn {
+  width: var(--tap);
+  height: var(--tap);
+  margin-right: calc(-1 * var(--space-2));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.closeBtn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Scrollable facet groups. */
+.body {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: var(--space-2) var(--space-4) var(--space-5);
+}
+
+.group {
+  border: 0;
+  margin: 0;
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.group:last-child {
+  border-bottom: 0;
+}
+
+.legend {
+  padding: 0;
+  margin-bottom: var(--space-3);
+}
+
+/* Brand checkboxes. */
+.brandList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.checkRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--tap);
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.checkRow input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+/* Toggle chips (size / color). Sharp; selected = ink fill. */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.chip {
+  min-height: var(--tap);
+  padding: 0 var(--space-4);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  color: var(--text);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.chip:hover {
+  border-color: var(--text);
+}
+
+.chipActive {
+  background: var(--text);
+  border-color: var(--text);
+  color: #fff;
+}
+
+/* Price inputs. */
+.priceRow {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-3);
+}
+
+.priceField {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  flex: 1;
+}
+
+.priceLabel {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.priceInput {
+  width: 100%;
+  min-height: var(--tap);
+  padding: 0 var(--space-3);
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  color: var(--text);
+  font-size: 15px;
+}
+
+.priceInput:focus {
+  outline: none;
+  border-color: var(--text);
+}
+
+.priceDash {
+  padding-bottom: var(--space-3);
+  color: var(--text-faint);
+}
+
+/* Footer actions. */
+.footer {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-top: 1px solid var(--line);
+}
+
+.ghostBtn {
+  flex: 0 0 auto;
+  min-height: var(--tap);
+  padding: 0 var(--space-5);
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  color: var(--text);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ghostBtn:hover {
+  border-color: var(--text);
+}
+
+.applyBtn {
+  flex: 1;
+}
+
+/* Desktop: center the sheet as a modal panel for a tidier large-screen feel. */
+@media (min-width: 1024px) {
+  .panel {
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 420px;
+    max-height: 80vh;
+    border: 1px solid var(--line-strong);
+    animation: none;
+  }
+}

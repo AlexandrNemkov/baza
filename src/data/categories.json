@@ -1,0 +1,9 @@
+[
+  { "slug": "odezhda", "name": "Одежда" },
+  { "slug": "aksessuary", "name": "Аксессуары" },
+  { "slug": "rubashki", "name": "Рубашки", "parentSlug": "odezhda" },
+  { "slug": "palto", "name": "Пальто", "parentSlug": "odezhda" },
+  { "slug": "platya", "name": "Платья", "parentSlug": "odezhda" },
+  { "slug": "sumki", "name": "Сумки", "parentSlug": "aksessuary" },
+  { "slug": "platki", "name": "Платки", "parentSlug": "aksessuary" }
+]

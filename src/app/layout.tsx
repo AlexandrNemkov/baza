@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import JsonLd from "../components/JsonLd";
 import { organization } from "../lib/seo/jsonld";
+import { SITE } from "../lib/seo/config";
 import "../styles/tokens.css";
 import "../styles/globals.css";
 
@@ -14,11 +15,10 @@ const manrope = Manrope({
 
 export const metadata: Metadata = {
   title: {
-    default: "Baza — одежда и аксессуары российских дизайнеров",
+    default: SITE.title,
     template: "%s · Baza",
   },
-  description:
-    "Мультибренд-магазин одежды и аксессуаров российских дизайнеров. База гардероба от локальных брендов.",
+  description: SITE.description,
   robots: { index: false, follow: false },
 };
 

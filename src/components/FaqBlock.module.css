@@ -1,0 +1,13 @@
+.block {
+  display: flex;
+  flex-direction: column;
+}
+
+.heading {
+  margin-bottom: var(--space-3);
+}
+
+.list {
+  /* hairline borders are provided by each Accordion's top border */
+  border-bottom: 1px solid var(--line);
+}

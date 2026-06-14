@@ -1,0 +1,37 @@
+.item {
+  border-top: 1px solid var(--line);
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  background: transparent;
+  border: 0;
+  padding: var(--space-4) 0;
+  min-height: var(--tap);
+  cursor: pointer;
+  text-align: left;
+  color: var(--text);
+}
+
+.title {
+  /* uses .micro */
+  color: var(--text);
+}
+
+.icon {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  color: var(--text-muted);
+}
+
+.panel {
+  padding: 0 0 var(--space-4);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}

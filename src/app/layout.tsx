@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
+import JsonLd from "../components/JsonLd";
+import { organization } from "../lib/seo/jsonld";
 import "../styles/tokens.css";
 import "../styles/globals.css";
 
@@ -27,7 +29,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru" className={manrope.variable}>
-      <body>{children}</body>
+      <body>
+        <JsonLd data={organization()} />
+        {children}
+      </body>
     </html>
   );
 }

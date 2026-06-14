@@ -1,0 +1,61 @@
+.section {
+  padding-top: var(--space-10);
+  padding-bottom: var(--space-10);
+}
+
+.section > .micro {
+  margin-bottom: var(--space-5);
+}
+
+.categories {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .categories {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.brands {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .brands {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.advantages {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  border-top: 1px solid var(--line);
+  padding-top: var(--space-8);
+}
+
+@media (min-width: 768px) {
+  .advantages {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.advantage {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.advTitle {
+  color: var(--text);
+}
+
+.advText {
+  color: var(--text-muted);
+  font-size: 14px;
+}

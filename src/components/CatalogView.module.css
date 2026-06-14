@@ -1,0 +1,89 @@
+.root {
+  /* groups the sticky bar with its results */
+}
+
+.title {
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  margin: 0 auto var(--space-4);
+  max-width: var(--maxw);
+  padding-inline: var(--space-4);
+}
+
+/* Sticky filter/sort bar, sits just under the site header. */
+.bar {
+  position: sticky;
+  top: var(--header-h);
+  z-index: 30;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.barInner {
+  height: var(--tap);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filterBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--tap);
+  padding: 0 var(--space-1) 0 0;
+  background: transparent;
+  border: 0;
+  color: var(--text);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Active-facet count badge — terracotta. */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  letter-spacing: 0;
+  font-weight: 600;
+}
+
+.sortControl {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+}
+
+.sortSelect {
+  min-height: var(--tap);
+  padding: 0 var(--space-2);
+  background: transparent;
+  border: 0;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.sortSelect:focus {
+  outline: none;
+}
+
+.results {
+  padding-top: var(--space-4);
+  padding-bottom: var(--space-8);
+}
+
+.count {
+  margin-bottom: var(--space-4);
+}

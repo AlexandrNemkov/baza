@@ -1,0 +1,51 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.price {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.sizes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.label {
+  color: var(--text);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.chip {
+  min-width: var(--tap);
+  min-height: var(--tap);
+  padding: 0 var(--space-4);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  color: var(--text);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.chip:hover {
+  border-color: var(--text);
+}
+
+.chipActive {
+  background: var(--text);
+  border-color: var(--text);
+  color: #fff;
+}

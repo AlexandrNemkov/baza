@@ -95,9 +95,15 @@ export function facetOptions(products: Product[]): {
 
   const sorted = (set: Set<string>) => [...set].sort((a, b) => a.localeCompare(b, 'ru'));
 
+  // Sizes need garment progression (XS<S<M<L<XL…), not alphabetical order.
+  const SIZE_RANK: Record<string, number> = { XS: 0, S: 1, M: 2, L: 3, XL: 4, XXL: 5, ONE: 99 };
+  const sortedSizes = [...sizes].sort(
+    (a, b) => (SIZE_RANK[a] ?? 50) - (SIZE_RANK[b] ?? 50) || a.localeCompare(b, 'ru'),
+  );
+
   return {
     brands: sorted(brands),
-    sizes: sorted(sizes),
+    sizes: sortedSizes,
     colors: sorted(colors),
   };
 }

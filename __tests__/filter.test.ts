@@ -159,7 +159,15 @@ describe('facetOptions', () => {
   it('returns unique, sorted brand/size/color options', () => {
     const opts = facetOptions(products);
     expect(opts.brands).toEqual(['lesyanebo', 'tgrunge', 'volchok']);
-    expect(opts.sizes).toEqual(['L', 'M', 'S', 'XL']);
+    expect(opts.sizes).toEqual(['S', 'M', 'L', 'XL']);
     expect(opts.colors).toEqual(['Белый', 'Синий', 'Чёрный']);
+  });
+
+  it('orders sizes by garment progression, not alphabetically', () => {
+    const opts = facetOptions([
+      makeProduct({ slug: 'a', sizes: ['XL', 'XS', 'M'] }),
+      makeProduct({ slug: 'b', sizes: ['L', 'S'] }),
+    ]);
+    expect(opts.sizes).toEqual(['XS', 'S', 'M', 'L', 'XL']);
   });
 });

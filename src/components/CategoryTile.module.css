@@ -1,0 +1,26 @@
+.tile {
+  display: block;
+  position: relative;
+  color: var(--text);
+}
+
+.image {
+  aspect-ratio: 3 / 4;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-4);
+}
+
+.name {
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.nameOnImage {
+  color: #fff;
+  mix-blend-mode: normal;
+}

@@ -1,0 +1,36 @@
+.hero {
+  background: #e6e4df;
+}
+
+.inner {
+  padding: var(--space-10) 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .inner {
+    padding: calc(var(--space-10) * 1.6) 0;
+  }
+}
+
+.eyebrow {
+  color: var(--text-muted);
+}
+
+.headline {
+  font-size: clamp(32px, 7vw, 64px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--text);
+  max-width: 16ch;
+}
+
+.cta {
+  margin-top: var(--space-2);
+  font-size: 14px;
+  color: var(--text);
+}

@@ -7,6 +7,8 @@
 
 * {
   margin: 0;
+  /* Ultra-minimal / app-like: sharp corners everywhere. */
+  border-radius: 0;
 }
 
 html {
@@ -18,6 +20,7 @@ body {
   color: var(--text);
   font-family: var(--font-manrope), system-ui, sans-serif;
   line-height: 1.6;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -43,36 +46,34 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: -0.02em;
-  line-height: 1.2;
+  line-height: 1.15;
+  color: var(--text);
 }
 
+/* Links default to ink; terracotta is reserved for CTAs / active states. */
 a {
-  color: var(--accent);
+  color: var(--text);
   text-decoration: none;
-}
-
-a:hover {
-  color: var(--accent-hover);
 }
 
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
-  border-radius: var(--radius-sm);
 }
 
+/* ---- Layout ---- */
 .container {
   max-width: var(--maxw);
   margin-inline: auto;
-  padding-inline: 16px;
+  padding-inline: var(--space-4);
 }
 
 .grid-products {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  gap: var(--space-4);
 }
 
 @media (min-width: 768px) {
@@ -85,4 +86,53 @@ a:hover {
   .grid-products {
     grid-template-columns: repeat(4, 1fr);
   }
+}
+
+/* ---- Frosted glass surface ---- */
+.glass {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
+  backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
+}
+
+@supports not ((backdrop-filter: blur(2px)) or (-webkit-backdrop-filter: blur(2px))) {
+  .glass {
+    background: rgba(255, 255, 255, 0.96);
+  }
+}
+
+/* ---- Utilities ---- */
+.micro {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  font-weight: 500;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent);
+  color: #fff;
+  border: 0;
+  padding: 14px 22px;
+  min-height: var(--tap);
+  font: inherit;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: var(--accent-hover);
+  color: #fff;
+}
+
+.link-underline {
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 3px;
 }

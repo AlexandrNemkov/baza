@@ -1,0 +1,8 @@
+:root{
+  --bg:#F3F2F0; --surface:#FFFFFF; --line:#E8E7E3;
+  --text:#16161A; --text-muted:#6E6E6A;
+  --accent:#B5512F; --accent-hover:#9A4427;
+  --radius-sm:4px; --radius-md:8px;
+  --maxw:1200px; --space:16px;
+  --tap:44px;
+}

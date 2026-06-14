@@ -5,7 +5,6 @@ import JsonLd from '@/components/JsonLd';
 import { getAllBrands, getBrand, getProductsByBrand } from '@/data';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { itemList } from '@/lib/seo/jsonld';
-import { SITE } from '@/lib/seo/config';
 import styles from './page.module.css';
 
 type Params = { brand: string };
@@ -44,9 +43,9 @@ export default async function BrandPage({
     <div className={`container ${styles.page}`}>
       <Breadcrumbs
         items={[
-          { name: 'Главная', url: SITE.url + '/' },
-          { name: 'Бренды', url: SITE.url + '/brands' },
-          { name: b.name, url: SITE.url + '/brands/' + b.slug },
+          { name: 'Главная', path: '/' },
+          { name: 'Бренды', path: '/brands' },
+          { name: b.name, path: '/brands/' + b.slug },
         ]}
       />
 

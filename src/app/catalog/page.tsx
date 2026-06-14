@@ -4,7 +4,6 @@ import JsonLd from '@/components/JsonLd';
 import { getAllProducts } from '@/data';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { itemList } from '@/lib/seo/jsonld';
-import { SITE } from '@/lib/seo/config';
 
 export const metadata = buildMetadata({
   title: 'Каталог',
@@ -20,8 +19,8 @@ export default function CatalogPage() {
       <div className="container">
         <Breadcrumbs
           items={[
-            { name: 'Главная', url: SITE.url + '/' },
-            { name: 'Каталог', url: SITE.url + '/catalog' },
+            { name: 'Главная', path: '/' },
+            { name: 'Каталог', path: '/catalog' },
           ]}
         />
       </div>

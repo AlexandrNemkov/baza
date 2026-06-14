@@ -63,16 +63,16 @@ describe('product()', () => {
 describe('breadcrumb()', () => {
   it('emits a BreadcrumbList with 1-based positions in order', () => {
     const ld = breadcrumb([
-      { name: 'Главная', url: 'https://x/' },
-      { name: 'Одежда', url: 'https://x/odezhda' },
-      { name: 'Рубашка', url: 'https://x/odezhda/r' },
+      { name: 'Главная', path: '/' },
+      { name: 'Одежда', path: '/odezhda' },
+      { name: 'Рубашка', path: '/odezhda/r' },
     ]);
     expect(ld['@context']).toBe('https://schema.org');
     expect(ld['@type']).toBe('BreadcrumbList');
     expect(ld.itemListElement).toEqual([
-      { '@type': 'ListItem', position: 1, name: 'Главная', item: 'https://x/' },
-      { '@type': 'ListItem', position: 2, name: 'Одежда', item: 'https://x/odezhda' },
-      { '@type': 'ListItem', position: 3, name: 'Рубашка', item: 'https://x/odezhda/r' },
+      { '@type': 'ListItem', position: 1, name: 'Главная', item: SITE.url + '/' },
+      { '@type': 'ListItem', position: 2, name: 'Одежда', item: SITE.url + '/odezhda' },
+      { '@type': 'ListItem', position: 3, name: 'Рубашка', item: SITE.url + '/odezhda/r' },
     ]);
   });
 });

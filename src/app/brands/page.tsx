@@ -2,7 +2,6 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import BrandCard from '@/components/BrandCard';
 import { getAllBrands } from '@/data';
 import { buildMetadata } from '@/lib/seo/metadata';
-import { SITE } from '@/lib/seo/config';
 import styles from './page.module.css';
 
 export const metadata = buildMetadata({
@@ -18,8 +17,8 @@ export default function BrandsPage() {
     <div className={`container ${styles.page}`}>
       <Breadcrumbs
         items={[
-          { name: 'Главная', url: SITE.url + '/' },
-          { name: 'Бренды', url: SITE.url + '/brands' },
+          { name: 'Главная', path: '/' },
+          { name: 'Бренды', path: '/brands' },
         ]}
       />
       <h1 className={styles.title}>Бренды</h1>

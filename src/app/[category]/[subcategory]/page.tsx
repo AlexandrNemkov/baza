@@ -5,7 +5,6 @@ import JsonLd from '@/components/JsonLd';
 import { getAllCategories, getCategory, getProductsByCategory } from '@/data';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { itemList } from '@/lib/seo/jsonld';
-import { SITE } from '@/lib/seo/config';
 
 type Params = { category: string; subcategory: string };
 
@@ -49,14 +48,14 @@ export default async function SubcategoryPage({
       <div className="container">
         <Breadcrumbs
           items={[
-            { name: 'Главная', url: SITE.url + '/' },
+            { name: 'Главная', path: '/' },
             {
               name: parent?.name ?? category,
-              url: SITE.url + '/' + category,
+              path: '/' + category,
             },
             {
               name: sub.name,
-              url: SITE.url + '/' + category + '/' + sub.slug,
+              path: '/' + category + '/' + sub.slug,
             },
           ]}
         />

@@ -16,7 +16,6 @@ import {
 import type { SizeChartRow } from '@/data/types';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { product as productJsonLd } from '@/lib/seo/jsonld';
-import { SITE } from '@/lib/seo/config';
 import styles from './page.module.css';
 
 type Params = { slug: string };
@@ -73,19 +72,19 @@ export default async function ProductPage({
   const related = relatedProducts(p, 4);
 
   const breadcrumbItems = [
-    { name: 'Главная', url: SITE.url + '/' },
+    { name: 'Главная', path: '/' },
     ...(category
-      ? [{ name: category.name, url: SITE.url + '/' + category.slug }]
+      ? [{ name: category.name, path: '/' + category.slug }]
       : []),
     ...(category && subcategory
       ? [
           {
             name: subcategory.name,
-            url: SITE.url + '/' + category.slug + '/' + subcategory.slug,
+            path: '/' + category.slug + '/' + subcategory.slug,
           },
         ]
       : []),
-    { name: p.title, url: SITE.url + '/product/' + p.slug },
+    { name: p.title, path: '/product/' + p.slug },
   ];
 
   return (

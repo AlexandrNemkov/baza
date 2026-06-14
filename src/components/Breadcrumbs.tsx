@@ -3,12 +3,14 @@ import JsonLd from './JsonLd';
 import { breadcrumb } from '@/lib/seo/jsonld';
 import styles from './Breadcrumbs.module.css';
 
-type Crumb = { name: string; url: string };
+type Crumb = { name: string; path: string };
 
 /**
- * Breadcrumb trail. Pages pass `items` with absolute urls (built from
- * SITE.url) so the emitted BreadcrumbList JSON-LD carries canonical links.
- * The last item is rendered as plain text (current page), others as links.
+ * Breadcrumb trail. Pages pass `items` with RELATIVE app paths (e.g. `/`,
+ * `/odezhda`). Links use those relative paths so navigation stays client-side
+ * (Next `<Link>` handles basePath). The emitted BreadcrumbList JSON-LD rebuilds
+ * absolute urls from SITE.url so the structured data stays canonical. The last
+ * item is rendered as plain text (current page), others as links.
  */
 export default function Breadcrumbs({ items }: { items: Crumb[] }) {
   if (items.length === 0) return null;
@@ -20,13 +22,13 @@ export default function Breadcrumbs({ items }: { items: Crumb[] }) {
           {items.map((item, i) => {
             const isLast = i === items.length - 1;
             return (
-              <li key={item.url} className={styles.item}>
+              <li key={item.path} className={styles.item}>
                 {isLast ? (
                   <span className={styles.current} aria-current="page">
                     {item.name}
                   </span>
                 ) : (
-                  <Link href={item.url} className={styles.link}>
+                  <Link href={item.path} className={styles.link}>
                     {item.name}
                   </Link>
                 )}

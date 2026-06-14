@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import JsonLd from "../components/JsonLd";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 import { organization } from "../lib/seo/jsonld";
 import { SITE } from "../lib/seo/config";
 import "../styles/tokens.css";
@@ -31,7 +33,11 @@ export default function RootLayout({
     <html lang="ru" className={manrope.variable}>
       <body>
         <JsonLd data={organization()} />
-        {children}
+        <Header />
+        <main style={{ paddingTop: "var(--space-5)", minHeight: "60vh" }}>
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );

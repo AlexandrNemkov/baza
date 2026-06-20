@@ -3,6 +3,8 @@ import ProductGrid from '@/components/ProductGrid';
 import CategoryTile from '@/components/CategoryTile';
 import BrandCard from '@/components/BrandCard';
 import FaqBlock from '@/components/FaqBlock';
+import SectionHeading from '@/components/SectionHeading';
+import Reveal from '@/components/Reveal';
 import { getAllProducts, getAllBrands, getAllCategories } from '@/data';
 import { buildMetadata } from '@/lib/seo/metadata';
 import styles from './page.module.css';
@@ -44,26 +46,32 @@ export default function Home() {
       <Hero />
 
       <section className={`container ${styles.section}`}>
-        <p className="micro">Новинки</p>
-        <ProductGrid products={newProducts} />
+        <SectionHeading index="01" title="Новинки" href="/catalog" cta="Каталог" />
+        <Reveal>
+          <ProductGrid products={newProducts} />
+        </Reveal>
       </section>
 
       <section className={`container ${styles.section}`}>
-        <p className="micro">Категории</p>
-        <div className={styles.categories}>
-          {topCategories.map((c) => (
-            <CategoryTile key={c.slug} category={c} />
-          ))}
-        </div>
+        <SectionHeading index="02" title="Категории" />
+        <Reveal>
+          <div className={styles.categories}>
+            {topCategories.map((c) => (
+              <CategoryTile key={c.slug} category={c} />
+            ))}
+          </div>
+        </Reveal>
       </section>
 
       <section className={`container ${styles.section}`}>
-        <p className="micro">Бренды</p>
-        <div className={styles.brands}>
-          {brands.map((b) => (
-            <BrandCard key={b.slug} brand={b} />
-          ))}
-        </div>
+        <SectionHeading index="03" title="Бренды" href="/brands" cta="Все" />
+        <Reveal>
+          <div className={styles.brands}>
+            {brands.map((b) => (
+              <BrandCard key={b.slug} brand={b} />
+            ))}
+          </div>
+        </Reveal>
       </section>
 
       <section className={`container ${styles.section}`}>

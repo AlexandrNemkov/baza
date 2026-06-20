@@ -7,6 +7,11 @@
   margin-bottom: var(--space-5);
 }
 
+/* Space between an editorial SectionHeading and the content that follows it. */
+.section > :first-child:not(:last-child) {
+  margin-bottom: var(--space-6);
+}
+
 .categories {
   display: grid;
   grid-template-columns: 1fr;

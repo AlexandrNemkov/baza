@@ -14,11 +14,13 @@ export default function ProductCard({ product }: { product: Product }) {
 
   return (
     <Link href={`/product/${product.slug}`} className={styles.card}>
-      <div
-        className={styles.imageWrap}
-        style={{ background: cover?.color ?? 'var(--line-strong)' }}
-      >
-        {cover?.label && <span className={styles.placeholder}>{cover.label}</span>}
+      <div className={styles.imageWrap}>
+        <div
+          className={styles.imageInner}
+          style={{ background: cover?.color ?? 'var(--line-strong)' }}
+        >
+          {cover?.label && <span className={styles.placeholder}>{cover.label}</span>}
+        </div>
       </div>
       <div className={styles.body}>
         <span className={`micro ${styles.brand}`}>{brandName}</span>

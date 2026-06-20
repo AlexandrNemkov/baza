@@ -18,19 +18,42 @@
 
 .eyebrow {
   color: var(--text-muted);
+  letter-spacing: 0.2em;
 }
 
 .headline {
-  font-size: clamp(32px, 7vw, 64px);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(40px, 9vw, 76px);
   font-weight: 500;
-  letter-spacing: -0.03em;
-  line-height: 1.05;
+  letter-spacing: -0.02em;
+  line-height: 0.98;
   color: var(--text);
   max-width: 16ch;
 }
 
+.accent {
+  font-style: italic;
+  font-weight: 500;
+}
+
+.rule {
+  display: block;
+  width: 56px;
+  height: 2px;
+  background: var(--accent);
+  margin-top: var(--space-2);
+}
+
+.subcopy {
+  max-width: 42ch;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
 .cta {
   margin-top: var(--space-2);
-  font-size: 14px;
+  font-size: 13px;
+  letter-spacing: 0.04em;
   color: var(--text);
 }

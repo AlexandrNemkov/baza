@@ -95,14 +95,16 @@ export default async function ProductPage({
       <Breadcrumbs items={breadcrumbItems} />
 
       <div className={styles.layout}>
-        {/* Left: gallery column (scrolls naturally on desktop) */}
-        <Reveal as="div" className={styles.galleryCol}>
+        {/* Left: gallery column (scrolls naturally on desktop).
+            Not wrapped in Reveal — the main product image must be visible
+            immediately, never fade in. */}
+        <div className={styles.galleryCol}>
           <ProductGallery
             images={p.images}
             mark={brandInitial(brand?.name ?? p.brandSlug)}
             alt={`${brand?.name ?? p.brandSlug} — ${p.title}`}
           />
-        </Reveal>
+        </div>
 
         {/* Right: sticky info column */}
         <div className={styles.infoCol}>

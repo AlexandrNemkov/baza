@@ -4,6 +4,21 @@
   padding: var(--space-8) 0 var(--space-10);
 }
 
+/* Oversized editorial sign-off. Hairline-tonal, full-bleed within the
+   container, sits above the footer nav. Decorative (real wordmark is in the
+   header), so aria-hidden. */
+.wordmark {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(72px, 22vw, 280px);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  opacity: 0.1;
+  margin-bottom: var(--space-8);
+  user-select: none;
+}
+
 .cols {
   display: grid;
   grid-template-columns: 1fr;
@@ -29,6 +44,13 @@
 .link {
   font-size: 14px;
   color: var(--text-muted);
+  width: fit-content;
+  transition: color 180ms ease;
+}
+
+.link:hover,
+.link:focus-visible {
+  color: var(--text);
 }
 
 .brand {

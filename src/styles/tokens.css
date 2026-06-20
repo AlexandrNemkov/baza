@@ -1,6 +1,8 @@
 :root{
-  --bg:#F3F2F0; --surface:#FFFFFF;
-  --line:#ECEBE7; --line-strong:#E2E1DD;
+  /* Warm gallery-paper neutrals — keeps ink + terracotta, nudges the page
+     toward a calm, off-white lookbook feel. Text-on-bg stays WCAG AA. */
+  --bg:#F4F1EA; --surface:#FBFAF6;
+  --line:#E7E2D6; --line-strong:#DCD5C5;
   --text:#16161A; --text-muted:#6E6E6A; --text-faint:#9A968E;
   --accent:#B5512F; --accent-hover:#9A4427;
   --radius:0px;
@@ -8,6 +10,6 @@
   --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px;
   --space-5:24px; --space-6:32px; --space-8:48px; --space-10:64px;
   --tap:44px;
-  --glass-bg:rgba(255,255,255,0.72); --glass-blur:14px;
+  --glass-bg:rgba(251,250,246,0.72); --glass-blur:14px;
   --header-h:56px;
 }

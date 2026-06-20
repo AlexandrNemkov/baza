@@ -116,7 +116,7 @@ a {
 
 @supports not ((backdrop-filter: blur(2px)) or (-webkit-backdrop-filter: blur(2px))) {
   .glass {
-    background: rgba(255, 255, 255, 0.96);
+    background: rgba(251, 250, 246, 0.96);
   }
 }
 
@@ -224,5 +224,64 @@ a {
 
   .link-underline::after {
     transition: none;
+  }
+}
+
+/* ---- Cross-document page transitions (Move 3) ----
+   Opt into the native MPA view-transition. No-op in browsers that don't
+   support it; a gentle crossfade where they do. */
+@view-transition {
+  navigation: auto;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 320ms;
+    animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* No motion: cut instantly rather than crossfade. */
+  ::view-transition-group(*),
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+}
+
+/* ---- Smooth scrolling (Move 6), gated to non-reduced-motion ---- */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ---- Orchestrated hero load reveal (Move 1) ----
+   Each staggered element gets .load-rise; runs once on first paint.
+   Fully disabled (visible, no transform) under reduced motion. */
+@keyframes load-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.load-rise {
+  opacity: 0;
+  animation: load-rise 720ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  animation-delay: var(--load-delay, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .load-rise {
+    opacity: 1;
+    transform: none;
+    animation: none;
   }
 }

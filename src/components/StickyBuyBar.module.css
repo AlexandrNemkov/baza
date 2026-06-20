@@ -7,6 +7,14 @@
   border-top: 1px solid var(--line);
 }
 
+/* Mobile-only: the desktop info column is sticky with its own inline CTA, so
+   the fixed bar would be redundant ≥1024px. */
+@media (min-width: 1024px) {
+  .bar {
+    display: none;
+  }
+}
+
 .inner {
   display: flex;
   align-items: center;

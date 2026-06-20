@@ -1,10 +1,12 @@
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Breadcrumbs from '@/components/Breadcrumbs';
-import Gallery from '@/components/Gallery';
+import ProductGallery from '@/components/ProductGallery';
 import { brandInitial } from '@/components/Placeholder';
 import ProductBuyPanel from '@/components/ProductBuyPanel';
 import ProductGrid from '@/components/ProductGrid';
-import Accordion from '@/components/Accordion';
+import Reveal from '@/components/Reveal';
+import SectionHeading from '@/components/SectionHeading';
 import FaqBlock from '@/components/FaqBlock';
 import JsonLd from '@/components/JsonLd';
 import {
@@ -74,9 +76,7 @@ export default async function ProductPage({
 
   const breadcrumbItems = [
     { name: 'Главная', href: '/' },
-    ...(category
-      ? [{ name: category.name, href: '/' + category.slug }]
-      : []),
+    ...(category ? [{ name: category.name, href: '/' + category.slug }] : []),
     ...(category && subcategory
       ? [
           {
@@ -88,50 +88,68 @@ export default async function ProductPage({
     { name: p.title, href: '/product/' + p.slug },
   ];
 
+  const brandHref = '/brands/' + p.brandSlug;
+
   return (
     <div className={`container ${styles.page}`}>
       <Breadcrumbs items={breadcrumbItems} />
 
-      <Gallery
-        images={p.images}
-        mark={brandInitial(brand?.name ?? p.brandSlug)}
-        alt={`${brand?.name ?? p.brandSlug} — ${p.title}`}
-      />
+      <div className={styles.layout}>
+        {/* Left: gallery column (scrolls naturally on desktop) */}
+        <Reveal as="div" className={styles.galleryCol}>
+          <ProductGallery
+            images={p.images}
+            mark={brandInitial(brand?.name ?? p.brandSlug)}
+            alt={`${brand?.name ?? p.brandSlug} — ${p.title}`}
+          />
+        </Reveal>
 
-      <div className={styles.head}>
-        {brand && <p className={`micro ${styles.brand}`}>{brand.name}</p>}
-        <h1 className={styles.title}>{p.title}</h1>
+        {/* Right: sticky info column */}
+        <div className={styles.infoCol}>
+          <div className={styles.info}>
+            {brand && (
+              <Link href={brandHref} className={`micro ${styles.brand} link-underline`}>
+                {brand.name}
+              </Link>
+            )}
+            <h1 className={styles.title}>{p.title}</h1>
+
+            <p className={styles.lead}>{p.description}</p>
+
+            <ProductBuyPanel
+              price={p.price}
+              sizes={p.sizes}
+              sizeChart={<SizeChart chart={p.sizeChart} />}
+              careContent={
+                <>
+                  <p className={styles.text}>{p.composition}</p>
+                  <p className={styles.text}>{p.care}</p>
+                </>
+              }
+            />
+          </div>
+        </div>
       </div>
 
-      <ProductBuyPanel price={p.price} sizes={p.sizes} />
-
-      <div className={styles.accordions}>
-        <Accordion title="Описание" defaultOpen>
-          <p className={styles.text}>{p.description}</p>
-        </Accordion>
-        <Accordion title="Состав и уход">
-          <p className={styles.text}>{p.composition}</p>
-          <p className={styles.text}>{p.care}</p>
-        </Accordion>
-        <Accordion title="Размеры">
-          <SizeChart chart={p.sizeChart} />
-        </Accordion>
-        <Accordion title="Доставка">
-          <p className={styles.text}>
-            Доставляем по всей России курьерскими службами и почтой. Сроки и
-            стоимость рассчитываются при оформлении заказа. Возврат — в течение
-            14 дней при сохранении товарного вида.
-          </p>
-        </Accordion>
-      </div>
+      {/* Below the fold (full width) */}
+      {brand && (
+        <section className={styles.brandBlock}>
+          <p className="micro">О бренде</p>
+          <h2 className={styles.brandName}>{brand.name}</h2>
+          <p className={styles.brandText}>{brand.description}</p>
+          <Link href={brandHref} className={`link-underline ${styles.brandCta}`}>
+            Все вещи бренда
+          </Link>
+        </section>
+      )}
 
       <FaqBlock items={p.faq} />
 
       {related.length > 0 && (
-        <section className={styles.related}>
-          <p className="micro">Похожее</p>
+        <Reveal as="section" className={styles.related}>
+          <SectionHeading index="04" title="Похожие вещи" />
           <ProductGrid products={related} />
-        </section>
+        </Reveal>
       )}
 
       <JsonLd data={productJsonLd(p)} />

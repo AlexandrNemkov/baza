@@ -1,4 +1,18 @@
 .gallery {
+  width: 100%;
+}
+
+/* ---- Desktop: vertical stack (hidden on mobile) ---- */
+.stack {
+  display: none;
+}
+
+.plate {
+  width: 100%;
+}
+
+/* ---- Mobile: swipeable carousel ---- */
+.carousel {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
@@ -38,4 +52,16 @@
 
 .dotActive {
   background: var(--accent);
+}
+
+@media (min-width: 1024px) {
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .carousel {
+    display: none;
+  }
 }

@@ -2,29 +2,67 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
+  /* Clears the fixed mobile StickyBuyBar; trimmed on desktop where it's hidden. */
   padding-bottom: 96px;
 }
 
-.head {
+/* ---- Two-column editorial layout ---- */
+.layout {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: var(--space-5);
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
 }
 
 .brand {
+  align-self: flex-start;
   color: var(--text-muted);
 }
 
 .title {
-  font-size: 24px;
+  font-size: clamp(26px, 4vw, 38px);
   letter-spacing: -0.02em;
+  line-height: 1.06;
 }
 
-.accordions {
-  display: flex;
-  flex-direction: column;
+.lead {
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.65;
+  max-width: 46ch;
 }
 
+@media (min-width: 1024px) {
+  .layout {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--space-8);
+  }
+
+  .galleryCol {
+    flex: 1 1 60%;
+    min-width: 0;
+  }
+
+  .infoCol {
+    flex: 1 1 40%;
+    min-width: 0;
+    align-self: stretch;
+  }
+
+  .info {
+    position: sticky;
+    top: calc(var(--header-h) + var(--space-4));
+    gap: var(--space-5);
+  }
+}
+
+/* ---- Shared text bits (used by SizeChart + accordion content) ---- */
 .text {
   color: var(--text-muted);
   font-size: 14px;
@@ -56,9 +94,43 @@
   color: var(--text);
 }
 
+/* ---- "О бренде" mini-block ---- */
+.brandBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-6) 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.brandName {
+  font-size: clamp(22px, 3vw, 28px);
+}
+
+.brandText {
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.65;
+  max-width: 60ch;
+}
+
+.brandCta {
+  align-self: flex-start;
+  font-size: 13px;
+  margin-top: var(--space-2);
+}
+
+/* ---- Related ---- */
 .related {
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
-  padding-top: var(--space-6);
+  padding-top: var(--space-4);
+}
+
+@media (min-width: 1024px) {
+  .page {
+    padding-bottom: var(--space-10);
+  }
 }

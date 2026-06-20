@@ -1,59 +1,129 @@
 .hero {
-  background: #e6e4df;
+  /* Full-height magazine cover. Sits on warm paper — no separate fill so the
+     whitespace reads as one calm field. */
+  background: var(--bg);
 }
 
 .inner {
-  padding: var(--space-10) 0;
+  min-height: calc(100svh - var(--header-h) - var(--space-5));
+  padding: var(--space-10) 0 var(--space-8);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: center;
   gap: var(--space-4);
-}
-
-@media (min-width: 768px) {
-  .inner {
-    padding: calc(var(--space-10) * 1.6) 0;
-  }
+  position: relative;
 }
 
 .eyebrow {
   color: var(--text-muted);
-  letter-spacing: 0.2em;
+  letter-spacing: 0.22em;
 }
 
 .headline {
   font-family: var(--font-display), Georgia, serif;
-  font-size: clamp(40px, 9vw, 76px);
+  font-size: clamp(44px, 12vw, 132px);
   font-weight: 500;
   letter-spacing: -0.02em;
-  line-height: 0.98;
+  line-height: 0.95;
   color: var(--text);
-  max-width: 16ch;
+  text-wrap: balance;
+  margin-block: var(--space-1);
 }
 
 .accent {
   font-style: italic;
   font-weight: 500;
+  color: var(--accent);
 }
 
 .rule {
   display: block;
-  width: 56px;
+  width: 64px;
   height: 2px;
   background: var(--accent);
-  margin-top: var(--space-2);
+  margin-block: var(--space-2);
 }
 
 .subcopy {
-  max-width: 42ch;
-  font-size: 15px;
+  max-width: 44ch;
+  font-size: 16px;
   line-height: 1.6;
   color: var(--text-muted);
 }
 
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  margin-top: var(--space-3);
+  flex-wrap: wrap;
+}
+
 .cta {
-  margin-top: var(--space-2);
-  font-size: 13px;
+  font-size: 14px;
   letter-spacing: 0.04em;
   color: var(--text);
+  font-weight: 500;
+}
+
+.secondary {
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
+.meta {
+  margin-top: var(--space-5);
+  color: var(--text-faint);
+  letter-spacing: 0.18em;
+}
+
+/* Bottom scroll cue, pinned to the corner of the cover. Static under
+   reduced motion (the line just doesn't pulse). */
+.scrollCue {
+  position: absolute;
+  right: 0;
+  bottom: var(--space-8);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+@media (min-width: 768px) {
+  .scrollCue {
+    display: flex;
+  }
+}
+
+.scrollLabel {
+  writing-mode: vertical-rl;
+  color: var(--text-faint);
+  letter-spacing: 0.2em;
+}
+
+.scrollLine {
+  width: 1px;
+  height: 40px;
+  background: var(--line-strong);
+  transform-origin: top;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .scrollLine {
+    animation: scroll-pulse 2400ms ease-in-out infinite;
+  }
+}
+
+@keyframes scroll-pulse {
+  0%,
+  100% {
+    transform: scaleY(0.4);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
 }

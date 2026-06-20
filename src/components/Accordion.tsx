@@ -25,21 +25,45 @@ type AccordionProps = {
   title: string;
   children: ReactNode;
   defaultOpen?: boolean;
+  /**
+   * Controlled mode: when `open` is provided, the parent owns the open state
+   * and must update it via `onToggle`. Used by the PDP "Таблица размеров" link
+   * to expand the Размеры row. Omit both for the default uncontrolled mode.
+   */
+  open?: boolean;
+  onToggle?: (next: boolean) => void;
+  /** Optional anchor id so the panel can be smooth-scrolled into view. */
+  id?: string;
 };
 
 /** Single hairline-bordered collapsible row with a uppercase micro title. */
-export default function Accordion({ title, children, defaultOpen = false }: AccordionProps) {
-  const [open, setOpen] = useState(defaultOpen);
+export default function Accordion({
+  title,
+  children,
+  defaultOpen = false,
+  open: controlledOpen,
+  onToggle,
+  id,
+}: AccordionProps) {
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen);
+  const isControlled = controlledOpen !== undefined;
+  const open = isControlled ? controlledOpen : uncontrolledOpen;
   const panelId = useId();
 
+  const toggle = () => {
+    const next = !open;
+    if (!isControlled) setUncontrolledOpen(next);
+    onToggle?.(next);
+  };
+
   return (
-    <div className={styles.item}>
+    <div className={styles.item} id={id}>
       <button
         type="button"
         className={styles.header}
         aria-expanded={open}
         aria-controls={panelId}
-        onClick={() => setOpen((v) => !v)}
+        onClick={toggle}
       >
         <span className={`micro ${styles.title}`}>{title}</span>
         {open ? <MinusIcon /> : <PlusIcon />}

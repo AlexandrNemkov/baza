@@ -1,23 +1,49 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import type { ReactNode } from 'react';
+import Accordion from './Accordion';
 import StickyBuyBar from './StickyBuyBar';
 import styles from './ProductBuyPanel.module.css';
 
 type ProductBuyPanelProps = {
   price: number;
   sizes: string[];
+  /** Rendered SizeChart (table or string) for the Размеры accordion. */
+  sizeChart: ReactNode;
+  /** Composition + care copy for the "Состав и уход" accordion. */
+  careContent: ReactNode;
 };
 
+const SIZE_CHART_ID = 'pdp-size-chart';
+
 /**
- * Client panel that owns the selected-size state and shares it between the
- * sharp segmented size selector and the fixed StickyBuyBar. Visual only — no
- * cart logic. Price is shown with weight 500.
+ * Client info panel for the editorial PDP. Owns the selected-size state and
+ * shares it between the sharp segmented size selector and the mobile-only
+ * StickyBuyBar. Also owns the open state of the Размеры accordion so the inline
+ * "Таблица размеров" link can expand + scroll to it.
+ *
+ * Visual only — no cart logic. Price is shown with weight 500.
  */
-export default function ProductBuyPanel({ price, sizes }: ProductBuyPanelProps) {
+export default function ProductBuyPanel({
+  price,
+  sizes,
+  sizeChart,
+  careContent,
+}: ProductBuyPanelProps) {
   const [selectedSize, setSelectedSize] = useState<string | undefined>(
     sizes[0],
   );
+  const [sizeChartOpen, setSizeChartOpen] = useState(false);
+  const chartRef = useRef<HTMLDivElement>(null);
+
+  const openSizeChart = () => {
+    setSizeChartOpen(true);
+    // Defer to next frame so the panel is expanded before we scroll to it.
+    requestAnimationFrame(() => {
+      chartRef.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    });
+  };
 
   return (
     <div className={styles.panel}>
@@ -25,7 +51,16 @@ export default function ProductBuyPanel({ price, sizes }: ProductBuyPanelProps) 
 
       {sizes.length > 0 && (
         <div className={styles.sizes}>
-          <p className={`micro ${styles.label}`}>Размер</p>
+          <div className={styles.sizeRow}>
+            <p className={`micro ${styles.label}`}>Размер</p>
+            <button
+              type="button"
+              className={`link-underline ${styles.chartLink}`}
+              onClick={openSizeChart}
+            >
+              Таблица размеров
+            </button>
+          </div>
           <div className={styles.chips} role="group" aria-label="Размер">
             {sizes.map((size) => {
               const active = size === selectedSize;
@@ -44,6 +79,35 @@ export default function ProductBuyPanel({ price, sizes }: ProductBuyPanelProps) 
           </div>
         </div>
       )}
+
+      <button type="button" className={`btn ${styles.cta}`}>
+        В корзину
+      </button>
+
+      <p className={styles.meta}>
+        Доставка по РФ · Возврат 14 дней · Оплата картой и СБП
+      </p>
+
+      <div className={styles.accordions}>
+        <Accordion title="Состав и уход">{careContent}</Accordion>
+        <div ref={chartRef}>
+          <Accordion
+            title="Размеры"
+            id={SIZE_CHART_ID}
+            open={sizeChartOpen}
+            onToggle={setSizeChartOpen}
+          >
+            {sizeChart}
+          </Accordion>
+        </div>
+        <Accordion title="Доставка">
+          <p className={styles.text}>
+            Доставляем по всей России курьерскими службами и почтой. Сроки и
+            стоимость рассчитываются при оформлении заказа. Возврат — в течение
+            14 дней при сохранении товарного вида.
+          </p>
+        </Accordion>
+      </div>
 
       <StickyBuyBar price={price} selectedSize={selectedSize} />
     </div>

@@ -2,6 +2,7 @@ import Hero from '@/components/Hero';
 import ProductGrid from '@/components/ProductGrid';
 import CategoryTile from '@/components/CategoryTile';
 import BrandCard from '@/components/BrandCard';
+import Marquee from '@/components/Marquee';
 import FaqBlock from '@/components/FaqBlock';
 import SectionHeading from '@/components/SectionHeading';
 import Reveal from '@/components/Reveal';
@@ -62,6 +63,8 @@ export default function Home() {
           </div>
         </Reveal>
       </section>
+
+      <Marquee items={brands.map((b) => b.name)} />
 
       <section className={`container ${styles.section}`}>
         <SectionHeading index="03" title="Бренды" href="/brands" cta="Все" />

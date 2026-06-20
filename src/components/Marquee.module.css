@@ -1,0 +1,39 @@
+.marquee {
+  overflow: hidden;
+  border-block: 1px solid var(--line);
+  padding-block: var(--space-5);
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.track {
+  display: flex;
+  width: max-content;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .track {
+    animation: marquee-scroll 38s linear infinite;
+  }
+}
+
+.group {
+  white-space: nowrap;
+  padding-right: 0.3em;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(28px, 6vw, 56px);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    /* Two identical groups; shift by exactly one for a seamless loop. */
+    transform: translateX(-50%);
+  }
+}

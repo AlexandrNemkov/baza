@@ -23,6 +23,10 @@ export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className="container">
+        <p className={styles.wordmark} aria-hidden="true">
+          Baza
+        </p>
+
         <div className={styles.cols}>
           <div className={styles.col}>
             <span className={styles.brand}>BAZA</span>

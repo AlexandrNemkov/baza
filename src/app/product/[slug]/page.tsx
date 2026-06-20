@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import Gallery from '@/components/Gallery';
+import { brandInitial } from '@/components/Placeholder';
 import ProductBuyPanel from '@/components/ProductBuyPanel';
 import ProductGrid from '@/components/ProductGrid';
 import Accordion from '@/components/Accordion';
@@ -91,7 +92,11 @@ export default async function ProductPage({
     <div className={`container ${styles.page}`}>
       <Breadcrumbs items={breadcrumbItems} />
 
-      <Gallery images={p.images} />
+      <Gallery
+        images={p.images}
+        mark={brandInitial(brand?.name ?? p.brandSlug)}
+        alt={`${brand?.name ?? p.brandSlug} — ${p.title}`}
+      />
 
       <div className={styles.head}>
         {brand && <p className={`micro ${styles.brand}`}>{brand.name}</p>}

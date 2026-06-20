@@ -19,17 +19,6 @@
 .slide {
   flex: 0 0 100%;
   scroll-snap-align: start;
-  aspect-ratio: 3 / 4;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.label {
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(22, 22, 26, 0.2);
 }
 
 .dots {

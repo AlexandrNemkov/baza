@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import ProductGrid from '@/components/ProductGrid';
+import Placeholder, { brandInitial } from '@/components/Placeholder';
 import JsonLd from '@/components/JsonLd';
 import { getAllBrands, getBrand, getProductsByBrand } from '@/data';
 import { buildMetadata } from '@/lib/seo/metadata';
@@ -50,10 +51,12 @@ export default async function BrandPage({
       />
 
       <section className={styles.intro}>
-        <div
+        <Placeholder
           className={styles.cover}
-          style={{ background: b.cover ?? '#E6E4DF' }}
-          aria-hidden="true"
+          tone={b.cover}
+          ratio="16 / 5"
+          mark={brandInitial(b.name)}
+          alt={`${b.name} — обложка бренда`}
         />
         <h1 className={styles.title}>{b.name}</h1>
         <p className={styles.desc}>{b.description}</p>

@@ -43,9 +43,9 @@ export default async function BrandPage({
     <div className={`container ${styles.page}`}>
       <Breadcrumbs
         items={[
-          { name: 'Главная', path: '/' },
-          { name: 'Бренды', path: '/brands' },
-          { name: b.name, path: '/brands/' + b.slug },
+          { name: 'Главная', href: '/' },
+          { name: 'Бренды', href: '/brands' },
+          { name: b.name, href: '/brands/' + b.slug },
         ]}
       />
 

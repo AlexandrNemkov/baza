@@ -19,8 +19,8 @@ export default function CatalogPage() {
       <div className="container">
         <Breadcrumbs
           items={[
-            { name: 'Главная', path: '/' },
-            { name: 'Каталог', path: '/catalog' },
+            { name: 'Главная', href: '/' },
+            { name: 'Каталог', href: '/catalog' },
           ]}
         />
       </div>

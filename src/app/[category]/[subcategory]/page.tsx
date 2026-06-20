@@ -48,14 +48,14 @@ export default async function SubcategoryPage({
       <div className="container">
         <Breadcrumbs
           items={[
-            { name: 'Главная', path: '/' },
+            { name: 'Главная', href: '/' },
             {
               name: parent?.name ?? category,
-              path: '/' + category,
+              href: '/' + category,
             },
             {
               name: sub.name,
-              path: '/' + category + '/' + sub.slug,
+              href: '/' + category + '/' + sub.slug,
             },
           ]}
         />

@@ -48,9 +48,9 @@ export default async function PodborkaPage({
       <div className={styles.page}>
         <Breadcrumbs
           items={[
-            { name: 'Главная', path: '/' },
-            { name: 'Подборки', path: '/podborki' },
-            { name: pod.title, path: '/podborki/' + pod.slug },
+            { name: 'Главная', href: '/' },
+            { name: 'Подборки', href: '/podborki' },
+            { name: pod.title, href: '/podborki/' + pod.slug },
           ]}
         />
 

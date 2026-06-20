@@ -15,8 +15,8 @@ export default function VozvratPage() {
       <div className={styles.page}>
         <Breadcrumbs
           items={[
-            { name: 'Главная', path: '/' },
-            { name: 'Возврат', path: '/vozvrat' },
+            { name: 'Главная', href: '/' },
+            { name: 'Возврат', href: '/vozvrat' },
           ]}
         />
         <h1 className={styles.title}>Возврат</h1>

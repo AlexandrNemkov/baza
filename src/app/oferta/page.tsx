@@ -14,8 +14,8 @@ export default function OfertaPage() {
       <div className={styles.page}>
         <Breadcrumbs
           items={[
-            { name: 'Главная', path: '/' },
-            { name: 'Публичная оферта', path: '/oferta' },
+            { name: 'Главная', href: '/' },
+            { name: 'Публичная оферта', href: '/oferta' },
           ]}
         />
         <h1 className={styles.title}>Публичная оферта</h1>

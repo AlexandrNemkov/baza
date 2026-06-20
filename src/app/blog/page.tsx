@@ -26,8 +26,8 @@ export default function BlogPage() {
       <div className={styles.page}>
         <Breadcrumbs
           items={[
-            { name: 'Главная', path: '/' },
-            { name: 'Журнал', path: '/blog' },
+            { name: 'Главная', href: '/' },
+            { name: 'Журнал', href: '/blog' },
           ]}
         />
         <h1 className={styles.title}>Журнал</h1>

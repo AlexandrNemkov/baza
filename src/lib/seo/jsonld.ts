@@ -31,7 +31,7 @@ export function product(p: Product) {
   };
 }
 
-export function breadcrumb(items: { name: string; path: string }[]) {
+export function breadcrumb(items: { name: string; href: string }[]) {
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -39,7 +39,7 @@ export function breadcrumb(items: { name: string; path: string }[]) {
       '@type': 'ListItem',
       position: i + 1,
       name: item.name,
-      item: SITE.url + item.path,
+      item: SITE.url + item.href,
     })),
   };
 }

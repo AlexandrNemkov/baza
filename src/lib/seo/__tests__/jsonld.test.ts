@@ -63,9 +63,9 @@ describe('product()', () => {
 describe('breadcrumb()', () => {
   it('emits a BreadcrumbList with 1-based positions in order', () => {
     const ld = breadcrumb([
-      { name: 'Главная', path: '/' },
-      { name: 'Одежда', path: '/odezhda' },
-      { name: 'Рубашка', path: '/odezhda/r' },
+      { name: 'Главная', href: '/' },
+      { name: 'Одежда', href: '/odezhda' },
+      { name: 'Рубашка', href: '/odezhda/r' },
     ]);
     expect(ld['@context']).toBe('https://schema.org');
     expect(ld['@type']).toBe('BreadcrumbList');

@@ -45,8 +45,8 @@ export default async function CategoryPage({
       <div className="container">
         <Breadcrumbs
           items={[
-            { name: 'Главная', path: '/' },
-            { name: cat.name, path: '/' + cat.slug },
+            { name: 'Главная', href: '/' },
+            { name: cat.name, href: '/' + cat.slug },
           ]}
         />
       </div>

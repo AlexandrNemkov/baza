@@ -19,8 +19,8 @@ export default function PodborkiPage() {
       <div className={styles.page}>
         <Breadcrumbs
           items={[
-            { name: 'Главная', path: '/' },
-            { name: 'Подборки', path: '/podborki' },
+            { name: 'Главная', href: '/' },
+            { name: 'Подборки', href: '/podborki' },
           ]}
         />
         <h1 className={styles.title}>Подборки</h1>

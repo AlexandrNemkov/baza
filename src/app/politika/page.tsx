@@ -15,8 +15,8 @@ export default function PolitikaPage() {
       <div className={styles.page}>
         <Breadcrumbs
           items={[
-            { name: 'Главная', path: '/' },
-            { name: 'Политика конфиденциальности', path: '/politika' },
+            { name: 'Главная', href: '/' },
+            { name: 'Политика конфиденциальности', href: '/politika' },
           ]}
         />
         <h1 className={styles.title}>Политика конфиденциальности</h1>

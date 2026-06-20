@@ -72,19 +72,19 @@ export default async function ProductPage({
   const related = relatedProducts(p, 4);
 
   const breadcrumbItems = [
-    { name: 'Главная', path: '/' },
+    { name: 'Главная', href: '/' },
     ...(category
-      ? [{ name: category.name, path: '/' + category.slug }]
+      ? [{ name: category.name, href: '/' + category.slug }]
       : []),
     ...(category && subcategory
       ? [
           {
             name: subcategory.name,
-            path: '/' + category.slug + '/' + subcategory.slug,
+            href: '/' + category.slug + '/' + subcategory.slug,
           },
         ]
       : []),
-    { name: p.title, path: '/product/' + p.slug },
+    { name: p.title, href: '/product/' + p.slug },
   ];
 
   return (

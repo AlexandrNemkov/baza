@@ -46,9 +46,9 @@ export default async function ArticlePage({
       <article className={styles.page}>
         <Breadcrumbs
           items={[
-            { name: 'Главная', path: '/' },
-            { name: 'Журнал', path: '/blog' },
-            { name: a.title, path: '/blog/' + a.slug },
+            { name: 'Главная', href: '/' },
+            { name: 'Журнал', href: '/blog' },
+            { name: a.title, href: '/blog/' + a.slug },
           ]}
         />
 

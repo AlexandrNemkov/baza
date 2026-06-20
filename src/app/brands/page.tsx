@@ -17,8 +17,8 @@ export default function BrandsPage() {
     <div className={`container ${styles.page}`}>
       <Breadcrumbs
         items={[
-          { name: 'Главная', path: '/' },
-          { name: 'Бренды', path: '/brands' },
+          { name: 'Главная', href: '/' },
+          { name: 'Бренды', href: '/brands' },
         ]}
       />
       <h1 className={styles.title}>Бренды</h1>

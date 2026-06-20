@@ -3,7 +3,7 @@ import JsonLd from './JsonLd';
 import { breadcrumb } from '@/lib/seo/jsonld';
 import styles from './Breadcrumbs.module.css';
 
-type Crumb = { name: string; path: string };
+type Crumb = { name: string; href: string };
 
 /**
  * Breadcrumb trail. Pages pass `items` with RELATIVE app paths (e.g. `/`,
@@ -22,13 +22,13 @@ export default function Breadcrumbs({ items }: { items: Crumb[] }) {
           {items.map((item, i) => {
             const isLast = i === items.length - 1;
             return (
-              <li key={item.path} className={styles.item}>
+              <li key={item.href} className={styles.item}>
                 {isLast ? (
                   <span className={styles.current} aria-current="page">
                     {item.name}
                   </span>
                 ) : (
-                  <Link href={item.path} className={styles.link}>
+                  <Link href={item.href} className={styles.link}>
                     {item.name}
                   </Link>
                 )}

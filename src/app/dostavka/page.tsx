@@ -15,8 +15,8 @@ export default function DostavkaPage() {
       <div className={styles.page}>
         <Breadcrumbs
           items={[
-            { name: 'Главная', path: '/' },
-            { name: 'Доставка', path: '/dostavka' },
+            { name: 'Главная', href: '/' },
+            { name: 'Доставка', href: '/dostavka' },
           ]}
         />
         <h1 className={styles.title}>Доставка</h1>

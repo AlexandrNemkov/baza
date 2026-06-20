@@ -15,8 +15,8 @@ export default function OplataPage() {
       <div className={styles.page}>
         <Breadcrumbs
           items={[
-            { name: 'Главная', path: '/' },
-            { name: 'Оплата', path: '/oplata' },
+            { name: 'Главная', href: '/' },
+            { name: 'Оплата', href: '/oplata' },
           ]}
         />
         <h1 className={styles.title}>Оплата</h1>

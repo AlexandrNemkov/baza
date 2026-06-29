@@ -4,7 +4,7 @@ import styles from './SectionHeading.module.css';
 type SectionHeadingProps = {
   /** Serif index numeral rendered in terracotta, e.g. "01". */
   index?: string;
-  /** Uppercase tracked eyebrow title (Manrope micro). */
+  /** Uppercase tracked eyebrow title (mono micro). */
   title: string;
   /** Optional relative path for the right-aligned CTA link. */
   href?: string;

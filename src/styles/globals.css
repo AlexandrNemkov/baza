@@ -17,9 +17,9 @@ html {
 
 body {
   background: var(--bg);
-  color: var(--text);
-  font-family: var(--font-manrope), system-ui, sans-serif;
-  line-height: 1.6;
+  color: var(--ink);
+  font-family: var(--font-rubik), system-ui, sans-serif;
+  line-height: 1.5;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
 }
@@ -43,11 +43,11 @@ select {
 h1,
 h2,
 h3 {
-  font-family: var(--font-display), Georgia, "Times New Roman", serif;
-  font-weight: 500;
-  letter-spacing: -0.015em;
-  line-height: 1.08;
-  color: var(--text);
+  font-family: var(--font-rubik), system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--ink);
 }
 
 h1 {
@@ -68,12 +68,12 @@ h6 {
   font-weight: 500;
   letter-spacing: -0.01em;
   line-height: 1.2;
-  color: var(--text);
+  color: var(--ink);
 }
 
-/* Links default to ink; terracotta is reserved for CTAs / active states. */
+/* Links default to ink; accent is reserved for hover states. */
 a {
-  color: var(--text);
+  color: var(--ink);
   text-decoration: none;
 }
 
@@ -83,10 +83,18 @@ a {
 }
 
 /* ---- Layout ---- */
-.container {
-  max-width: var(--maxw);
+.container,
+.wrap {
+  max-width: var(--container);
   margin-inline: auto;
-  padding-inline: var(--space-4);
+  padding-inline: var(--pad);
+}
+
+@media (max-width: 767px) {
+  .container,
+  .wrap {
+    padding-inline: var(--pad-mobile);
+  }
 }
 
 .grid-products {
@@ -107,95 +115,90 @@ a {
   }
 }
 
-/* ---- Frosted glass surface ---- */
-.glass {
-  background: var(--glass-bg);
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
-  backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
-}
-
-@supports not ((backdrop-filter: blur(2px)) or (-webkit-backdrop-filter: blur(2px))) {
-  .glass {
-    background: rgba(251, 250, 246, 0.96);
-  }
-}
-
 /* ---- Utilities ---- */
-.micro {
-  font-size: 11px;
-  letter-spacing: 0.14em;
+
+/* Caps/micro label — journal style */
+.micro,
+.cap,
+.br {
+  font-family: var(--font-mono), monospace;
   text-transform: uppercase;
-  color: var(--text-faint);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
   font-weight: 500;
 }
 
+.mono {
+  font-family: var(--font-mono), monospace;
+}
+
+.accent {
+  color: var(--accent);
+}
+
+/* ---- Button ---- */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--accent);
-  color: #fff;
+  background: var(--fill);
+  color: var(--on-accent);
   border: 0;
-  padding: 14px 22px;
+  padding: 15px 26px;
   min-height: var(--tap);
-  font: inherit;
+  font-family: var(--font-mono), monospace;
   font-size: 12px;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
-}
-
-.btn {
-  transition: background 180ms ease, transform 120ms ease;
+  transition: background 180ms ease, color 180ms ease, transform 120ms ease;
 }
 
 .btn:hover {
-  background: var(--accent-hover);
-  color: #fff;
+  background: var(--accent-d);
+  color: var(--on-accent);
 }
 
 .btn:active {
   transform: translateY(1px);
 }
 
-/* Animated underline: a pseudo-element rule that grows from the left. */
+.btn.ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+}
+
+.btn.ghost:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* ---- Underline link — C style (colour transition, no growing pseudo) ---- */
 .link-underline {
-  position: relative;
-  padding-bottom: 3px;
+  transition: color 0.2s;
 }
 
-.link-underline::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 1px;
-  background: currentColor;
-  transform: scaleX(1);
-  transform-origin: left;
-  transition: transform 240ms ease;
+.link-underline:hover,
+.link-underline:focus-visible {
+  color: var(--accent);
 }
 
-@media (hover: hover) {
-  .link-underline::after {
-    transform: scaleX(0);
-  }
-
-  .link-underline:hover::after,
-  .link-underline:focus-visible::after {
-    transform: scaleX(1);
+@media (prefers-reduced-motion: reduce) {
+  .link-underline {
+    transition: none;
   }
 }
 
-/* ---- Paper grain overlay (whisper-subtle, behind interactive UI) ---- */
+/* ---- Paper grain overlay ---- */
 .grain {
   position: fixed;
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  opacity: 0.04;
+  opacity: 0.05;
   mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 160px 160px;
@@ -221,13 +224,9 @@ a {
     transform: none;
     transition: none;
   }
-
-  .link-underline::after {
-    transition: none;
-  }
 }
 
-/* ---- Cross-document page transitions (Move 3) ----
+/* ---- Cross-document page transitions ----
    Opt into the native MPA view-transition. No-op in browsers that don't
    support it; a gentle crossfade where they do. */
 @view-transition {
@@ -251,14 +250,14 @@ a {
   }
 }
 
-/* ---- Smooth scrolling (Move 6), gated to non-reduced-motion ---- */
+/* ---- Smooth scrolling, gated to non-reduced-motion ---- */
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
   }
 }
 
-/* ---- Orchestrated hero load reveal (Move 1) ----
+/* ---- Orchestrated hero load reveal ----
    Each staggered element gets .load-rise; runs once on first paint.
    Fully disabled (visible, no transform) under reduced motion. */
 @keyframes load-rise {

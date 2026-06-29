@@ -6,7 +6,7 @@ type HeroProps = {
 };
 
 /**
- * Full-height editorial hero — a magazine cover. Eyebrow, oversized Spectral
+ * Full-height editorial hero — a magazine cover. Eyebrow, oversized Rubik
  * headline with an italic accent, a terracotta rule, a one-line statement, and
  * a primary CTA + secondary link. Elements fade-and-rise in sequence on first
  * load via staggered CSS `animation-delay` (disabled under reduced motion).

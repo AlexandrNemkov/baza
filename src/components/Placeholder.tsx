@@ -21,7 +21,7 @@ type PlaceholderProps = {
 
 /**
  * Art-directed image placeholder — a tonal "lookbook plate" used until real
- * photography is wired in. Renders a large, low-contrast Spectral mark over a
+ * photography is wired in. Renders a large, low-contrast mark over a
  * tonal ground with a micro caption in the corner, evoking a fashion plate
  * rather than an empty box. Decorative glyphs are aria-hidden; the plate
  * carries the real name via `role="img"` + `aria-label` for SEO/a11y.

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Manrope, Spectral } from "next/font/google";
+import { Rubik, JetBrains_Mono } from "next/font/google";
 import JsonLd from "../components/JsonLd";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -8,18 +8,18 @@ import { SITE } from "../lib/seo/config";
 import "../styles/tokens.css";
 import "../styles/globals.css";
 
-const manrope = Manrope({
-  weight: ["400", "500", "600"],
+const rubik = Rubik({
+  weight: ["400", "500", "600", "700", "800"],
+  style: ["normal", "italic"],
   subsets: ["latin", "cyrillic"],
-  variable: "--font-manrope",
+  variable: "--font-rubik",
   display: "swap",
 });
 
-const spectral = Spectral({
+const mono = JetBrains_Mono({
   weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
   subsets: ["latin", "cyrillic"],
-  variable: "--font-display",
+  variable: "--font-mono",
   display: "swap",
 });
 
@@ -38,7 +38,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru" className={`${manrope.variable} ${spectral.variable}`}>
+    <html lang="ru" className={`${rubik.variable} ${mono.variable}`}>
       <body>
         <JsonLd data={organization()} />
         <Header />

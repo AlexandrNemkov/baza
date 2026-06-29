@@ -1,32 +1,14 @@
 import type { Product } from '@/data/types';
+import { asset } from './basePath';
 
 /**
- * TEMPORARY sample imagery. Until real product photography is shot, we hotlink
- * free keyword-based photos from LoremFlickr so the demo reads like a real
- * shop. Each product gets a stable, on-theme image (keyword chosen by
- * subcategory; a slug-derived `lock` keeps it deterministic and distinct).
- *
- * Replace with real `image.src` values (own CDN / public/ assets) at launch —
- * see the spec. Nothing here is meant to ship to production.
+ * Локальные курированные фэшн-фото из public/img (p01.jpg … p16.jpg).
+ * Каждый продукт получает стабильное фото: номер определяется детерминированным
+ * хэшом slug + индекс слайда. При реальной съёмке заменяются на image.src
+ * из собственных данных продукта.
  */
 
-const KEYWORD_BY_SUBCATEGORY: Record<string, string> = {
-  rubashki: 'shirt,fashion',
-  palto: 'coat,fashion',
-  platya: 'dress,fashion',
-  sumki: 'handbag',
-  platki: 'scarf',
-};
-
-function keywordFor(product: Product): string {
-  if (product.subcategory && KEYWORD_BY_SUBCATEGORY[product.subcategory]) {
-    return KEYWORD_BY_SUBCATEGORY[product.subcategory];
-  }
-  if (product.category === 'aksessuary') return 'accessory,fashion';
-  return 'fashion,clothing';
-}
-
-/** Small stable hash of a string → non-negative integer. */
+/** Малый стабильный хэш строки → неотрицательное целое. */
 function hash(s: string): number {
   let h = 0;
   for (let i = 0; i < s.length; i++) {
@@ -36,10 +18,11 @@ function hash(s: string): number {
 }
 
 /**
- * Deterministic sample-photo URL for a product image at index `i`.
- * @param width / @param height — requested pixel size (cover-cropped).
+ * Детерминированный путь к локальному фото для продукта при индексе `i`.
+ * Параметры `_width` / `_height` оставлены для совместимости вызовов — не используются.
  */
-export function sampleImage(product: Product, i = 0, width = 640, height = 800): string {
-  const lock = (hash(product.slug) % 400) + i + 1;
-  return `https://loremflickr.com/${width}/${height}/${keywordFor(product)}?lock=${lock}`;
+export function sampleImage(product: Product, i = 0, _width?: number, _height?: number): string {
+  const n = ((hash(product.slug) + i) % 16) + 1;
+  const nn = String(n).padStart(2, '0');
+  return asset(`/img/p${nn}.jpg`);
 }

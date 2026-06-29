@@ -1,96 +1,113 @@
+import Link from 'next/link';
 import Hero from '@/components/Hero';
 import ProductGrid from '@/components/ProductGrid';
-import CategoryTile from '@/components/CategoryTile';
-import BrandCard from '@/components/BrandCard';
-import Marquee from '@/components/Marquee';
-import FaqBlock from '@/components/FaqBlock';
 import SectionHeading from '@/components/SectionHeading';
 import Reveal from '@/components/Reveal';
-import { getAllProducts, getAllBrands, getAllCategories } from '@/data';
+import NewsletterForm from '@/components/NewsletterForm';
+import { getAllProducts, getAllBrands } from '@/data';
+import { getAllArticles } from '@/data/blog';
+import { asset } from '@/lib/basePath';
 import { buildMetadata } from '@/lib/seo/metadata';
 import styles from './page.module.css';
 
 export const metadata = buildMetadata({ path: '/' });
 
-const HOME_FAQ = [
-  {
-    q: 'Что такое Baza?',
-    a: 'Baza — мультибренд-магазин одежды и аксессуаров российских дизайнеров. Мы собираем базу гардероба от локальных марок: спокойные вещи вне сезона с акцентом на крой и материалы.',
-  },
-  {
-    q: 'Как происходит доставка?',
-    a: 'Доставляем по всей России курьерскими службами и почтой. Сроки зависят от региона; стоимость рассчитывается при оформлении заказа.',
-  },
-  {
-    q: 'Какие способы оплаты доступны?',
-    a: 'Оплата картой онлайн при оформлении заказа. Все платежи проходят через защищённое соединение.',
-  },
-  {
-    q: 'Можно ли вернуть товар?',
-    a: 'Да. Вещь надлежащего качества можно вернуть в течение 14 дней с момента получения, если она не была в употреблении и сохранён товарный вид.',
-  },
-];
-
-const ADVANTAGES = [
-  { title: 'Доставка по РФ', text: 'Курьер и почта во все регионы.' },
-  { title: 'Удобная оплата', text: 'Картой онлайн, защищённое соединение.' },
-  { title: 'Локальные дизайнеры', text: 'Поддерживаем российские марки.' },
-];
-
 export default function Home() {
   const newProducts = getAllProducts().slice(0, 4);
-  const topCategories = getAllCategories().filter((c) => !c.parentSlug);
-  const brands = getAllBrands();
+  const brands = getAllBrands().slice(0, 5);
+  const articles = getAllArticles().slice(0, 3);
 
   return (
     <>
+      {/* 01 — HERO */}
       <Hero />
 
-      <section className={`container ${styles.section}`}>
-        <SectionHeading index="01" title="Новинки" href="/catalog" cta="Каталог" />
-        <Reveal>
-          <ProductGrid products={newProducts} />
+      {/* 02 — Новинки выпуска */}
+      <SectionHeading
+        index="02"
+        title="Новинки выпуска"
+        href="/catalog"
+        cta="Смотреть все →"
+      />
+      <Reveal>
+        <ProductGrid products={newProducts} />
+      </Reveal>
+
+      {/* 03 — FEATURE / LOOKBOOK */}
+      <section className={styles.feat}>
+        <Reveal className={styles.featImg}>
+          <img
+            src={asset('/img/p03.jpg')}
+            alt="Лукбук Baza FW26"
+            className={styles.featPhoto}
+          />
+          <span className={`mono ${styles.featIdx}`}>№ 03 / LOOKBOOK · FW26</span>
+        </Reveal>
+        <Reveal delay={100} className={styles.featTxt}>
+          <div className={`mono ${styles.featNo}`}>№ 03 — Съёмка сезона</div>
+          <h3 className={styles.featH3}>
+            Капсула,
+            <br />
+            которая молчит
+          </h3>
+          <p className={styles.featP}>
+            Восемь вещей, из которых собирается месяц образов. Снято в одном
+            свете, на одной фактуре — как разворот журнала.
+          </p>
+          <Link href="/blog" className="btn">
+            Смотреть съёмку →
+          </Link>
         </Reveal>
       </section>
 
-      <section className={`container ${styles.section}`}>
-        <SectionHeading index="02" title="Категории" />
-        <Reveal>
-          <div className={styles.categories}>
-            {topCategories.map((c) => (
-              <CategoryTile key={c.slug} category={c} />
-            ))}
-          </div>
-        </Reveal>
-      </section>
+      {/* 04 — Из журнала */}
+      <SectionHeading
+        index="04"
+        title="Из журнала"
+        href="/blog"
+        cta="Все статьи →"
+      />
+      <div className={styles.trio}>
+        {articles.map((a, i) => (
+          <Reveal key={a.slug} delay={i * 80} className={styles.trioCard}>
+            <div className={`mono ${styles.trioNo}`}>№ 0{i + 1}</div>
+            <div className={`cap ${styles.trioTag}`}>Журнал</div>
+            <h3 className={styles.trioH3}>{a.title}</h3>
+            <p className={styles.trioP}>{a.excerpt}</p>
+            <Link href={`/blog/${a.slug}`} className={`mono ${styles.trioMore}`}>
+              Читать →
+            </Link>
+          </Reveal>
+        ))}
+      </div>
 
-      <Marquee items={brands.map((b) => b.name)} />
+      {/* 05 — Бренды выпуска */}
+      <SectionHeading
+        index="05"
+        title="Бренды выпуска"
+        href="/brands"
+        cta="Все бренды →"
+      />
+      <div className={styles.bidx}>
+        {brands.map((b, i) => (
+          <Link key={b.slug} href={`/brands/${b.slug}`} className={styles.bidxRow}>
+            <span className={`mono ${styles.bidxN}`}>
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <span className={styles.bidxNm}>{b.name}</span>
+            <span className={`cap ${styles.bidxMeta}`}>{b.description.slice(0, 40)}…</span>
+          </Link>
+        ))}
+      </div>
 
-      <section className={`container ${styles.section}`}>
-        <SectionHeading index="03" title="Бренды" href="/brands" cta="Все" />
-        <Reveal>
-          <div className={styles.brands}>
-            {brands.map((b) => (
-              <BrandCard key={b.slug} brand={b} />
-            ))}
-          </div>
-        </Reveal>
-      </section>
-
-      <section className={`container ${styles.section}`}>
-        <div className={styles.advantages}>
-          {ADVANTAGES.map((a) => (
-            <div key={a.title} className={styles.advantage}>
-              <p className={`micro ${styles.advTitle}`}>{a.title}</p>
-              <p className={styles.advText}>{a.text}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className={`container ${styles.section}`}>
-        <FaqBlock items={HOME_FAQ} />
-      </section>
+      {/* 06 — Баннер-подписка */}
+      <Reveal className={styles.banner}>
+        <div className={`cap ${styles.bannerCap}`}>№ 06 — Письма Baza</div>
+        <h2 className={styles.bannerH2}>
+          Меньше, но <em className={styles.bannerEm}>своё</em>
+        </h2>
+        <NewsletterForm />
+      </Reveal>
     </>
   );
 }

@@ -1,129 +1,119 @@
+/* ---- Hero C-style: сплит 1.45fr / 1fr с бордером --rule ---- */
 .hero {
-  /* Full-height magazine cover. Sits on warm paper — no separate fill so the
-     whitespace reads as one calm field. */
-  background: var(--bg);
+  display: grid;
+  grid-template-columns: 1.45fr 1fr;
+  border-bottom: 1px solid var(--rule);
 }
 
-.inner {
-  min-height: calc(100svh - var(--header-h) - var(--space-5));
-  padding: var(--space-10) 0 var(--space-8);
+/* ЛЕВАЯ ПАНЕЛЬ */
+.L {
+  padding: 48px 32px 38px;
+  border-right: 1px solid var(--rule);
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: var(--space-4);
-  position: relative;
 }
 
-.eyebrow {
-  color: var(--text-muted);
-  letter-spacing: 0.22em;
+.kick {
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 11px;
 }
 
 .headline {
-  font-family: var(--font-display), Georgia, serif;
-  font-size: clamp(44px, 12vw, 132px);
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  line-height: 0.95;
-  color: var(--text);
-  text-wrap: balance;
-  margin-block: var(--space-1);
+  font-family: var(--font-rubik), 'Rubik', system-ui, sans-serif;
+  font-size: clamp(52px, 9.2vw, 128px);
+  line-height: 0.88;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  margin: 30px 0 0 -0.045em;
+  color: var(--ink);
 }
 
 .accent {
-  font-style: italic;
-  font-weight: 500;
   color: var(--accent);
+  font-style: italic;
+  font-weight: 600;
 }
 
-.rule {
-  display: block;
-  width: 64px;
-  height: 2px;
-  background: var(--accent);
-  margin-block: var(--space-2);
+.lead {
+  margin-top: 28px;
+  max-width: 48ch;
+  font-size: 16.5px;
+  color: #3a352b;
+  line-height: 1.5;
 }
 
-.subcopy {
-  max-width: 44ch;
-  font-size: 16px;
-  line-height: 1.6;
-  color: var(--text-muted);
-}
-
-.actions {
+.acts {
+  margin-top: auto;
+  padding-top: 34px;
   display: flex;
+  gap: 14px;
   align-items: center;
-  gap: var(--space-6);
-  margin-top: var(--space-3);
   flex-wrap: wrap;
 }
 
-.cta {
-  font-size: 14px;
-  letter-spacing: 0.04em;
-  color: var(--text);
-  font-weight: 500;
+.stat {
+  color: var(--muted);
+  font-size: 12px;
+  margin-left: auto;
 }
 
-.secondary {
-  font-size: 13px;
-  letter-spacing: 0.04em;
-  color: var(--text-muted);
+/* ПРАВАЯ ПАНЕЛЬ */
+.R {
+  position: relative;
+  background: #e2d9c7;
+  min-height: 480px;
+  display: flex;
+  align-items: flex-end;
+  padding: 18px;
+  overflow: hidden;
 }
 
-.meta {
-  margin-top: var(--space-5);
-  color: var(--text-faint);
-  letter-spacing: 0.18em;
-}
-
-/* Bottom scroll cue, pinned to the corner of the cover. Static under
-   reduced motion (the line just doesn't pulse). */
-.scrollCue {
+.photo {
   position: absolute;
-  right: 0;
-  bottom: var(--space-8);
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-2);
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
 }
 
-@media (min-width: 768px) {
-  .scrollCue {
-    display: flex;
+.idx {
+  position: absolute;
+  right: 18px;
+  top: 18px;
+  z-index: 2;
+  font-size: 11px;
+  color: #fff;
+  mix-blend-mode: difference;
+}
+
+.caption {
+  position: relative;
+  z-index: 2;
+  background: var(--bg);
+  padding: 6px 10px;
+}
+
+/* ---- Адаптив ---- */
+@media (max-width: 760px) {
+  .hero {
+    grid-template-columns: 1fr;
   }
-}
 
-.scrollLabel {
-  writing-mode: vertical-rl;
-  color: var(--text-faint);
-  letter-spacing: 0.2em;
-}
-
-.scrollLine {
-  width: 1px;
-  height: 40px;
-  background: var(--line-strong);
-  transform-origin: top;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .scrollLine {
-    animation: scroll-pulse 2400ms ease-in-out infinite;
+  .L {
+    border-right: 0;
+    padding: 32px 18px 28px;
   }
-}
 
-@keyframes scroll-pulse {
-  0%,
-  100% {
-    transform: scaleY(0.4);
-    opacity: 0.4;
+  .R {
+    border-top: 1px solid var(--rule);
+    min-height: 300px;
   }
-  50% {
-    transform: scaleY(1);
-    opacity: 1;
+
+  .stat {
+    margin-left: 0;
+    width: 100%;
   }
 }

@@ -1,75 +1,62 @@
 import Link from 'next/link';
+import { asset } from '@/lib/basePath';
+import { getAllProducts, getAllBrands } from '@/data';
 import styles from './Hero.module.css';
 
-type HeroProps = {
-  eyebrow?: string;
-};
-
 /**
- * Full-height editorial hero — a magazine cover. Eyebrow, oversized Rubik
- * headline with an italic accent, a terracotta rule, a one-line statement, and
- * a primary CTA + secondary link. Elements fade-and-rise in sequence on first
- * load via staggered CSS `animation-delay` (disabled under reduced motion).
+ * Hero в стиле C: сплит 1.45fr / 1fr с бордером --rule.
+ * Слева — текст + CTA; справа — фото-плашка с подписью.
+ * Появляется сразу через load-rise (без IntersectionObserver).
  */
-export default function Hero({
-  eyebrow = 'Мультибренд · Российские дизайнеры',
-}: HeroProps) {
+export default function Hero() {
+  const brandCount = getAllBrands().length;
+  const productCount = getAllProducts().length;
+
   return (
     <section className={styles.hero}>
-      <div className={`container ${styles.inner}`}>
-        <p
-          className={`micro ${styles.eyebrow} load-rise`}
-          style={{ '--load-delay': '60ms' } as React.CSSProperties}
-        >
-          {eyebrow}
-        </p>
+      {/* ЛЕВАЯ КОЛОНКА */}
+      <div className={`${styles.L} load-rise`}>
+        <div className={`${styles.kick} mono`}>
+          <span>Бренды РФ дизайнеров</span>
+          <span>РОССИЯ · RU</span>
+        </div>
 
-        <h1
-          className={`${styles.headline} load-rise`}
-          style={{ '--load-delay': '160ms' } as React.CSSProperties}
-        >
+        <h1 className={styles.headline}>
           База
           <br />
           <em className={styles.accent}>гардероба</em>
         </h1>
 
-        <span
-          className={`${styles.rule} load-rise`}
-          style={{ '--load-delay': '280ms' } as React.CSSProperties}
-          aria-hidden="true"
-        />
-
-        <p
-          className={`${styles.subcopy} load-rise`}
-          style={{ '--load-delay': '380ms' } as React.CSSProperties}
-        >
-          Спокойные вещи вне сезона от локальных марок — крой, материалы и тихая
-          сборка базового гардероба.
+        <p className={styles.lead}>
+          Российские дизайнеры под одной обложкой. Спокойные вещи, честные
+          материалы и тексты о том, как собрать гардероб, который служит годами.
         </p>
 
-        <div
-          className={`${styles.actions} load-rise`}
-          style={{ '--load-delay': '480ms' } as React.CSSProperties}
-        >
-          <Link href="/catalog" className={`link-underline ${styles.cta}`}>
-            Смотреть каталог
+        <div className={styles.acts}>
+          <Link href="/catalog" className="btn">
+            В каталог →
           </Link>
-          <Link href="/brands" className={`link-underline ${styles.secondary}`}>
+          <Link href="/brands" className="btn ghost">
             Бренды
           </Link>
+          <span className={`mono ${styles.stat}`}>
+            {brandCount} брендов · {productCount}+ вещей
+          </span>
         </div>
+      </div>
 
-        <p
-          className={`micro ${styles.meta} load-rise`}
-          style={{ '--load-delay': '600ms' } as React.CSSProperties}
-        >
-          Локальные марки · Доставка по РФ · 2026
-        </p>
-
-        <div className={styles.scrollCue} aria-hidden="true">
-          <span className={`micro ${styles.scrollLabel}`}>Листать</span>
-          <span className={styles.scrollLine} />
-        </div>
+      {/* ПРАВАЯ КОЛОНКА */}
+      <div
+        className={`${styles.R} load-rise`}
+        style={{ '--load-delay': '120ms' } as React.CSSProperties}
+      >
+        <img
+          src={asset('/img/p01.jpg')}
+          alt="Образ выпуска Baza — лён"
+          className={styles.photo}
+        />
+        <span className={`mono ${styles.idx}`}>VOLCHOK · FW26</span>
+        <span className={`cap ${styles.caption}`}>Образ выпуска</span>
       </div>
     </section>
   );

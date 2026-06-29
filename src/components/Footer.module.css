@@ -1,74 +1,96 @@
+/* ---- Footer ---- */
 .footer {
-  border-top: 1px solid var(--line);
-  margin-top: var(--space-10);
-  padding: var(--space-8) 0 var(--space-10);
+  padding: 44px var(--pad) 30px;
+  border-top: 1px solid var(--rule);
 }
 
-/* Oversized editorial sign-off. Hairline-tonal, full-bleed within the
-   container, sits above the footer nav. Decorative (real wordmark is in the
-   header), so aria-hidden. */
-.wordmark {
-  font-family: var(--font-display), Georgia, serif;
-  font-weight: 500;
-  font-size: clamp(72px, 22vw, 280px);
-  line-height: 0.9;
-  letter-spacing: -0.02em;
-  color: var(--text);
-  opacity: 0.1;
-  margin-bottom: var(--space-8);
-  user-select: none;
-}
-
-.cols {
+/* 4-column grid: логотип + 3 колонки */
+.fgrid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-6);
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 26px;
 }
 
-@media (min-width: 768px) {
-  .cols {
-    grid-template-columns: 1.5fr 1fr 1fr;
+/* ---- Brand column ---- */
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.fw {
+  font-weight: 800;
+  font-size: 30px;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.dot {
+  color: var(--accent);
+  font-style: normal;
+}
+
+.tagline {
+  color: #4A4538;
+  font-size: 13.5px;
+  max-width: 34ch;
+  line-height: 1.5;
+}
+
+/* ---- Column headings ---- */
+.colHead {
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+/* ---- Links ---- */
+.link {
+  display: block;
+  padding: 4px 0;
+  font-size: 13.5px;
+  color: var(--ink);
+  transition: color 0.2s;
+}
+
+.link:hover {
+  color: var(--accent);
+}
+
+.linkDummy {
+  display: block;
+  padding: 4px 0;
+  font-size: 13.5px;
+  color: var(--ink);
+  cursor: default;
+}
+
+/* ---- Bottom bar ---- */
+.fbot {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--rule);
+  margin-top: 34px;
+  padding-top: 16px;
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* ---- Adaptive ---- */
+@media (max-width: 980px) {
+  .fgrid {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
-.col {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-}
-
-.label {
-  margin-bottom: var(--space-1);
-}
-
-.link {
-  font-size: 14px;
-  color: var(--text-muted);
-  width: fit-content;
-  transition: color 180ms ease;
-}
-
-.link:hover,
-.link:focus-visible {
-  color: var(--text);
-}
-
-.brand {
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--text);
-}
-
-.brandLine {
-  font-size: 13px;
-  color: var(--text-muted);
-  max-width: 28ch;
-}
-
-.bottom {
-  margin-top: var(--space-8);
-  font-size: 12px;
-  color: var(--text-faint);
+@media (max-width: 760px) {
+  .footer {
+    padding-inline: var(--pad-mobile);
+  }
 }

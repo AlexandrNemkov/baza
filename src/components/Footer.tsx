@@ -1,65 +1,51 @@
 import Link from 'next/link';
 import styles from './Footer.module.css';
 
-const NAV_LINKS = [
-  { label: 'Каталог', href: '/catalog' },
-  { label: 'Бренды', href: '/brands' },
-  { label: 'Подборки', href: '/podborki' },
-  { label: 'Блог', href: '/blog' },
-];
-
-const SERVICE_LINKS = [
-  { label: 'Доставка', href: '/dostavka' },
-  { label: 'Оплата', href: '/oplata' },
-  { label: 'Возврат', href: '/vozvrat' },
-];
-
-const LEGAL_LINKS = [
-  { label: 'Оферта', href: '/oferta' },
-  { label: 'Политика', href: '/politika' },
-];
-
 export default function Footer() {
   return (
     <footer className={styles.footer}>
-      <div className="container">
-        <p className={styles.wordmark} aria-hidden="true">
-          Baza
-        </p>
-
-        <div className={styles.cols}>
-          <div className={styles.col}>
-            <span className={styles.brand}>BAZA</span>
-            <p className={styles.brandLine}>
-              Baza — одежда и аксессуары российских дизайнеров
-            </p>
+      <div className={styles.fgrid}>
+        {/* Логотип + слоган */}
+        <div className={styles.brand}>
+          <div className={styles.fw}>
+            BAZA<b className={styles.dot}>.</b>
           </div>
-
-          <div className={styles.col}>
-            <p className={`micro ${styles.label}`}>Навигация</p>
-            {NAV_LINKS.map((l) => (
-              <Link key={l.href} href={l.href} className={styles.link}>
-                {l.label}
-              </Link>
-            ))}
-          </div>
-
-          <div className={styles.col}>
-            <p className={`micro ${styles.label}`}>Сервис</p>
-            {SERVICE_LINKS.map((l) => (
-              <Link key={l.href} href={l.href} className={styles.link}>
-                {l.label}
-              </Link>
-            ))}
-            {LEGAL_LINKS.map((l) => (
-              <Link key={l.href} href={l.href} className={styles.link}>
-                {l.label}
-              </Link>
-            ))}
-          </div>
+          <p className={styles.tagline}>
+            Магазин-журнал одежды и аксессуаров российских дизайнеров.
+          </p>
         </div>
 
-        <p className={styles.bottom}>© {new Date().getFullYear()} Baza</p>
+        {/* Магазин */}
+        <div>
+          <h4 className={styles.colHead}>Магазин</h4>
+          <Link href="/catalog" className={styles.link}>Новинки</Link>
+          <Link href="/catalog" className={styles.link}>Каталог</Link>
+          <Link href="/brands" className={styles.link}>Бренды</Link>
+          <Link href="/blog" className={styles.link}>Журнал</Link>
+        </div>
+
+        {/* Сервис */}
+        <div>
+          <h4 className={styles.colHead}>Сервис</h4>
+          <Link href="/dostavka" className={styles.link}>Доставка</Link>
+          <Link href="/oplata" className={styles.link}>Оплата</Link>
+          <Link href="/vozvrat" className={styles.link}>Возврат</Link>
+          <Link href="/oferta" className={styles.link}>Оферта</Link>
+          <Link href="/politika" className={styles.link}>Политика</Link>
+        </div>
+
+        {/* Связь */}
+        <div>
+          <h4 className={styles.colHead}>Связь</h4>
+          <span className={styles.linkDummy}>Telegram</span>
+          <span className={styles.linkDummy}>Instagram</span>
+          <a href="mailto:hello@baza.ru" className={styles.link}>hello@baza.ru</a>
+        </div>
+      </div>
+
+      <div className={styles.fbot}>
+        <span>© 2026 BAZA</span>
+        <span>Выпуск №01 · Сделано в России</span>
       </div>
     </footer>
   );

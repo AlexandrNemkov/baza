@@ -2,51 +2,35 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import styles from './Header.module.css';
 
-const PRIMARY_LINKS = [
+const NAV_LINKS = [
+  { label: 'Новинки', href: '/catalog' },
   { label: 'Каталог', href: '/catalog' },
   { label: 'Бренды', href: '/brands' },
-  { label: 'Подборки', href: '/podborki' },
-  { label: 'Блог', href: '/blog' },
+  { label: 'Журнал', href: '/blog' },
 ];
 
-const SERVICE_LINKS = [
-  { label: 'Доставка', href: '/dostavka' },
-  { label: 'Оплата', href: '/oplata' },
-  { label: 'Возврат', href: '/vozvrat' },
+const MMENU_LINKS = [
+  { label: 'Новинки', href: '/catalog' },
+  { label: 'Каталог', href: '/catalog' },
+  { label: 'Бренды', href: '/brands' },
+  { label: 'Журнал', href: '/blog' },
+  { label: 'Избранное', href: '#' },
 ];
 
-function BurgerIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-      <line x1="3" y1="7" x2="21" y2="7" />
-      <line x1="3" y1="12" x2="21" y2="12" />
-      <line x1="3" y1="17" x2="21" y2="17" />
-    </svg>
-  );
-}
-
-function CloseIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-      <line x1="5" y1="5" x2="19" y2="19" />
-      <line x1="19" y1="5" x2="5" y2="19" />
-    </svg>
-  );
-}
-
-function SearchIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-      <circle cx="11" cy="11" r="7" />
-      <line x1="16.5" y1="16.5" x2="21" y2="21" />
-    </svg>
-  );
+function getActiveHref(pathname: string): string | null {
+  if (pathname.startsWith('/blog')) return '/blog';
+  if (pathname.startsWith('/brands')) return '/brands';
+  if (pathname.startsWith('/catalog')) return '/catalog';
+  return null;
 }
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const activeHref = getActiveHref(pathname);
 
   useEffect(() => {
     if (!open) return;
@@ -57,76 +41,84 @@ export default function Header() {
     return () => document.removeEventListener('keydown', onKey);
   }, [open]);
 
+  // Закрываем меню при смене роута
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
   return (
-    <header className={`${styles.header} glass`}>
-      <div className={`${styles.bar} container`}>
-        <button
-          type="button"
-          className={styles.iconBtn}
-          aria-label={open ? 'Закрыть меню' : 'Открыть меню'}
-          aria-expanded={open}
-          aria-controls="site-menu"
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? <CloseIcon /> : <BurgerIcon />}
-        </button>
-
-        <Link href="/" className={styles.wordmark}>
-          BAZA
-        </Link>
-
-        <button
-          type="button"
-          className={`${styles.iconBtn} ${styles.searchBtn}`}
-          aria-label="Поиск"
-        >
-          <SearchIcon />
-        </button>
+    <>
+      {/* Util-бар */}
+      <div className={styles.util}>
+        <div className={styles.utilWrap}>
+          <span className={`cap ${styles.utilText}`}>
+            Бесплатная доставка по РФ от 10&nbsp;000&nbsp;₽
+          </span>
+          <span className={`cap ${styles.utilText} ${styles.utilRight}`}>
+            Выпуск №01 · <span className={styles.accentSpan}>2026</span>
+          </span>
+        </div>
       </div>
 
-      {open && (
-        <>
+      {/* Шапка */}
+      <header className={styles.header}>
+        <div className={styles.hrow}>
+          {/* Бургер — только мобайл, слева */}
           <button
             type="button"
-            className={styles.overlay}
-            aria-label="Закрыть меню"
-            tabIndex={-1}
-            onClick={() => setOpen(false)}
-          />
-          <div id="site-menu" className={`${styles.panel} glass`}>
-            <div className="container">
-              <p className={`micro ${styles.eyebrow}`}>Меню</p>
-              <nav className={styles.nav} aria-label="Основная навигация">
-                {PRIMARY_LINKS.map((l) => (
-                  <Link
-                    key={l.href}
-                    href={l.href}
-                    className={styles.navLink}
-                    onClick={() => setOpen(false)}
-                  >
-                    {l.label}
-                  </Link>
-                ))}
-              </nav>
+            className={`${styles.burger} ${open ? styles.burgerOpen : ''}`}
+            aria-label={open ? 'Закрыть меню' : 'Открыть меню'}
+            aria-expanded={open}
+            aria-controls="site-mmenu"
+            onClick={() => setOpen((v) => !v)}
+          >
+            <span />
+          </button>
 
-              <div className={styles.divider} />
+          {/* Навигация — десктоп, слева */}
+          <nav className={styles.main} aria-label="Основная навигация">
+            {NAV_LINKS.map((l) => (
+              <Link
+                key={`${l.label}-${l.href}`}
+                href={l.href}
+                className={`${styles.mainLink}${activeHref === l.href && l.label !== 'Новинки' ? ` ${styles.on}` : ''}`}
+              >
+                {l.label}
+              </Link>
+            ))}
+          </nav>
 
-              <nav className={styles.serviceNav} aria-label="Сервис">
-                {SERVICE_LINKS.map((l) => (
-                  <Link
-                    key={l.href}
-                    href={l.href}
-                    className={styles.serviceLink}
-                    onClick={() => setOpen(false)}
-                  >
-                    {l.label}
-                  </Link>
-                ))}
-              </nav>
-            </div>
-          </div>
-        </>
-      )}
-    </header>
+          {/* Логотип — по центру */}
+          <Link href="/" className={styles.wordmark} aria-label="Главная — BAZA">
+            BAZA<b className={styles.dot}>.</b>
+          </Link>
+
+          {/* Правая навигация */}
+          <nav className={styles.hnav} aria-label="Действия">
+            <span className={styles.favLink}>Избранное</span>
+            <span>Корзина</span>
+          </nav>
+        </div>
+
+        {/* Мобильное выпадающее меню */}
+        <nav
+          id="site-mmenu"
+          className={`${styles.mmenu}${open ? ` ${styles.mmenuOpen}` : ''}`}
+          aria-label="Мобильное меню"
+          aria-hidden={!open}
+        >
+          {MMENU_LINKS.map((l) => (
+            <Link
+              key={l.label}
+              href={l.href}
+              className={styles.mmenuLink}
+              onClick={() => setOpen(false)}
+            >
+              {l.label}
+            </Link>
+          ))}
+        </nav>
+      </header>
+    </>
   );
 }

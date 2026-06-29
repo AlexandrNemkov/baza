@@ -6,11 +6,11 @@ import styles from './Breadcrumbs.module.css';
 type Crumb = { name: string; href: string };
 
 /**
- * Breadcrumb trail. Pages pass `items` with RELATIVE app paths (e.g. `/`,
- * `/odezhda`). Links use those relative paths so navigation stays client-side
- * (Next `<Link>` handles basePath). The emitted BreadcrumbList JSON-LD rebuilds
- * absolute urls from SITE.url so the structured data stays canonical. The last
- * item is rendered as plain text (current page), others as links.
+ * Хлебные крошки в стиле C: mono 11px uppercase, разделитель «/»,
+ * последний пункт цветом --accent.
+ *
+ * Страницы передают `items` с относительными путями приложения.
+ * JSON-LD BreadcrumbList не изменён — данные/структура сохранены.
  */
 export default function Breadcrumbs({ items }: { items: Crumb[] }) {
   if (items.length === 0) return null;
@@ -18,7 +18,7 @@ export default function Breadcrumbs({ items }: { items: Crumb[] }) {
   return (
     <>
       <nav aria-label="breadcrumbs" className={styles.nav}>
-        <ol className={`micro ${styles.list}`}>
+        <ol className={styles.list}>
           {items.map((item, i) => {
             const isLast = i === items.length - 1;
             return (
@@ -34,7 +34,7 @@ export default function Breadcrumbs({ items }: { items: Crumb[] }) {
                 )}
                 {!isLast && (
                   <span className={styles.sep} aria-hidden="true">
-                    —
+                    /
                   </span>
                 )}
               </li>

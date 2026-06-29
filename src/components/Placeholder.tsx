@@ -41,7 +41,7 @@ export default function Placeholder({
     return (
       <div
         className={`${styles.plate}${className ? ' ' + className : ''}`}
-        style={{ background: tone ?? 'var(--line-strong)', aspectRatio: ratio }}
+        style={{ background: tone ?? '#E4DBC9', aspectRatio: ratio }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img className={styles.photo} src={src} alt={alt} loading="lazy" />
@@ -53,7 +53,7 @@ export default function Placeholder({
     <div
       className={`${styles.plate}${className ? ' ' + className : ''}`}
       style={{
-        background: tone ?? 'var(--line-strong)',
+        background: tone ?? '#E4DBC9',
         aspectRatio: ratio,
       }}
       role="img"

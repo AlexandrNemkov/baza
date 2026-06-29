@@ -2,36 +2,38 @@ import Link from 'next/link';
 import styles from './SectionHeading.module.css';
 
 type SectionHeadingProps = {
-  /** Serif index numeral rendered in terracotta, e.g. "01". */
+  /** Номер секции, напр. «01». Рисуется mono --accent слева. */
   index?: string;
-  /** Uppercase tracked eyebrow title (mono micro). */
+  /** Заголовок секции. */
   title: string;
-  /** Optional relative path for the right-aligned CTA link. */
+  /** Опциональный путь для CTA-ссылки справа. */
   href?: string;
-  /** CTA label; defaults to a sensible "Все". */
+  /** Текст CTA; по умолчанию «Все →». */
   cta?: string;
 };
 
 /**
- * Editorial section heading: a hairline-bottom row pairing an optional serif
- * index numeral in terracotta with an uppercase tracked eyebrow and an optional
- * right-aligned CTA. NOT an <h1>; the eyebrow is a <p> so the one-h1-per-page
- * rule is preserved.
+ * Заголовок секции в стиле C (.sbar из product.html):
+ * слева — номер (mono --accent) + заголовок;
+ * справа — опциональная CTA-ссылка (mono --accent).
+ *
+ * Не <h1>; заголовок — <h2> (как в эталоне .sbar h2).
+ * API пропсов сохранён для совместимости с вызовами на страницах.
  */
 export default function SectionHeading({
   index,
   title,
   href,
-  cta = 'Все',
+  cta = 'Все →',
 }: SectionHeadingProps) {
   return (
     <div className={styles.row}>
-      <p className={styles.label}>
+      <div className={styles.label}>
         {index && <span className={styles.index}>{index}</span>}
-        <span className={`micro ${styles.title}`}>{title}</span>
-      </p>
+        <h2 className={styles.title}>{title}</h2>
+      </div>
       {href && (
-        <Link href={href} className={`link-underline ${styles.cta}`}>
+        <Link href={href} className={styles.cta}>
           {cta}
         </Link>
       )}

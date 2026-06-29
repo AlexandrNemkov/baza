@@ -1,33 +1,48 @@
+/* Хлебные крошки по .crumb из catalog.html:
+   mono 11px, разделитель /, последний пункт --accent */
+
 .nav {
-  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--line);
 }
 
 .list {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--space-2);
+  gap: 10px;
+  height: 42px;
   list-style: none;
+  /* шрифт/размер берём из глобального .micro (nav получает класс снаружи) */
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 .item {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-2);
+  gap: 10px;
 }
 
 .link {
-  color: var(--text-faint);
+  color: var(--muted);
+  transition: color 0.15s;
 }
 
 .link:hover {
-  color: var(--text);
+  color: var(--ink);
 }
 
+/* Текущая (последняя) крошка — акцент */
 .current {
-  color: var(--text);
+  color: var(--accent);
 }
 
+/* Разделитель */
 .sep {
-  color: var(--text-faint);
+  color: var(--muted);
+  /* чуть меньше gap из .item, разделитель slim */
+  opacity: 0.7;
 }

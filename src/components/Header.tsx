@@ -17,7 +17,6 @@ const MMENU_LINKS = [
   { label: 'Каталог', href: '/catalog' },
   { label: 'Бренды', href: '/brands' },
   { label: 'Журнал', href: '/blog' },
-  { label: 'Избранное', href: '#' },
 ];
 
 function getActiveHref(pathname: string): string | null {
@@ -95,8 +94,10 @@ export default function Header() {
 
           {/* Правая навигация */}
           <nav className={styles.hnav} aria-label="Действия">
-            <span className={styles.favLink}>Избранное</span>
-            <span>Корзина</span>
+            <button type="button" className={styles.favLink}>
+              Избранное
+            </button>
+            <button type="button">Корзина</button>
           </nav>
         </div>
 
@@ -117,6 +118,13 @@ export default function Header() {
               {l.label}
             </Link>
           ))}
+          <button
+            type="button"
+            className={styles.mmenuLink}
+            onClick={() => setOpen(false)}
+          >
+            Избранное
+          </button>
         </nav>
       </header>
     </>

@@ -19,10 +19,6 @@
   color: #B7AE9E;
 }
 
-.utilRight {
-  /* скрывается на мобиле */
-}
-
 .accentSpan {
   color: #EFBDAE;
 }
@@ -95,18 +91,21 @@
   cursor: default;
 }
 
-.hnav span {
+.hnav button {
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  font: inherit;
+  color: var(--ink);
   cursor: pointer;
   transition: color 0.2s;
 }
 
-.hnav span:hover {
+.hnav button:hover {
   color: var(--accent);
-}
-
-.favLink {
-  /* скрывается на мобиле */
 }
 
 /* ---- Burger (mobile only) ---- */
@@ -184,11 +183,17 @@
 
 .mmenuLink {
   display: block;
+  width: 100%;
   padding: 15px var(--pad);
+  border: 0;
   border-top: 1px solid var(--line);
+  background: transparent;
+  font: inherit;
   font-size: 16px;
   font-weight: 500;
+  text-align: left;
   color: var(--ink);
+  cursor: pointer;
   transition: color 0.2s;
 }
 

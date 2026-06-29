@@ -15,6 +15,8 @@ type PlaceholderProps = {
   /** Aspect ratio as a CSS `aspect-ratio` value. Defaults to 3 / 4. */
   ratio?: string;
   className?: string;
+  /** Optional photo URL. When set, renders the image instead of the plate. */
+  src?: string;
 };
 
 /**
@@ -31,7 +33,22 @@ export default function Placeholder({
   alt,
   ratio = '3 / 4',
   className,
+  src,
 }: PlaceholderProps) {
+  // Photo present → render the image (the tone shows while it loads); the
+  // monogram plate is the fallback used until real photography is wired in.
+  if (src) {
+    return (
+      <div
+        className={`${styles.plate}${className ? ' ' + className : ''}`}
+        style={{ background: tone ?? 'var(--line-strong)', aspectRatio: ratio }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img className={styles.photo} src={src} alt={alt} loading="lazy" />
+      </div>
+    );
+  }
+
   return (
     <div
       className={`${styles.plate}${className ? ' ' + className : ''}`}

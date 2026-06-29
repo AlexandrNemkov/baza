@@ -9,6 +9,7 @@ import Reveal from '@/components/Reveal';
 import SectionHeading from '@/components/SectionHeading';
 import FaqBlock from '@/components/FaqBlock';
 import JsonLd from '@/components/JsonLd';
+import { sampleImage } from '@/lib/sampleImage';
 import {
   getAllProducts,
   getProduct,
@@ -100,7 +101,10 @@ export default async function ProductPage({
             immediately, never fade in. */}
         <div className={styles.galleryCol}>
           <ProductGallery
-            images={p.images}
+            images={p.images.map((img, i) => ({
+              ...img,
+              src: img.src ?? sampleImage(p, i),
+            }))}
             mark={brandInitial(brand?.name ?? p.brandSlug)}
             alt={`${brand?.name ?? p.brandSlug} — ${p.title}`}
           />

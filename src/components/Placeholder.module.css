@@ -7,6 +7,14 @@
   overflow: hidden;
 }
 
+/* Photo fills the plate (cover-cropped). The tonal ground shows while loading. */
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 /* Oversized tonal serif mark — the lookbook "plate" centrepiece. Low-contrast
    so it reads as art direction, not a label. Mixes into the tonal ground. */
 .mark {

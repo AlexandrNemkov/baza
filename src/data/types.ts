@@ -10,6 +10,8 @@ export type ProductImage = {
   /** Hex string, e.g. "#E4E3DF". */
   color: string;
   label?: string;
+  /** Optional photo URL. When absent, an art-directed plate is rendered. */
+  src?: string;
 };
 
 /** A single FAQ entry on a product page. */

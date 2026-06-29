@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import Placeholder from './Placeholder';
 import styles from './ProductGallery.module.css';
 
-type GalleryImage = { color: string; label?: string };
+type GalleryImage = { color: string; label?: string; src?: string };
 
 type ProductGalleryProps = {
   images: GalleryImage[];
@@ -65,6 +65,7 @@ export default function ProductGallery({
             caption={img.label}
             alt={plateAlt(alt, img, i)}
             ratio="4 / 5"
+            src={img.src}
           />
         ))}
       </div>
@@ -85,6 +86,7 @@ export default function ProductGallery({
               mark={mark}
               caption={img.label}
               alt={plateAlt(alt, img, i)}
+              src={img.src}
             />
           ))}
         </div>

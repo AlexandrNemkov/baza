@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { getBrand } from '@/data';
 import type { Product } from '@/data/types';
 import Placeholder, { brandInitial } from './Placeholder';
+import { sampleImage } from '@/lib/sampleImage';
 import styles from './ProductCard.module.css';
 
 /**
@@ -22,6 +23,7 @@ export default function ProductCard({ product }: { product: Product }) {
           mark={brandInitial(brandName)}
           caption={cover?.label}
           alt={`${brandName} — ${product.title}`}
+          src={cover?.src ?? sampleImage(product, 0)}
         />
       </div>
       <div className={styles.body}>

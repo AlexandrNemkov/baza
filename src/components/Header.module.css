@@ -9,8 +9,7 @@
   justify-content: space-between;
   align-items: center;
   height: 34px;
-  max-width: var(--container);
-  margin-inline: auto;
+  /* Full-bleed: util-бар идёт во всю ширину, в один край с секциями ниже */
   padding-inline: var(--pad);
 }
 
@@ -37,8 +36,7 @@
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   height: 64px;
-  max-width: var(--container);
-  margin-inline: auto;
+  /* Full-bleed: шапка идёт во всю ширину, в один край с секциями ниже */
   padding-inline: var(--pad);
 }
 

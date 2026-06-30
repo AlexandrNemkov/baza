@@ -82,7 +82,10 @@
 .group {
   border: 0;
   margin: 0;
-  padding: 20px 0;
+  /* Больше воздуха над заголовком (от разделителя), заголовок вплотную к
+     контенту. Низ компенсирует ~13px центрирования 44px-строк, чтобы
+     визуально верх ≈ низ. */
+  padding: 26px 0 14px;
   border-bottom: 1px solid var(--line);
 }
 
@@ -92,7 +95,7 @@
 
 .legend {
   padding: 0;
-  margin-bottom: 6px;
+  margin-bottom: 2px;
   font-family: var(--font-mono, 'JetBrains Mono', monospace);
   font-size: 11px;
   text-transform: uppercase;
@@ -104,14 +107,16 @@
 .brandList {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
 }
 
 .checkRow {
   display: flex;
   align-items: center;
   gap: 12px;
-  min-height: 44px;
+  /* 34px — нормальная высота строки списка вместо «огромной» 44px; текст
+     меньше «плавает» по центру, чекбоксы стоят плотнее */
+  min-height: 34px;
   cursor: pointer;
   font-size: 15px;
 }

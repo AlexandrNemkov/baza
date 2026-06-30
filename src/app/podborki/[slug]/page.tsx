@@ -44,25 +44,38 @@ export default async function PodborkaPage({
     .filter((p): p is Product => p !== undefined);
 
   return (
-    <div className="container">
-      <div className={styles.page}>
-        <Breadcrumbs
-          items={[
-            { name: 'Главная', href: '/' },
-            { name: 'Подборки', href: '/podborki' },
-            { name: pod.title, href: '/podborki/' + pod.slug },
-          ]}
-        />
+    <>
+      <Breadcrumbs
+        items={[
+          { name: 'Главная', href: '/' },
+          { name: 'Подборки', href: '/podborki' },
+          { name: pod.title, href: '/podborki/' + pod.slug },
+        ]}
+      />
 
-        <div className={styles.head}>
-          <h1 className={styles.title}>{pod.title}</h1>
-          <p className={styles.intro}>{pod.intro}</p>
+      {/* titlebar */}
+      <div className={styles.titlebar}>
+        <div className={`container ${styles.titlebarInner}`}>
+          <h1 className={styles.titleH1}>{pod.title}</h1>
+          <div className={`mono ${styles.titleMeta}`}>
+            Подборка
+            <br />
+            {pod.productSlugs.length} позиций
+          </div>
         </div>
+      </div>
 
+      {/* intro */}
+      <div className="container">
+        <p className={styles.intro}>{pod.intro}</p>
+      </div>
+
+      {/* products */}
+      <div className={`container ${styles.section}`}>
         <ProductGrid products={products} />
       </div>
 
       <JsonLd data={itemList(products)} />
-    </div>
+    </>
   );
 }

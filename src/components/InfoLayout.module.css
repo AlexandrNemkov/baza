@@ -1,0 +1,265 @@
+/* InfoLayout — сервисный двухколоночный layout C-Журнал */
+
+/* ── titlebar ──────────────────────────────────────────────── */
+.titlebar {
+  border-bottom: 1px solid var(--rule);
+}
+
+.titlebarInner {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 34px var(--pad, 32px) 26px;
+  gap: 24px;
+}
+
+.titleH1 {
+  font-size: clamp(40px, 7vw, 86px);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 0.9;
+  margin-left: -0.04em;
+}
+
+.titleMeta {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 12px;
+  color: var(--muted);
+  text-align: right;
+  flex: 0 0 auto;
+}
+
+/* ── info grid ─────────────────────────────────────────────── */
+.info {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+}
+
+/* ── sub-nav ───────────────────────────────────────────────── */
+.snav {
+  border-right: 1px solid var(--rule);
+}
+
+.snavIn {
+  position: sticky;
+  top: var(--header-h, 64px);
+  padding: 24px 0;
+}
+
+.snavLabel {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  padding: 0 var(--pad, 32px) 12px;
+}
+
+.snavLink {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 13px var(--pad, 32px);
+  border-top: 1px solid var(--line);
+  font-size: 15px;
+  font-weight: 500;
+  transition: background 0.15s, color 0.15s;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.snavLink:hover {
+  background: var(--paper);
+}
+
+.snavLink.active {
+  color: var(--accent);
+}
+
+.snavNum {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.snavLink.active .snavNum {
+  color: var(--accent);
+}
+
+/* ── content area ──────────────────────────────────────────── */
+.scontent {
+  padding: 6px 0 0;
+}
+
+/* ── sblock ────────────────────────────────────────────────── */
+.sblock {
+  padding: 30px var(--pad, 32px);
+  border-bottom: 1px solid var(--line);
+  max-width: 760px;
+}
+
+.sblock:last-child {
+  border-bottom: 0;
+}
+
+.sblockNo {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  color: var(--accent);
+  font-size: 13px;
+}
+
+.sblock h2 {
+  font-size: clamp(22px, 2.6vw, 30px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 8px 0 14px;
+  line-height: 1.05;
+}
+
+.sblock p {
+  color: #34301F;
+  font-size: 16px;
+  margin-bottom: 14px;
+  max-width: 62ch;
+}
+
+.sblock p:last-child {
+  margin-bottom: 0;
+}
+
+.sblock a {
+  color: var(--accent);
+}
+
+/* ── table ─────────────────────────────────────────────────── */
+.tbl {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 8px 0 6px;
+  border-top: 1px solid var(--line);
+}
+
+.tbl td {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 15px;
+  vertical-align: top;
+}
+
+.tbl td:first-child {
+  font-weight: 600;
+  width: 46%;
+}
+
+.tbl td:last-child {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 14px;
+  text-align: right;
+  color: #34301F;
+}
+
+/* ── note (врезка) ─────────────────────────────────────────── */
+.note {
+  background: var(--paper);
+  border-left: 2px solid var(--accent);
+  padding: 16px 20px;
+  margin: 6px 0 4px;
+}
+
+.note p {
+  margin: 0;
+  font-size: 15px;
+  color: #34301F;
+}
+
+/* ── steps ─────────────────────────────────────────────────── */
+.steps {
+  list-style: none;
+  margin: 6px 0 4px;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+
+.steps li {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 16px;
+  color: #34301F;
+}
+
+.stepNum {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  color: var(--accent);
+  font-size: 13px;
+}
+
+/* ── clause list (оферта) ──────────────────────────────────── */
+.clause {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.clause li {
+  display: grid;
+  grid-template-columns: 38px 1fr;
+  gap: 12px;
+  padding: 9px 0;
+  font-size: 15.5px;
+  color: #34301F;
+  line-height: 1.55;
+}
+
+.clauseNum {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* ── reqs table (оферта реквизиты) ────────────────────────── */
+.reqs {
+  width: 100%;
+  border-collapse: collapse;
+  border-top: 1px solid var(--line);
+}
+
+.reqs td {
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 14.5px;
+  vertical-align: top;
+}
+
+.reqs td:first-child {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--muted);
+  width: 40%;
+}
+
+/* ── responsive ────────────────────────────────────────────── */
+@media (max-width: 880px) {
+  .info {
+    grid-template-columns: 1fr;
+  }
+
+  .snav {
+    border-right: 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .snavIn {
+    position: static;
+    padding: 14px 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .titlebarInner {
+    padding: 24px var(--pad, 18px) 18px;
+  }
+}

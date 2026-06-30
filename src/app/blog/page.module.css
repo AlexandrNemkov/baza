@@ -249,6 +249,7 @@
 }
 
 .bannerH2 {
+  color: #efe9dc;
   font-size: clamp(30px, 5.5vw, 64px);
   font-weight: 800;
   letter-spacing: -0.03em;

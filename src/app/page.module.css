@@ -177,6 +177,7 @@
 
 .bannerH2 {
   font-family: var(--font-rubik), 'Rubik', system-ui, sans-serif;
+  color: #efe9dc;
   font-size: clamp(32px, 6vw, 72px);
   font-weight: 800;
   letter-spacing: -0.03em;

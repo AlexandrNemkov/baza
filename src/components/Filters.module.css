@@ -92,7 +92,7 @@
 
 .legend {
   padding: 0;
-  margin-bottom: 12px;
+  margin-bottom: 6px;
   font-family: var(--font-mono, 'JetBrains Mono', monospace);
   font-size: 11px;
   text-transform: uppercase;

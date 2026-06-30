@@ -1,6 +1,8 @@
 import { notFound } from 'next/navigation';
+import Link from 'next/link';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import ProductGrid from '@/components/ProductGrid';
+import SectionHeading from '@/components/SectionHeading';
 import Placeholder, { brandInitial } from '@/components/Placeholder';
 import JsonLd from '@/components/JsonLd';
 import { getAllBrands, getBrand, getProductsByBrand } from '@/data';
@@ -39,9 +41,10 @@ export default async function BrandPage({
   if (!b) notFound();
 
   const products = getProductsByBrand(b.slug);
+  const productCount = products.length;
 
   return (
-    <div className={`container ${styles.page}`}>
+    <>
       <Breadcrumbs
         items={[
           { name: 'Главная', href: '/' },
@@ -50,21 +53,97 @@ export default async function BrandPage({
         ]}
       />
 
-      <section className={styles.intro}>
-        <Placeholder
-          className={styles.cover}
-          tone={b.cover}
-          ratio="16 / 5"
-          mark={brandInitial(b.name)}
-          alt={`${b.name} — обложка бренда`}
-        />
-        <h1 className={styles.title}>{b.name}</h1>
-        <p className={styles.desc}>{b.description}</p>
+      {/* Brand Hero */}
+      <section className={styles.bhero}>
+        <div className={styles.bheroL}>
+          <div className={styles.kick}>
+            <span>Марка · Россия</span>
+            <span>RU</span>
+          </div>
+          <h1 className={styles.h1}>{b.name}</h1>
+          <p className={styles.lead}>{b.description}</p>
+          <div className={styles.stats}>
+            {productCount > 0 && (
+              <div className={styles.stat}>
+                <strong className={styles.statVal}>{productCount}</strong>
+                <span className={styles.statLabel}>
+                  {productWord(productCount)} в наличии
+                </span>
+              </div>
+            )}
+            <div className={styles.stat}>
+              <strong className={styles.statVal}>RU</strong>
+              <span className={styles.statLabel}>производство</span>
+            </div>
+            <div className={styles.stat}>
+              <strong className={styles.statVal}>1–2</strong>
+              <span className={styles.statLabel}>дня отгрузка</span>
+            </div>
+          </div>
+        </div>
+        <div className={styles.bheroR}>
+          <Placeholder
+            tone={b.cover}
+            mark={brandInitial(b.name)}
+            alt={`${b.name} — обложка`}
+            ratio="auto"
+            className={styles.bheroCover}
+          />
+          <span className={styles.bheroIdx}>
+            {b.name.toUpperCase()}
+          </span>
+        </div>
       </section>
 
+      {/* Products */}
+      <SectionHeading
+        index="02"
+        title="Вещи бренда"
+        href="/catalog"
+        cta="В общий каталог →"
+      />
       <ProductGrid products={products} />
 
+      {/* Story split */}
+      <section className={styles.story}>
+        <div className={styles.storyImg}>
+          <Placeholder
+            tone={b.cover}
+            mark={brandInitial(b.name)}
+            alt={`${b.name} — история`}
+            ratio="auto"
+            className={styles.storyPlaceholder}
+          />
+          <span className={styles.storyIdx}>№ 03 / ЦЕХ · РОССИЯ</span>
+        </div>
+        <div className={styles.storyTxt}>
+          <div className={styles.storyNo}>№ 03 — История</div>
+          <h3 className={styles.storyH3}>
+            Меньше моделей,
+            <br />
+            больше внимания
+          </h3>
+          <p className={styles.storyP}>{b.description}</p>
+          <p className={styles.storyP}>
+            Небольшие партии, собственный цех — только то, что хочется носить
+            годами.
+          </p>
+          <Link href="/brands" className={styles.storyBack}>
+            ← Все бренды
+          </Link>
+        </div>
+      </section>
+
       <JsonLd data={itemList(products)} />
-    </div>
+    </>
   );
+}
+
+function productWord(n: number): string {
+  const mod10 = n % 10;
+  const mod100 = n % 100;
+  if (mod100 >= 11 && mod100 <= 14) return 'вещей';
+  if (mod10 === 1) return 'вещь';
+  if (mod10 >= 2 && mod10 <= 4) return 'вещи';
+  return 'вещей';
 }

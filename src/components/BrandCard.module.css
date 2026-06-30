@@ -1,26 +1,88 @@
-.card {
+/* Ячейка bgrid — бордеры управляются родительской сеткой */
+.cell {
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.link {
   display: block;
-  border: 1px solid var(--line);
-  padding: var(--space-5);
-  color: var(--text);
+  padding: 16px;
+  color: var(--ink);
+  text-decoration: none;
 }
 
-.card:hover {
-  border-color: var(--line-strong);
+/* Фото-область 5/4 с overlay-метками */
+.photo {
+  position: relative;
+  margin-bottom: 14px;
 }
 
-.name {
-  font-size: 18px;
-  font-weight: 500;
+.placeholder {
+  aspect-ratio: 5 / 4;
+  width: 100%;
+}
+
+/* Hover-зум фото */
+.link:hover .placeholder :global(.photo) {
+  transform: scale(1.04);
+}
+
+/* Порядковый номер — левый верхний угол */
+.photoNo {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  background: var(--ink);
+  color: var(--bg);
+  font-family: var(--font-mono), monospace;
+  font-size: 10px;
+  padding: 3px 8px;
   letter-spacing: 0.04em;
-  color: var(--text);
 }
 
-.desc {
-  margin-top: var(--space-2);
-  font-size: 13px;
-  line-height: 1.5;
-  color: var(--text-muted);
+/* Счётчик вещей — правый нижний угол */
+.photoCt {
+  position: absolute;
+  right: 9px;
+  bottom: 7px;
+  z-index: 2;
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  color: var(--ink);
+  opacity: 0.55;
+  letter-spacing: 0.02em;
+}
+
+/* Имя бренда */
+.nm {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.link:hover .nm {
+  color: var(--accent);
+}
+
+/* Регион / мета */
+.rg {
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 7px 0 9px;
+  letter-spacing: 0.04em;
+}
+
+/* Краткое описание */
+.ds {
+  font-size: 14px;
+  color: var(--ink);
+  opacity: 0.7;
+  max-width: 34ch;
+  line-height: 1.45;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   line-clamp: 3;

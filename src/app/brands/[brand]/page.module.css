@@ -1,28 +1,219 @@
-.page {
+/* ── Brand Hero ── */
+.bhero {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  border-bottom: 1px solid var(--rule);
+}
+
+.bheroL {
+  padding: 46px var(--pad) 38px;
+  border-right: 1px solid var(--rule);
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
-  padding-bottom: var(--space-10);
 }
 
-.intro {
+.kick {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
+  justify-content: space-between;
+  color: var(--muted);
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
-.cover {
-  width: 100%;
-  aspect-ratio: 16 / 5;
+.h1 {
+  font-size: clamp(48px, 8vw, 108px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.88;
+  margin: 26px 0 0 -0.04em;
 }
 
-.title {
-  font-size: 24px;
+.lead {
+  margin-top: 24px;
+  max-width: 48ch;
+  font-size: 16.5px;
+  color: var(--ink);
+  opacity: 0.78;
+  line-height: 1.6;
+}
+
+.stats {
+  margin-top: auto;
+  padding-top: 30px;
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.stat {
+  font-family: var(--font-mono), monospace;
+}
+
+.statVal {
+  display: block;
+  font-size: 26px;
+  font-weight: 600;
   letter-spacing: -0.02em;
+  line-height: 1;
 }
 
-.desc {
-  color: var(--text-muted);
-  font-size: 15px;
-  max-width: 60ch;
+.statLabel {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+/* Правая колонка — фото/плейсхолдер */
+.bheroR {
+  position: relative;
+  min-height: 440px;
+  background: var(--paper);
+  overflow: hidden;
+}
+
+.bheroCover {
+  position: absolute !important;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  aspect-ratio: unset !important;
+}
+
+.bheroIdx {
+  position: absolute;
+  right: 18px;
+  top: 18px;
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  color: var(--ink);
+  opacity: 0.4;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ── Story split ── */
+.story {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--rule);
+  border-top: 1px solid var(--rule);
+}
+
+.storyImg {
+  position: relative;
+  min-height: 420px;
+  background: var(--paper);
+  overflow: hidden;
+}
+
+.storyPlaceholder {
+  position: absolute !important;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  aspect-ratio: unset !important;
+}
+
+.storyIdx {
+  position: absolute;
+  left: 18px;
+  bottom: 16px;
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  color: var(--ink);
+  opacity: 0.45;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.storyTxt {
+  padding: 52px var(--pad);
+  border-left: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+}
+
+.storyNo {
+  font-family: var(--font-mono), monospace;
+  color: var(--accent);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+
+.storyH3 {
+  font-size: clamp(28px, 3.6vw, 42px);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  margin: 16px 0 18px -0.03em;
+}
+
+.storyP {
+  color: var(--ink);
+  opacity: 0.72;
+  max-width: 44ch;
+  margin-bottom: 14px;
+  line-height: 1.6;
+}
+
+.storyBack {
+  margin-top: 8px;
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  color: var(--accent);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.storyBack:hover {
+  color: var(--accent-d);
+}
+
+/* ── Responsive ── */
+@media (max-width: 980px) {
+  .bhero {
+    grid-template-columns: 1fr;
+  }
+
+  .bheroL {
+    border-right: 0;
+  }
+
+  .bheroR {
+    border-top: 1px solid var(--rule);
+    min-height: 300px;
+  }
+
+  .story {
+    grid-template-columns: 1fr;
+  }
+
+  .storyTxt {
+    border-left: 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .storyImg {
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 760px) {
+  .stats {
+    gap: 20px;
+  }
+
+  .bheroL {
+    padding: 28px var(--pad) 24px;
+  }
+
+  .storyTxt {
+    padding: 32px var(--pad);
+  }
 }

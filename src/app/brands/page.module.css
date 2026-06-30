@@ -1,23 +1,258 @@
-.page {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
-  padding-bottom: var(--space-10);
+/* ── Titlebar ── */
+.titlebar {
+  border-bottom: 1px solid var(--rule);
 }
 
-.title {
-  font-size: 24px;
+.titlebarInner {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 34px var(--pad) 26px;
+  gap: 24px;
+  max-width: var(--container);
+  margin: 0 auto;
+}
+
+.h1 {
+  font-size: clamp(40px, 7vw, 86px);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 0.9;
+  margin-left: -0.04em;
+}
+
+.meta {
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: right;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.metaLine {
+  display: block;
+}
+
+/* ── Lead row ── */
+.leadRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--rule);
+}
+
+.leadL {
+  padding: 30px var(--pad);
+  border-right: 1px solid var(--rule);
+}
+
+.leadText {
+  max-width: 46ch;
+  color: var(--ink);
+  opacity: 0.78;
+  font-size: 16.5px;
+  line-height: 1.6;
+}
+
+.leadR {
+  padding: 30px var(--pad);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+.stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 8px;
+}
+
+.stat:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.statLabel {
+  /* color inherited from .stat */
+}
+
+.statVal {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ── Brand cards grid ── */
+.bgrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-left: 1px solid var(--rule);
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+/* Третий в ряду — без правого бордера (потомки — div.cell из BrandCard) */
+.bgrid > div:nth-child(3n) {
+  border-right: 0;
+}
+
+/* ── A–Z Index header ── */
+.ixhead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px var(--pad);
+  border-bottom: 1px solid var(--rule);
+  border-top: 1px solid var(--rule);
+}
+
+.ixheadLeft {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.ixNo {
+  font-family: var(--font-mono), monospace;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.ixTitle {
+  font-size: 23px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+.ixMeta {
+  color: var(--accent);
+}
+
+/* ── A–Z Index rows ── */
+.bidx {
+  border-bottom: 1px solid var(--rule);
+}
+
+.bidxRow {
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  align-items: center;
+  gap: 20px;
+  padding: 18px var(--pad);
+  border-top: 1px solid var(--line);
+  color: var(--ink);
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.bidxRow:first-child {
+  border-top: 0;
+}
+
+.bidxRow:hover {
+  background: var(--paper);
+}
+
+.bidxN {
+  font-family: var(--font-mono), monospace;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.bidxNm {
+  font-size: clamp(18px, 2.4vw, 26px);
+  font-weight: 700;
   letter-spacing: -0.02em;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-4);
+.bidxRow:hover .bidxNm {
+  color: var(--accent);
 }
 
-@media (min-width: 768px) {
-  .grid {
-    grid-template-columns: repeat(3, 1fr);
+.bidxMeta {
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ── Banner ── */
+.banner {
+  padding: 62px var(--pad);
+  text-align: center;
+  border-bottom: 1px solid var(--rule);
+  background: var(--ink);
+  color: #EFE9DC;
+}
+
+.bannerCap {
+  color: #EFBDAE;
+}
+
+.bannerH2 {
+  font-size: clamp(30px, 5.5vw, 64px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 0.98;
+  margin: 14px 0 22px;
+}
+
+.bannerEm {
+  color: #EFBDAE;
+  font-style: italic;
+  font-weight: 600;
+}
+
+/* ── Responsive ── */
+@media (max-width: 980px) {
+  .bgrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .leadRow {
+    grid-template-columns: 1fr;
+  }
+
+  .leadL {
+    border-right: 0;
+    border-bottom: 1px solid var(--rule);
+  }
+}
+
+@media (max-width: 760px) {
+  .bgrid {
+    grid-template-columns: 1fr;
+  }
+
+  .titlebarInner {
+    padding: 24px var(--pad) 18px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .meta {
+    text-align: left;
+  }
+
+  .bidxRow {
+    grid-template-columns: 48px 1fr;
+  }
+
+  .bidxMeta {
+    display: none;
   }
 }

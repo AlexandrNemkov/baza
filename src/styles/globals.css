@@ -196,7 +196,9 @@ a {
 /* ---- Paper grain overlay ---- */
 .grain {
   position: fixed;
-  inset: 0;
+  /* Overscan: уводим кромки blend-слоя за вьюпорт, иначе на мобиле (iOS Safari)
+     по верхней/правой кромке виден 1px-шов от mix-blend-mode. */
+  inset: -2px;
   z-index: 1;
   pointer-events: none;
   opacity: 0.05;

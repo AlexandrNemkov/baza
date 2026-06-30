@@ -106,6 +106,18 @@
   color: var(--accent);
 }
 
+/* Избранное — ссылка, оформляется как соседние действия в .hnav */
+.favLink {
+  display: inline-flex;
+  align-items: center;
+  color: var(--ink);
+  transition: color 0.2s;
+}
+
+.favLink:hover {
+  color: var(--accent);
+}
+
 /* ---- Burger (mobile only) ---- */
 .burger {
   display: none;

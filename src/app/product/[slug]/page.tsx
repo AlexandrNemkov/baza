@@ -135,6 +135,8 @@ export default async function ProductPage({
 
             {/* Панель покупки */}
             <ProductBuyPanel
+              slug={p.slug}
+              title={p.title}
               price={p.price}
               sizes={p.sizes}
               sizeChart={<SizeChart chart={p.sizeChart} />}
@@ -172,9 +174,6 @@ export default async function ProductPage({
         </section>
       )}
 
-      {/* FAQ */}
-      <FaqBlock items={p.faq} />
-
       {/* Похожие вещи */}
       {related.length > 0 && (
         <>
@@ -192,6 +191,9 @@ export default async function ProductPage({
           </div>
         </>
       )}
+
+      {/* FAQ — под похожими, во всю ширину секции */}
+      <FaqBlock items={p.faq} />
 
       {/* JSON-LD Product */}
       <JsonLd data={productJsonLd(p)} />

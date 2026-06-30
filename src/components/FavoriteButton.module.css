@@ -1,0 +1,64 @@
+/* ── Иконка-сердечко в углу карточки ── */
+.icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.icon:hover {
+  border-color: var(--ink);
+}
+
+.iconActive {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ── Кнопка с текстом в карточке товара ── */
+.full {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  min-height: var(--tap);
+  margin-top: 12px;
+  padding: 13px 20px;
+  background: transparent;
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.full:hover {
+  border-color: var(--ink);
+}
+
+.fullActive {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon,
+  .full {
+    transition: none;
+  }
+}

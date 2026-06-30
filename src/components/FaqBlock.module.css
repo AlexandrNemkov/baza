@@ -1,9 +1,14 @@
 .block {
   display: flex;
   flex-direction: column;
+  /* Верхний разделитель отделяет FAQ от блока «Похожие вещи» */
+  border-top: 1px solid var(--rule);
+  padding-block: var(--space-5);
 }
 
 .heading {
+  /* Инсет как у секций (--pad), хайрлайны строк остаются во всю ширину */
+  padding-inline: var(--pad);
   margin-bottom: var(--space-3);
 }
 

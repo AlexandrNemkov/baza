@@ -50,3 +50,12 @@
   line-height: 1.6;
   color: var(--text-body);
 }
+
+/* Full-bleed: текст инсетится на --pad, хайрлайн остаётся во всю ширину */
+.summaryInset {
+  padding-inline: var(--pad);
+}
+
+.panelInset {
+  padding-inline: var(--pad);
+}

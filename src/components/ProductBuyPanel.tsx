@@ -4,9 +4,14 @@ import { useRef, useState } from 'react';
 import type { ReactNode } from 'react';
 import Accordion from './Accordion';
 import StickyBuyBar from './StickyBuyBar';
+import FavoriteButton from './FavoriteButton';
 import styles from './ProductBuyPanel.module.css';
 
 type ProductBuyPanelProps = {
+  /** Slug товара — для кнопки «в избранное». */
+  slug: string;
+  /** Название товара — для доступной подписи кнопки «в избранное». */
+  title: string;
   price: number;
   sizes: string[];
   /** Rendered SizeChart (table or string) for the Размеры accordion. */
@@ -26,6 +31,8 @@ const SIZE_CHART_ID = 'pdp-size-chart';
  * Visual only — no cart logic. Price is shown mono weight 600.
  */
 export default function ProductBuyPanel({
+  slug,
+  title,
   price,
   sizes,
   sizeChart,
@@ -91,6 +98,9 @@ export default function ProductBuyPanel({
       <button type="button" className={styles.buy}>
         В корзину — {priceFormatted} ₽
       </button>
+
+      {/* В избранное */}
+      <FavoriteButton slug={slug} title={title} variant="full" />
 
       {/* Meta delivery line */}
       <p className={styles.metaline}>

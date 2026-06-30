@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { getBrand } from '@/data';
 import type { Product } from '@/data/types';
 import Placeholder, { brandInitial } from './Placeholder';
+import FavoriteButton from './FavoriteButton';
 import { sampleImage } from '@/lib/sampleImage';
 import styles from './ProductCard.module.css';
 
@@ -27,6 +28,7 @@ export default function ProductCard({ product }: { product: Product }) {
           ratio="4 / 5"
           src={cover?.src ?? sampleImage(product, 0)}
         />
+        <FavoriteButton slug={product.slug} title={product.title} />
       </div>
       <span className={styles.brand}>{brandName}</span>
       <span className={styles.title}>{product.title}</span>

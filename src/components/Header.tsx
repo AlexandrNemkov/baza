@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useFavorites } from '@/lib/useFavorites';
 import styles from './Header.module.css';
 
 const NAV_LINKS = [
@@ -30,6 +31,8 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const activeHref = getActiveHref(pathname);
+  const { favorites } = useFavorites();
+  const favCount = favorites.length;
 
   useEffect(() => {
     if (!open) return;
@@ -94,9 +97,9 @@ export default function Header() {
 
           {/* Правая навигация */}
           <nav className={styles.hnav} aria-label="Действия">
-            <button type="button" className={styles.favLink}>
-              Избранное
-            </button>
+            <Link href="/izbrannoe" className={styles.favLink}>
+              Избранное{favCount > 0 ? ` · ${favCount}` : ''}
+            </Link>
             <button type="button">Корзина</button>
           </nav>
         </div>
@@ -118,13 +121,13 @@ export default function Header() {
               {l.label}
             </Link>
           ))}
-          <button
-            type="button"
+          <Link
+            href="/izbrannoe"
             className={styles.mmenuLink}
             onClick={() => setOpen(false)}
           >
-            Избранное
-          </button>
+            Избранное{favCount > 0 ? ` · ${favCount}` : ''}
+          </Link>
         </nav>
       </header>
     </>

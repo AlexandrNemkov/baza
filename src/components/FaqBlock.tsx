@@ -14,7 +14,7 @@ export default function FaqBlock({ items }: { items: FaqItem[] }) {
       <p className={`micro ${styles.heading}`}>Вопросы и ответы</p>
       <div className={styles.list}>
         {items.map((item) => (
-          <Accordion key={item.q} title={item.q}>
+          <Accordion key={item.q} title={item.q} inset>
             {item.a}
           </Accordion>
         ))}

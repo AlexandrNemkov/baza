@@ -17,6 +17,11 @@ type AccordionProps = {
   onToggle?: (next: boolean) => void;
   /** Optional anchor id so the panel can be smooth-scrolled into view. */
   id?: string;
+  /**
+   * Full-bleed-режим: хайрлайн во всю ширину, а текст summary/панели инсетится
+   * на `--pad` (как секции/шапка). Используется в FAQ карточки товара.
+   */
+  inset?: boolean;
 };
 
 /**
@@ -31,6 +36,7 @@ export default function Accordion({
   open: controlledOpen,
   onToggle,
   id,
+  inset = false,
 }: AccordionProps) {
   const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen);
   const isControlled = controlledOpen !== undefined;
@@ -60,12 +66,12 @@ export default function Accordion({
       onToggle={isControlled ? undefined : handleNativeToggle}
     >
       <summary
-        className={styles.summary}
+        className={`${styles.summary}${inset ? ` ${styles.summaryInset}` : ''}`}
         onClick={isControlled ? handleControlledClick : undefined}
       >
         <span className={styles.title}>{title}</span>
       </summary>
-      <div className={styles.panel}>
+      <div className={`${styles.panel}${inset ? ` ${styles.panelInset}` : ''}`}>
         {children}
       </div>
     </details>

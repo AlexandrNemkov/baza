@@ -2,7 +2,7 @@ import Link from 'next/link';
 import styles from './SectionHeading.module.css';
 
 type SectionHeadingProps = {
-  /** Номер секции, напр. «01». Рисуется mono --accent слева. */
+  /** Номер секции — больше не рисуется; проп оставлен для совместимости вызовов. */
   index?: string;
   /** Заголовок секции. */
   title: string;
@@ -21,7 +21,6 @@ type SectionHeadingProps = {
  * API пропсов сохранён для совместимости с вызовами на страницах.
  */
 export default function SectionHeading({
-  index,
   title,
   href,
   cta = 'Все →',
@@ -29,7 +28,6 @@ export default function SectionHeading({
   return (
     <div className={styles.row}>
       <div className={styles.label}>
-        {index && <span className={styles.index}>{index}</span>}
         <h2 className={styles.title}>{title}</h2>
       </div>
       {href && (

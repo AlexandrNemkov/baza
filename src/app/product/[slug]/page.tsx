@@ -179,7 +179,6 @@ export default async function ProductPage({
         <>
           <div className={styles.sbar}>
             <div className={styles.sbarTitle}>
-              <span className={styles.sbarNo}>05</span>
               <h2 className={styles.sbarH}>Похожие вещи</h2>
             </div>
             <Link href="/catalog" className={styles.sbarCta}>

@@ -147,7 +147,6 @@ export default async function ArticlePage({
       {/* related */}
       <div className={styles.sbar}>
         <div className={styles.sbarLeft}>
-          <span className={`mono ${styles.sbarNo}`}>06</span>
           <h2 className={styles.sbarH2}>Читать дальше</h2>
         </div>
         <Link href="/blog" className={`mono ${styles.sbarLink}`}>

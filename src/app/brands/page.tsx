@@ -87,7 +87,6 @@ export default function BrandsPage() {
       {/* A–Z index */}
       <div className={styles.ixhead}>
         <div className={styles.ixheadLeft}>
-          <span className={styles.ixNo}>{totalBrands}</span>
           <h2 className={styles.ixTitle}>Все марки · указатель</h2>
         </div>
         <span className={[styles.ixMeta, 'cap'].join(' ')}>Россия · RU</span>

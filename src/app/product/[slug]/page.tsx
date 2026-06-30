@@ -165,7 +165,7 @@ export default async function ProductPage({
               src={brandImgSrc}
               mark={brandInitial(brand.name)}
               alt={`${brand.name} — фото`}
-              ratio="4 / 3"
+              ratio="auto"
               className={styles.brandPh}
             />
           </div>

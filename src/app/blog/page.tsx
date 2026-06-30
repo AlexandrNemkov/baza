@@ -40,7 +40,7 @@ export default function BlogPage() {
 
       {/* titlebar */}
       <div className={styles.titlebar}>
-        <div className={`container ${styles.titlebarInner}`}>
+        <div className={styles.titlebarInner}>
           <h1 className={styles.titleH1}>Журнал</h1>
           <div className={`mono ${styles.titleMeta}`}>
             Выпуск №01
@@ -52,7 +52,7 @@ export default function BlogPage() {
 
       {/* rubrics */}
       <div className={styles.rubr}>
-        <div className={`container ${styles.rubrInner}`}>
+        <div className={styles.rubrInner}>
           {CHIPS.map((chip) => (
             <button
               key={chip}
@@ -90,7 +90,7 @@ export default function BlogPage() {
       </section>
 
       {/* article grid */}
-      <div className={`container ${styles.ag}`}>
+      <div className={styles.ag}>
         {rest.map((a, i) => {
           const img = ARTICLE_IMAGES[a.slug] ?? `/img/p${String((i + 2) % 16 + 1).padStart(2, '0')}.jpg`;
           return (

@@ -18,17 +18,15 @@ export default function CatalogPage() {
 
   return (
     <>
-      <div className="container">
-        <Breadcrumbs
+      <Breadcrumbs
           items={[
             { name: 'Главная', href: '/' },
             { name: 'Каталог', href: '/catalog' },
           ]}
         />
-      </div>
 
       <div className={styles.titlebar}>
-        <div className={`container ${styles.titlebarInner}`}>
+        <div className={styles.titlebarInner}>
           <h1 className={styles.h1}>Каталог</h1>
           <div className={`mono ${styles.meta}`}>
             ВЫПУСК №01<br />{products.length} ВЕЩЕЙ · {brands.length} БРЕНДОВ

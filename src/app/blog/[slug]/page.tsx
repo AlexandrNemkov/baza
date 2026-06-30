@@ -57,32 +57,28 @@ export default async function ArticlePage({
 
   return (
     <>
-      <div className="container">
-        <Breadcrumbs
+      <Breadcrumbs
           items={[
             { name: 'Главная', href: '/' },
             { name: 'Журнал', href: '/blog' },
             { name: a.title, href: '/blog/' + a.slug },
           ]}
         />
-      </div>
 
       {/* article header */}
-      <div className="container">
-        <div className={styles.ahead}>
-          <div className={styles.aheadTags}>
-            <span className={styles.aheadTagAccent}>Гид</span>
-            <span>8 мин чтения</span>
-            <span>{fmtDateShort(a.date)}</span>
-          </div>
-          <h1 className={styles.aheadH1}>{a.title}</h1>
-          <p className={styles.stand}>{a.excerpt}</p>
-          <div className={styles.by}>
-            <span>
-              Текст —{' '}
-              <span className={styles.byName}>Редакция Baza</span>
-            </span>
-          </div>
+      <div className={styles.ahead}>
+        <div className={styles.aheadTags}>
+          <span className={styles.aheadTagAccent}>Гид</span>
+          <span>8 мин чтения</span>
+          <span>{fmtDateShort(a.date)}</span>
+        </div>
+        <h1 className={styles.aheadH1}>{a.title}</h1>
+        <p className={styles.stand}>{a.excerpt}</p>
+        <div className={styles.by}>
+          <span>
+            Текст —{' '}
+            <span className={styles.byName}>Редакция Baza</span>
+          </span>
         </div>
       </div>
 
@@ -98,11 +94,14 @@ export default async function ArticlePage({
 
       {/* body */}
       <article className={styles.body}>
-        {a.body.map((block, i) => {
+        {(() => {
+          let h2Count = 0;
+          return a.body.map((block, i) => {
           if (block.type === 'h2') {
+            h2Count += 1;
             return (
               <h2 key={i}>
-                <span className={`mono ${styles.num}`}>№ {String(i).padStart(2, '0')}</span>
+                <span className={`mono ${styles.num}`}>№ {String(h2Count).padStart(2, '0')}</span>
                 {block.text}
               </h2>
             );
@@ -141,23 +140,22 @@ export default async function ArticlePage({
           }
           // type === 'p'
           return <p key={i}>{block.text}</p>;
-        })}
+        });
+        })()}
       </article>
 
       {/* related */}
-      <div className="container">
-        <div className={styles.sbar}>
-          <div className={styles.sbarLeft}>
-            <span className={`mono ${styles.sbarNo}`}>06</span>
-            <h2 className={styles.sbarH2}>Читать дальше</h2>
-          </div>
-          <Link href="/blog" className={`mono ${styles.sbarLink}`}>
-            Весь журнал →
-          </Link>
+      <div className={styles.sbar}>
+        <div className={styles.sbarLeft}>
+          <span className={`mono ${styles.sbarNo}`}>06</span>
+          <h2 className={styles.sbarH2}>Читать дальше</h2>
         </div>
+        <Link href="/blog" className={`mono ${styles.sbarLink}`}>
+          Весь журнал →
+        </Link>
       </div>
 
-      <div className={`container ${styles.ag}`}>
+      <div className={styles.ag}>
         {related.map((r, i) => {
           const img = ARTICLE_IMAGES[r.slug] ?? FALLBACK_IMAGES[i] ?? '/img/p05.jpg';
           return (

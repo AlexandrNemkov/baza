@@ -50,7 +50,7 @@
 
 /* Лид */
 .lead {
-  color: var(--muted);
+  color: var(--text-body);
   font-size: 15.5px;
   max-width: 42ch;
   line-height: 1.55;
@@ -113,7 +113,7 @@
 }
 
 .brandDesc {
-  color: var(--muted);
+  color: var(--text-body);
   max-width: 42ch;
   margin-bottom: 20px;
   font-size: 15px;
@@ -134,7 +134,7 @@
 }
 
 .brandImg {
-  background: var(--paper);
+  background: #DBD2BF;
   min-height: 300px;
 }
 

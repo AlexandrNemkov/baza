@@ -50,8 +50,7 @@
 
 .leadText {
   max-width: 46ch;
-  color: var(--ink);
-  opacity: 0.78;
+  color: var(--text-body);
   font-size: 16.5px;
   line-height: 1.6;
 }
@@ -112,7 +111,6 @@
   justify-content: space-between;
   padding: 15px var(--pad);
   border-bottom: 1px solid var(--rule);
-  border-top: 1px solid var(--rule);
 }
 
 .ixheadLeft {

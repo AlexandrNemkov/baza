@@ -45,13 +45,13 @@ export default function InfoLayout({
       <Breadcrumbs items={crumbs} />
 
       <div className={styles.titlebar}>
-        <div className={`container ${styles.titlebarInner}`}>
+        <div className={styles.titlebarInner}>
           <h1 className={styles.titleH1}>{title}</h1>
           <div className={`mono ${styles.titleMeta}`}>{meta}</div>
         </div>
       </div>
 
-      <div className={`container ${styles.info}`}>
+      <div className={styles.info}>
         <aside className={styles.snav}>
           <div className={styles.snavIn}>
             <div className={`mono ${styles.snavLabel}`}>Сервис</div>

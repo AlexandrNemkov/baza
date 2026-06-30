@@ -11,7 +11,7 @@
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  padding: 34px 0 26px;
+  padding: 34px var(--pad) 26px;
   gap: 24px;
 }
 
@@ -107,7 +107,7 @@
 /* --- responsive --- */
 @media (max-width: 760px) {
   .titlebarInner {
-    padding: 24px 0 18px;
+    padding: 24px var(--pad-mobile) 18px;
   }
 
   .grid {

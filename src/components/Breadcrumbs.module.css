@@ -3,6 +3,7 @@
 
 .nav {
   border-bottom: 1px solid var(--line);
+  width: 100%;
 }
 
 .list {
@@ -12,12 +13,19 @@
   gap: 10px;
   height: 42px;
   list-style: none;
+  padding-inline: var(--pad);
   /* шрифт/размер берём из глобального .micro (nav получает класс снаружи) */
   font-family: var(--font-mono), monospace;
   font-size: 11px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--muted);
+}
+
+@media (max-width: 767px) {
+  .list {
+    padding-inline: var(--pad-mobile);
+  }
 }
 
 .item {

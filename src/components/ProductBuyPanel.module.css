@@ -134,7 +134,7 @@
 
 /* Text inside accordion panels */
 .text {
-  color: var(--muted);
+  color: var(--text-body);
   font-size: 14px;
 }
 

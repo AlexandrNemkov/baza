@@ -11,7 +11,7 @@
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  padding: 34px 0 26px;
+  padding: 34px var(--pad) 26px;
   gap: 24px;
 }
 
@@ -35,7 +35,7 @@
 
 /* --- intro paragraph --- */
 .intro {
-  padding: 26px 0 30px;
+  padding: 26px var(--pad) 30px;
   border-bottom: 1px solid var(--line);
   max-width: 680px;
   font-size: 16px;
@@ -45,12 +45,12 @@
 
 /* --- product grid section --- */
 .section {
-  padding-bottom: var(--space-10, 64px);
+  padding: 0 var(--pad) var(--space-10, 64px);
 }
 
 /* --- responsive --- */
 @media (max-width: 760px) {
   .titlebarInner {
-    padding: 24px 0 18px;
+    padding: 24px var(--pad-mobile) 18px;
   }
 }

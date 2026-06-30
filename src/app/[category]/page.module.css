@@ -7,8 +7,7 @@
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  padding-top: 34px;
-  padding-bottom: 26px;
+  padding: 34px var(--pad) 26px;
 }
 
 .h1 {

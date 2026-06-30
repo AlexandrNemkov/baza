@@ -43,17 +43,15 @@ export default async function CategoryPage({
 
   return (
     <>
-      <div className="container">
-        <Breadcrumbs
+      <Breadcrumbs
           items={[
             { name: 'Главная', href: '/' },
             { name: cat.name, href: '/' + cat.slug },
           ]}
         />
-      </div>
 
       <div className={styles.titlebar}>
-        <div className={`container ${styles.titlebarInner}`}>
+        <div className={styles.titlebarInner}>
           <h1 className={styles.h1}>{cat.name}</h1>
           <div className={`mono ${styles.meta}`}>
             {products.length} ВЕЩЕЙ

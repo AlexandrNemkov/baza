@@ -1,7 +1,7 @@
 :root{
   /* Design C — Journal palette */
   --bg:#EFE9DC; --paper:#F6F2E8;
-  --ink:#16130E; --muted:#6E6656;
+  --ink:#16130E; --muted:#6E6656; --text-body:#3A352B;
   --line:#D8CFBC; --rule:#16130E;
   --accent:#C9806E; --accent-d:#E0998A;
   --fill:#EBAEA1; --on-accent:#2A1712;

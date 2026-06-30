@@ -11,7 +11,7 @@
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  padding: 34px 0 26px;
+  padding: 34px var(--pad) 26px;
   gap: 24px;
 }
 
@@ -47,7 +47,7 @@
   flex-wrap: wrap;
   align-items: center;
   min-height: 52px;
-  padding-block: 8px;
+  padding: 8px var(--pad);
 }
 
 .chip {
@@ -320,10 +320,10 @@
 
 @media (max-width: 760px) {
   .titlebarInner {
-    padding: 24px 0 18px;
+    padding: 24px var(--pad-mobile) 18px;
   }
   .rubrInner {
-    padding: 12px 0;
+    padding: 12px var(--pad-mobile);
   }
   .ag {
     grid-template-columns: 1fr;

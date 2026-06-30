@@ -76,7 +76,7 @@ export default function CatalogView({
     <section className={styles.root}>
       {/* Липкая полоса фильтров */}
       <div className={styles.filters}>
-        <div className={`${styles.filtersInner} container`}>
+        <div className={styles.filtersInner}>
           <div className={styles.chipSet}>
             <button
               type="button"
@@ -122,7 +122,7 @@ export default function CatalogView({
         <div className={styles.more}>
           <button
             type="button"
-            className="btn"
+            className="btn ghost"
             onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}
           >
             Показать ещё →

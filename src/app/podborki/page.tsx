@@ -36,7 +36,7 @@ export default function PodborkiPage() {
 
       {/* titlebar */}
       <div className={styles.titlebar}>
-        <div className={`container ${styles.titlebarInner}`}>
+        <div className={styles.titlebarInner}>
           <h1 className={styles.titleH1}>Подборки</h1>
           <div className={`mono ${styles.titleMeta}`}>
             Капсулы · Образы
@@ -47,7 +47,7 @@ export default function PodborkiPage() {
       </div>
 
       {/* grid */}
-      <div className={`container ${styles.grid}`}>
+      <div className={styles.grid}>
         {podborki.map((p) => (
           <Link key={p.slug} href={`/podborki/${p.slug}`} className={styles.card}>
             <div className={styles.cardPhoto}>

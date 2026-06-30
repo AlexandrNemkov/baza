@@ -46,8 +46,7 @@ export default async function SubcategoryPage({
 
   return (
     <>
-      <div className="container">
-        <Breadcrumbs
+      <Breadcrumbs
           items={[
             { name: 'Главная', href: '/' },
             {
@@ -60,10 +59,9 @@ export default async function SubcategoryPage({
             },
           ]}
         />
-      </div>
 
       <div className={styles.titlebar}>
-        <div className={`container ${styles.titlebarInner}`}>
+        <div className={styles.titlebarInner}>
           <h1 className={styles.h1}>{sub.name}</h1>
           <div className={`mono ${styles.meta}`}>
             {products.length} ВЕЩЕЙ

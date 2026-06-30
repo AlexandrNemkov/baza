@@ -23,7 +23,7 @@ export default function StickyBuyBar({ price, selectedSize }: StickyBuyBarProps)
 
   return (
     <div className={styles.bar} role="region" aria-label="Покупка">
-      <div className={`container ${styles.inner}`}>
+      <div className={styles.inner}>
         <div className={styles.info}>
           <span className={`micro ${styles.size}`}>
             Размер {selectedSize ?? '—'}

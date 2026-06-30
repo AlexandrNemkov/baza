@@ -55,7 +55,7 @@ export default async function PodborkaPage({
 
       {/* titlebar */}
       <div className={styles.titlebar}>
-        <div className={`container ${styles.titlebarInner}`}>
+        <div className={styles.titlebarInner}>
           <h1 className={styles.titleH1}>{pod.title}</h1>
           <div className={`mono ${styles.titleMeta}`}>
             Подборка
@@ -66,12 +66,10 @@ export default async function PodborkaPage({
       </div>
 
       {/* intro */}
-      <div className="container">
-        <p className={styles.intro}>{pod.intro}</p>
-      </div>
+      <p className={styles.intro}>{pod.intro}</p>
 
       {/* products */}
-      <div className={`container ${styles.section}`}>
+      <div className={styles.section}>
         <ProductGrid products={products} />
       </div>
 

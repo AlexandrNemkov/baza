@@ -42,7 +42,7 @@ export default function RootLayout({
       <body>
         <JsonLd data={organization()} />
         <Header />
-        <main style={{ paddingTop: "var(--space-5)", minHeight: "60vh" }}>
+        <main style={{ minHeight: "60vh" }}>
           {children}
         </main>
         <Footer />

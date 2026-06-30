@@ -36,10 +36,20 @@ export default function Accordion({
   const isControlled = controlledOpen !== undefined;
   const open = isControlled ? controlledOpen : uncontrolledOpen;
 
-  const handleToggle = (e: React.SyntheticEvent<HTMLDetailsElement>) => {
+  // Uncontrolled: let native <details> drive; mirror its open state to React
+  // (for the +/− icon) and forward to onToggle if a listener is present.
+  const handleNativeToggle = (e: React.SyntheticEvent<HTMLDetailsElement>) => {
     const next = (e.currentTarget as HTMLDetailsElement).open;
-    if (!isControlled) setUncontrolledOpen(next);
+    setUncontrolledOpen(next);
     onToggle?.(next);
+  };
+
+  // Controlled: suppress the browser's native toggle and ask the parent to
+  // flip the state. The DOM `open` attribute is then always determined by the
+  // `open` prop, never by native behaviour.
+  const handleControlledClick = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    onToggle?.(!open);
   };
 
   return (
@@ -47,9 +57,12 @@ export default function Accordion({
       className={styles.item}
       id={id}
       open={open}
-      onToggle={handleToggle}
+      onToggle={isControlled ? undefined : handleNativeToggle}
     >
-      <summary className={styles.summary}>
+      <summary
+        className={styles.summary}
+        onClick={isControlled ? handleControlledClick : undefined}
+      >
         <span className={styles.title}>{title}</span>
       </summary>
       <div className={styles.panel}>

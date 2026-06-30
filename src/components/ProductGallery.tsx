@@ -62,7 +62,7 @@ export default function ProductGallery({
   return (
     <div className={styles.gallery}>
       {/* Desktop: vertical stack with border separators */}
-      <div className={styles.stack} aria-hidden={undefined}>
+      <div className={styles.stack}>
         {images.map((img, i) => (
           <Placeholder
             key={i}

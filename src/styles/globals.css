@@ -82,11 +82,12 @@ a {
   outline-offset: 2px;
 }
 
-/* ---- Layout ---- */
+/* ---- Layout ----
+   Full-bleed: контент идёт во всю ширину, край в один уровень с секциями-
+   линейками (как в концепте C: `.wrap{max-width:none}`). Только внутренний
+   отступ `--pad`, без центрирующей колонки. */
 .container,
 .wrap {
-  max-width: var(--container);
-  margin-inline: auto;
   padding-inline: var(--pad);
 }
 

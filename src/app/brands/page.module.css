@@ -9,8 +9,6 @@
   justify-content: space-between;
   padding: 34px var(--pad) 26px;
   gap: 24px;
-  max-width: var(--container);
-  margin: 0 auto;
 }
 
 .h1 {

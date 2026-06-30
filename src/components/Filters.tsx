@@ -90,7 +90,7 @@ export default function Filters({
 
       <div
         ref={panelRef}
-        className={`${styles.panel} glass`}
+        className={styles.panel}
         role="dialog"
         aria-modal="true"
         aria-label="Фильтры"

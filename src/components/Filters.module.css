@@ -1,4 +1,6 @@
-/* Full-screen layer holding overlay + bottom sheet. */
+/* Filters — боковая/нижняя панель фильтров в стиле C */
+
+/* Полноэкранный слой */
 .layer {
   position: fixed;
   inset: 0;
@@ -8,14 +10,14 @@
 .overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(22, 19, 14, 0.5);
   border: 0;
   width: 100%;
   height: 100%;
   cursor: default;
 }
 
-/* Bottom-anchored sheet, slides up. Sharp corners. */
+/* Панель: явный фон --bg, без .glass */
 .panel {
   position: absolute;
   left: 0;
@@ -24,7 +26,8 @@
   display: flex;
   flex-direction: column;
   max-height: 88vh;
-  border-top: 1px solid var(--line);
+  background: var(--bg);
+  border-top: 1px solid var(--rule);
   animation: sheet-up 0.22s ease-out;
 }
 
@@ -33,39 +36,34 @@
 }
 
 @keyframes sheet-up {
-  from {
-    transform: translateY(100%);
-  }
-  to {
-    transform: translateY(0);
-  }
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .panel {
-    animation: none;
-  }
+  .panel { animation: none; }
 }
 
+/* Шапка панели */
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--space-4) var(--space-4) var(--space-3);
+  padding: 20px 24px 16px;
   border-bottom: 1px solid var(--line);
 }
 
 .closeBtn {
-  width: var(--tap);
-  height: var(--tap);
-  margin-right: calc(-1 * var(--space-2));
+  width: 44px;
+  height: 44px;
+  margin-right: -8px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   background: transparent;
   border: 0;
   cursor: pointer;
-  color: var(--text);
+  color: var(--ink);
 }
 
 .closeBtn svg {
@@ -73,17 +71,18 @@
   height: 20px;
 }
 
-/* Scrollable facet groups. */
+/* Прокручиваемое тело */
 .body {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding: var(--space-2) var(--space-4) var(--space-5);
+  padding: 8px 24px 32px;
 }
 
+/* Группа фасетов */
 .group {
   border: 0;
   margin: 0;
-  padding: var(--space-4) 0;
+  padding: 20px 0;
   border-bottom: 1px solid var(--line);
 }
 
@@ -93,21 +92,26 @@
 
 .legend {
   padding: 0;
-  margin-bottom: var(--space-3);
+  margin-bottom: 12px;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
 }
 
-/* Brand checkboxes. */
+/* Чекбоксы брендов */
 .brandList {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
+  gap: 4px;
 }
 
 .checkRow {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
-  min-height: var(--tap);
+  gap: 12px;
+  min-height: 44px;
   cursor: pointer;
   font-size: 15px;
 }
@@ -119,108 +123,115 @@
   cursor: pointer;
 }
 
-/* Toggle chips (size / color). Sharp; selected = ink fill. */
+/* Чипы (размер / цвет) */
 .chips {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2);
+  gap: 8px;
 }
 
 .chip {
-  min-height: var(--tap);
-  padding: 0 var(--space-4);
+  min-height: 44px;
+  padding: 0 16px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--surface);
-  border: 1px solid var(--line-strong);
-  color: var(--text);
-  font-size: 13px;
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
   cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
 }
 
 .chip:hover {
-  border-color: var(--text);
+  border-color: var(--ink);
 }
 
 .chipActive {
-  background: var(--text);
-  border-color: var(--text);
+  background: var(--ink);
+  border-color: var(--ink);
   color: #fff;
 }
 
-/* Price inputs. */
+/* Поля цены */
 .priceRow {
   display: flex;
   align-items: flex-end;
-  gap: var(--space-3);
+  gap: 12px;
 }
 
 .priceField {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
+  gap: 4px;
   flex: 1;
 }
 
 .priceLabel {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
   font-size: 11px;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--text-faint);
+  color: var(--muted);
 }
 
 .priceInput {
   width: 100%;
-  min-height: var(--tap);
-  padding: 0 var(--space-3);
-  background: var(--surface);
-  border: 1px solid var(--line-strong);
-  color: var(--text);
+  min-height: 44px;
+  padding: 0 12px;
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink);
   font-size: 15px;
 }
 
 .priceInput:focus {
   outline: none;
-  border-color: var(--text);
+  border-color: var(--ink);
 }
 
 .priceDash {
-  padding-bottom: var(--space-3);
-  color: var(--text-faint);
+  padding-bottom: 12px;
+  color: var(--muted);
+  font-size: 15px;
 }
 
-/* Footer actions. */
+/* Подвал кнопок */
 .footer {
   display: flex;
-  gap: var(--space-3);
-  padding: var(--space-4);
+  gap: 12px;
+  padding: 16px 24px;
   border-top: 1px solid var(--line);
 }
 
 .ghostBtn {
   flex: 0 0 auto;
-  min-height: var(--tap);
-  padding: 0 var(--space-5);
+  min-height: 44px;
+  padding: 0 20px;
   background: transparent;
-  border: 1px solid var(--line-strong);
-  color: var(--text);
-  font-size: 12px;
-  letter-spacing: 0.14em;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 11px;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  font-weight: 600;
   cursor: pointer;
+  transition: border-color 0.15s;
 }
 
 .ghostBtn:hover {
-  border-color: var(--text);
+  border-color: var(--ink);
 }
 
 .applyBtn {
   flex: 1;
 }
 
-/* Desktop: center the sheet as a modal panel for a tidier large-screen feel. */
+/* Десктоп: центрированная модалка */
 @media (min-width: 1024px) {
   .panel {
     left: 50%;
@@ -230,7 +241,7 @@
     transform: translate(-50%, -50%);
     width: 420px;
     max-height: 80vh;
-    border: 1px solid var(--line-strong);
+    border: 1px solid var(--rule);
     animation: none;
   }
 }

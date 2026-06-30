@@ -14,6 +14,8 @@ import ProductGrid from './ProductGrid';
 import Filters from './Filters';
 import styles from './CatalogView.module.css';
 
+const PAGE_SIZE = 12;
+
 const SORT_LABELS: Record<SortKey, string> = {
   new: 'Новинки',
   'price-asc': 'Цена ↑',
@@ -32,25 +34,17 @@ function activeCount(f: FilterState): number {
   return n;
 }
 
-/** Russian plural for «товар». */
-function plural(n: number): string {
-  const mod10 = n % 10;
-  const mod100 = n % 100;
-  if (mod10 === 1 && mod100 !== 11) return 'товар';
-  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return 'товара';
-  return 'товаров';
-}
-
 export default function CatalogView({
   products,
-  title,
 }: {
   products: Product[];
+  /** @deprecated title переехал в page-уровень; проп оставлен для совместимости */
   title?: string;
 }) {
   const [filter, setFilter] = useState<FilterState>(emptyFilterState());
   const [sort, setSort] = useState<SortKey>('new');
   const [sheetOpen, setSheetOpen] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
   const options = useMemo(() => facetOptions(products), [products]);
   const brandNames = useMemo(() => {
@@ -65,28 +59,47 @@ export default function CatalogView({
   );
 
   const active = activeCount(filter);
+  const visible = results.slice(0, visibleCount);
+  const hasMore = visibleCount < results.length;
+
+  // Сбрасываем пагинацию при смене фильтра/сортировки
+  const handleFilterChange = (next: FilterState) => {
+    setFilter(next);
+    setVisibleCount(PAGE_SIZE);
+  };
+  const handleSortChange = (next: SortKey) => {
+    setSort(next);
+    setVisibleCount(PAGE_SIZE);
+  };
 
   return (
     <section className={styles.root}>
-      {title && <h1 className={styles.title}>{title}</h1>}
+      {/* Липкая полоса фильтров */}
+      <div className={styles.filters}>
+        <div className={`${styles.filtersInner} container`}>
+          <div className={styles.chipSet}>
+            <button
+              type="button"
+              className={[styles.chip, active === 0 ? styles.chipAct : ''].filter(Boolean).join(' ')}
+              onClick={() => handleFilterChange(emptyFilterState())}
+            >
+              Все
+            </button>
+            <button
+              type="button"
+              className={[styles.chip, active > 0 ? styles.chipAct : ''].filter(Boolean).join(' ')}
+              onClick={() => setSheetOpen(true)}
+            >
+              Фильтры{active > 0 && <span className={styles.badge}>{active}</span>}
+            </button>
+          </div>
 
-      <div className={`${styles.bar} glass`}>
-        <div className={`${styles.barInner} container`}>
-          <button
-            type="button"
-            className={styles.filterBtn}
-            onClick={() => setSheetOpen(true)}
-          >
-            Фильтры
-            {active > 0 && <span className={styles.badge}>{active}</span>}
-          </button>
-
-          <label className={styles.sortControl}>
-            <span className="micro">Сортировка</span>
+          <div className={styles.sort}>
+            <span className="mono">Сортировка</span>
             <select
               className={styles.sortSelect}
               value={sort}
-              onChange={(e) => setSort(e.target.value as SortKey)}
+              onChange={(e) => handleSortChange(e.target.value as SortKey)}
               aria-label="Сортировка"
             >
               {(Object.keys(SORT_LABELS) as SortKey[]).map((key) => (
@@ -95,22 +108,33 @@ export default function CatalogView({
                 </option>
               ))}
             </select>
-          </label>
+          </div>
         </div>
       </div>
 
-      <div className={`${styles.results} container`}>
-        <p className={`micro ${styles.count}`}>
-          {results.length} {plural(results.length)}
-        </p>
-        <ProductGrid products={results} />
+      {/* Сетка товаров */}
+      <div className={styles.results}>
+        <ProductGrid products={visible} />
       </div>
+
+      {/* Кнопка «Показать ещё» */}
+      {hasMore && (
+        <div className={styles.more}>
+          <button
+            type="button"
+            className="btn"
+            onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}
+          >
+            Показать ещё →
+          </button>
+        </div>
+      )}
 
       <Filters
         options={options}
         brandNames={brandNames}
         value={filter}
-        onChange={setFilter}
+        onChange={handleFilterChange}
         open={sheetOpen}
         onClose={() => setSheetOpen(false)}
       />

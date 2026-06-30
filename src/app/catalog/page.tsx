@@ -1,9 +1,10 @@
 import Breadcrumbs from '@/components/Breadcrumbs';
 import CatalogView from '@/components/CatalogView';
 import JsonLd from '@/components/JsonLd';
-import { getAllProducts } from '@/data';
+import { getAllBrands, getAllProducts } from '@/data';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { itemList } from '@/lib/seo/jsonld';
+import styles from './page.module.css';
 
 export const metadata = buildMetadata({
   title: 'Каталог',
@@ -13,6 +14,7 @@ export const metadata = buildMetadata({
 
 export default function CatalogPage() {
   const products = getAllProducts();
+  const brands = getAllBrands();
 
   return (
     <>
@@ -24,7 +26,17 @@ export default function CatalogPage() {
           ]}
         />
       </div>
-      <CatalogView products={products} title="Каталог" />
+
+      <div className={styles.titlebar}>
+        <div className={`container ${styles.titlebarInner}`}>
+          <h1 className={styles.h1}>Каталог</h1>
+          <div className={`mono ${styles.meta}`}>
+            ВЫПУСК №01<br />{products.length} ВЕЩЕЙ · {brands.length} БРЕНДОВ
+          </div>
+        </div>
+      </div>
+
+      <CatalogView products={products} />
       <JsonLd data={itemList(products)} />
     </>
   );

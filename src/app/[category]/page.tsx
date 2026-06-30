@@ -5,6 +5,7 @@ import JsonLd from '@/components/JsonLd';
 import { getAllCategories, getCategory, getProductsByCategory } from '@/data';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { itemList } from '@/lib/seo/jsonld';
+import styles from './page.module.css';
 
 type Params = { category: string };
 
@@ -50,7 +51,17 @@ export default async function CategoryPage({
           ]}
         />
       </div>
-      <CatalogView products={products} title={cat.name} />
+
+      <div className={styles.titlebar}>
+        <div className={`container ${styles.titlebarInner}`}>
+          <h1 className={styles.h1}>{cat.name}</h1>
+          <div className={`mono ${styles.meta}`}>
+            {products.length} ВЕЩЕЙ
+          </div>
+        </div>
+      </div>
+
+      <CatalogView products={products} />
       <JsonLd data={itemList(products)} />
     </>
   );

@@ -1,0 +1,27 @@
+/* Titlebar каталога: крупный h1 + mono-мета справа */
+.titlebar {
+  border-bottom: 1px solid var(--rule);
+}
+
+/* .titlebarInner накладывается поверх .container */
+.titlebarInner {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-top: 34px;
+  padding-bottom: 26px;
+}
+
+.h1 {
+  font-size: clamp(40px, 7vw, 86px);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 0.9;
+  margin-left: -0.04em;
+}
+
+.meta {
+  font-size: 12px;
+  color: var(--muted);
+  text-align: right;
+}

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { Brand } from '@/data/types';
 import Placeholder, { brandInitial } from './Placeholder';
+import { productWord } from '@/lib/pluralize';
 import styles from './BrandCard.module.css';
 
 type BrandCardProps = {
@@ -49,12 +50,3 @@ export default function BrandCard({ brand, index, productCount }: BrandCardProps
   );
 }
 
-/** Склонение слова «вещь» по числу. */
-function productWord(n: number): string {
-  const mod10 = n % 10;
-  const mod100 = n % 100;
-  if (mod100 >= 11 && mod100 <= 14) return 'вещей';
-  if (mod10 === 1) return 'вещь';
-  if (mod10 >= 2 && mod10 <= 4) return 'вещи';
-  return 'вещей';
-}

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import InfoLayout, {
   InfoBlock,
   InfoTable,
@@ -81,7 +82,7 @@ export default function VozvratPage() {
           По закону не подлежат возврату вещи надлежащего качества из
           категории белья и изделий с индивидуальной подгонкой. Полный
           перечень исключений приведён в{' '}
-          <a href="/oferta">Публичной оферте →</a>
+          <Link href="/oferta">Публичной оферте →</Link>
         </p>
       </InfoBlock>
     </InfoLayout>

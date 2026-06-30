@@ -8,6 +8,7 @@ import JsonLd from '@/components/JsonLd';
 import { getAllBrands, getBrand, getProductsByBrand } from '@/data';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { itemList } from '@/lib/seo/jsonld';
+import { productWord } from '@/lib/pluralize';
 import styles from './page.module.css';
 
 type Params = { brand: string };
@@ -139,11 +140,3 @@ export default async function BrandPage({
   );
 }
 
-function productWord(n: number): string {
-  const mod10 = n % 10;
-  const mod100 = n % 100;
-  if (mod100 >= 11 && mod100 <= 14) return 'вещей';
-  if (mod10 === 1) return 'вещь';
-  if (mod10 >= 2 && mod10 <= 4) return 'вещи';
-  return 'вещей';
-}

@@ -13,7 +13,7 @@ export default function CategoryTile({ category }: { category: Category }) {
     <Link href={`/${category.slug}`} className={styles.tile}>
       <div
         className={styles.image}
-        style={{ background: category.cover ?? 'var(--line-strong)' }}
+        style={{ background: category.cover ?? 'var(--line)' }}
       >
         <span className={styles.mark} aria-hidden="true">
           {brandInitial(category.name)}

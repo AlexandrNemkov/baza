@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import InfoLayout, {
   InfoBlock,
   InfoClause,
@@ -74,7 +75,7 @@ export default function OfertaPage() {
               text: (
                 <>
                   Способы оплаты перечислены в разделе{' '}
-                  <a href="/oplata">Оплата</a>. Заказ считается оплаченным с
+                  <Link href="/oplata">Оплата</Link>. Заказ считается оплаченным с
                   момента поступления средств продавцу.
                 </>
               ),
@@ -91,7 +92,7 @@ export default function OfertaPage() {
               text: (
                 <>
                   Сроки и способы доставки определены в разделе{' '}
-                  <a href="/dostavka">Доставка</a>.
+                  <Link href="/dostavka">Доставка</Link>.
                 </>
               ),
             },
@@ -101,7 +102,7 @@ export default function OfertaPage() {
                 <>
                   Покупатель вправе вернуть товар надлежащего качества в
                   течение 14 дней. Порядок и исключения — в разделе{' '}
-                  <a href="/vozvrat">Возврат</a> и в соответствии с законом
+                  <Link href="/vozvrat">Возврат</Link> и в соответствии с законом
                   «О защите прав потребителей».
                 </>
               ),

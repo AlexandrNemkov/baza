@@ -36,13 +36,6 @@ export async function generateMetadata({
   });
 }
 
-const fmtDate = (iso: string) =>
-  new Date(iso).toLocaleDateString('ru-RU', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  });
-
 const fmtDateShort = (iso: string) => {
   const d = new Date(iso);
   return `${String(d.getDate()).padStart(2, '0')}.${String(d.getMonth() + 1).padStart(2, '0')}.${d.getFullYear()}`;

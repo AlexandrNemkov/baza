@@ -137,13 +137,6 @@ a {
   color: var(--accent);
 }
 
-/* TEMP transition shim — в дизайне C нет блюра: панели/шапка имеют сплошной
-   фон цвета страницы. Удалить вместе с алиасами в финальном чанке, когда
-   .header / .panel / StickyBuyBar / Filters / CatalogView переоформлены. */
-.glass {
-  background: var(--bg);
-}
-
 /* ---- Button ---- */
 .btn {
   display: inline-flex;

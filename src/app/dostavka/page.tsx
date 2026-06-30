@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import InfoLayout, {
   InfoBlock,
   InfoTable,
@@ -80,7 +81,7 @@ export default function DostavkaPage() {
         </p>
         <p>
           Подробнее об условиях возврата — в разделе{' '}
-          <a href="/vozvrat">Возврат →</a>
+          <Link href="/vozvrat">Возврат →</Link>
         </p>
       </InfoBlock>
     </InfoLayout>

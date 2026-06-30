@@ -1,7 +1,7 @@
 .tile {
   display: block;
   position: relative;
-  color: var(--text);
+  color: var(--ink);
 }
 
 .image {
@@ -21,13 +21,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--font-rubik), Georgia, serif;
   font-weight: 500;
   font-style: italic;
   font-size: clamp(40px, 18%, 88px);
   line-height: 1;
   letter-spacing: -0.02em;
-  color: var(--text);
+  color: var(--ink);
   opacity: 0.12;
   mix-blend-mode: multiply;
   user-select: none;
@@ -39,5 +39,5 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   font-weight: 600;
-  color: var(--text);
+  color: var(--ink);
 }

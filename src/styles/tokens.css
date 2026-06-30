@@ -16,9 +16,5 @@
   --space-5:24px; --space-6:32px; --space-8:48px; --space-10:64px;
   --tap:44px;
 
-  /* TEMP transition shim — старые имена токенов → C. Удалить в финальном чанке,
-     когда все компоненты переоформлены. */
-  --text:var(--ink); --text-muted:var(--muted); --text-faint:var(--muted);
-  --line-strong:var(--line); --surface:var(--paper); --maxw:var(--container);
-  --accent-hover:var(--accent-d); --font-display:var(--font-rubik);
+
 }

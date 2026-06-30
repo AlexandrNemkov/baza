@@ -34,7 +34,6 @@
   color: var(--ink);
   /* сбрасываем наследуемый .micro uppercase, если класс применён снаружи */
   text-transform: none;
-  letter-spacing: -0.015em;
 }
 
 /* CTA справа: mono, --accent */

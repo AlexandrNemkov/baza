@@ -18,6 +18,7 @@ export default function BrandsPage() {
 
   const totalProducts = allProducts.length;
   const totalBrands = brands.length;
+  const totalCities = new Set(brands.map((b) => b.city).filter(Boolean)).size;
 
   return (
     <>
@@ -52,6 +53,10 @@ export default function BrandsPage() {
           <div className={styles.stat}>
             <span className={styles.statLabel}>Марок в выпуске</span>
             <strong className={styles.statVal}>{totalBrands}</strong>
+          </div>
+          <div className={styles.stat}>
+            <span className={styles.statLabel}>Городов</span>
+            <strong className={styles.statVal}>{totalCities}</strong>
           </div>
           <div className={styles.stat}>
             <span className={styles.statLabel}>Вещей в наличии</span>
@@ -97,7 +102,9 @@ export default function BrandsPage() {
               </span>
               <span className={styles.bidxNm}>{b.name}</span>
               <span className={styles.bidxMeta}>
-                {count} {productWord(count)} · Россия
+                {b.specialization && b.city
+                  ? `${b.specialization} · ${b.city}`
+                  : 'Россия'}
               </span>
             </Link>
           );

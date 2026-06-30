@@ -43,7 +43,11 @@ export default function BrandCard({ brand, index, productCount }: BrandCardProps
           )}
         </div>
         <div className={styles.nm}>{brand.name}</div>
-        <div className={styles.rg}>Россия</div>
+        <div className={styles.rg}>
+          {brand.specialization && brand.city
+            ? `${brand.specialization} · ${brand.city}`
+            : 'Россия'}
+        </div>
         <div className={styles.ds}>{brand.description}</div>
       </Link>
     </div>

@@ -25,9 +25,16 @@ export default function BlogPage() {
   const articles = getAllArticles();
   const [activeChip, setActiveChip] = useState('Всё');
 
-  const [lead, ...rest] = articles;
+  // Фильтрация: «Всё» — все статьи, иначе — по rubric
+  const filtered =
+    activeChip === 'Всё'
+      ? articles
+      : articles.filter((a) => a.rubric === activeChip);
 
-  const leadImg = ARTICLE_IMAGES[lead.slug] ?? '/img/p01.jpg';
+  const lead = filtered[0] ?? null;
+  const restFiltered = filtered.slice(1);
+
+  const leadImg = lead ? (ARTICLE_IMAGES[lead.slug] ?? '/img/p01.jpg') : '/img/p01.jpg';
 
   return (
     <>
@@ -66,51 +73,62 @@ export default function BlogPage() {
       </div>
 
       {/* lead article */}
-      <section className={styles.leadart}>
-        <div className={styles.leadImg}>
-          <img
-            src={asset(leadImg)}
-            alt={lead.title}
-            className={styles.leadPhoto}
-          />
-          <span className={`mono ${styles.leadIdx}`}>№ 01 / ОБЛОЖКА · FW26</span>
-        </div>
-        <div className={styles.leadTxt}>
-          <div className={styles.leadTags}>
-            <span className={styles.leadTagAccent}>Гид</span>
-            <span>8 мин чтения</span>
-            <span>{fmtDateShort(lead.date)}</span>
+      {lead && (
+        <section className={styles.leadart}>
+          <div className={styles.leadImg}>
+            <img
+              src={asset(leadImg)}
+              alt={lead.title}
+              className={styles.leadPhoto}
+            />
+            <span className={`mono ${styles.leadIdx}`}>№ 01 / ОБЛОЖКА · FW26</span>
           </div>
-          <h2 className={styles.leadH2}>{lead.title}</h2>
-          <p className={styles.leadExcerpt}>{lead.excerpt}</p>
-          <Link href={`/blog/${lead.slug}`} className={styles.leadMore}>
-            Читать материал →
-          </Link>
-        </div>
-      </section>
+          <div className={styles.leadTxt}>
+            <div className={styles.leadTags}>
+              {lead.rubric && <span className={styles.leadTagAccent}>{lead.rubric}</span>}
+              {lead.readMin && <span>{lead.readMin} мин чтения</span>}
+              <span>{fmtDateShort(lead.date)}</span>
+            </div>
+            <h2 className={styles.leadH2}>{lead.title}</h2>
+            <p className={styles.leadExcerpt}>{lead.excerpt}</p>
+            <Link href={`/blog/${lead.slug}`} className={styles.leadMore}>
+              Читать материал →
+            </Link>
+          </div>
+        </section>
+      )}
 
       {/* article grid */}
-      <div className={styles.ag}>
-        {rest.map((a, i) => {
-          const img = ARTICLE_IMAGES[a.slug] ?? `/img/p${String((i + 2) % 16 + 1).padStart(2, '0')}.jpg`;
-          return (
-            <div key={a.slug} className={styles.agCell}>
-              <Link href={`/blog/${a.slug}`} className={styles.agLink}>
-                <div className={styles.agPhoto}>
-                  <img src={asset(img)} alt={a.title} />
-                  <span className={`mono ${styles.agNo}`}>0{i + 2}</span>
-                </div>
-                <div className={styles.agTags}>
-                  <span className={styles.agTagAccent}>Уход</span>
-                  <span>5 мин</span>
-                </div>
-                <h3 className={styles.agH3}>{a.title}</h3>
-                <p className={styles.agExcerpt}>{a.excerpt}</p>
-              </Link>
-            </div>
-          );
-        })}
-      </div>
+      {restFiltered.length > 0 && (
+        <div className={styles.ag}>
+          {restFiltered.map((a, i) => {
+            const img = ARTICLE_IMAGES[a.slug] ?? `/img/p${String((i + 2) % 16 + 1).padStart(2, '0')}.jpg`;
+            return (
+              <div key={a.slug} className={styles.agCell}>
+                <Link href={`/blog/${a.slug}`} className={styles.agLink}>
+                  <div className={styles.agPhoto}>
+                    <img src={asset(img)} alt={a.title} />
+                    <span className={`mono ${styles.agNo}`}>0{i + 2}</span>
+                  </div>
+                  <div className={styles.agTags}>
+                    {a.rubric && <span className={styles.agTagAccent}>{a.rubric}</span>}
+                    {a.readMin && <span>{a.readMin} мин</span>}
+                  </div>
+                  <h3 className={styles.agH3}>{a.title}</h3>
+                  <p className={styles.agExcerpt}>{a.excerpt}</p>
+                </Link>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* пустое состояние при фильтре без результатов */}
+      {filtered.length === 0 && (
+        <div className={styles.ag} style={{ padding: '3rem 0', textAlign: 'center', color: 'var(--ink-4)' }}>
+          Статей в рубрике «{activeChip}» пока нет
+        </div>
+      )}
 
       {/* banner / newsletter */}
       <div className={styles.banner}>

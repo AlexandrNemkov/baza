@@ -16,12 +16,18 @@ export type Article = {
   date: string;
   excerpt: string;
   body: ArticleBlock[];
+  /** Рубрика: Гид / Уход / Люди / Съёмка / Материалы. */
+  rubric?: string;
+  /** Примерное время чтения, мин. */
+  readMin?: number;
 };
 
 export const ARTICLES: Article[] = [
   {
     slug: 'kak-sobrat-bazovyy-garderob',
     title: 'Как собрать базовый гардероб',
+    rubric: 'Гид',
+    readMin: 8,
     date: '2026-06-01',
     excerpt:
       'Принцип капсулы, нейтральная палитра и вещи, которые сочетаются между собой: пошаговый разбор.',
@@ -67,6 +73,8 @@ export const ARTICLES: Article[] = [
   {
     slug: 'uhod-za-lnom',
     title: 'Уход за льном: как сохранить вещи надолго',
+    rubric: 'Уход',
+    readMin: 5,
     date: '2026-05-20',
     excerpt:
       'Стирка, сушка и хранение льняных вещей: простые правила, продлевающие срок службы.',
@@ -102,6 +110,8 @@ export const ARTICLES: Article[] = [
   {
     slug: 'kto-shit-v-rossii',
     title: 'Кто шьёт в России',
+    rubric: 'Люди',
+    readMin: 7,
     date: '2026-05-10',
     excerpt:
       'Знакомим с марками, которые делают одежду здесь — с лицами, цехами и историями.',

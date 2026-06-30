@@ -58,7 +58,9 @@ export default async function BrandPage({
       <section className={styles.bhero}>
         <div className={styles.bheroL}>
           <div className={styles.kick}>
-            <span>Марка · Россия</span>
+            <span>
+              {b.city ? `${b.city} · RU` : 'Марка · Россия'}
+            </span>
             <span>RU</span>
           </div>
           <h1 className={styles.h1}>{b.name}</h1>
@@ -70,6 +72,12 @@ export default async function BrandPage({
                 <span className={styles.statLabel}>
                   {productWord(productCount)} в наличии
                 </span>
+              </div>
+            )}
+            {b.founded && (
+              <div className={styles.stat}>
+                <strong className={styles.statVal}>{b.founded}</strong>
+                <span className={styles.statLabel}>с года</span>
               </div>
             )}
             <div className={styles.stat}>

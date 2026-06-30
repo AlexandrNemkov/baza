@@ -68,8 +68,8 @@ export default async function ArticlePage({
       {/* article header */}
       <div className={styles.ahead}>
         <div className={styles.aheadTags}>
-          <span className={styles.aheadTagAccent}>Гид</span>
-          <span>8 мин чтения</span>
+          {a.rubric && <span className={styles.aheadTagAccent}>{a.rubric}</span>}
+          {a.readMin && <span>{a.readMin} мин чтения</span>}
           <span>{fmtDateShort(a.date)}</span>
         </div>
         <h1 className={styles.aheadH1}>{a.title}</h1>
@@ -164,7 +164,7 @@ export default async function ArticlePage({
                 <div className={styles.agPhoto}>
                   <img src={asset(img)} alt={r.title} />
                 </div>
-                <div className={`mono ${styles.agTag}`}>Журнал</div>
+                <div className={`mono ${styles.agTag}`}>{r.rubric ?? 'Журнал'}</div>
                 <h3 className={styles.agH3}>{r.title}</h3>
               </Link>
             </div>

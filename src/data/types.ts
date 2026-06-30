@@ -26,6 +26,12 @@ export type Brand = {
   description: string;
   logo?: string;
   cover?: string;
+  /** Направление / категория бренда, напр. «Минимализм», «Верхняя одежда». */
+  specialization?: string;
+  /** Город базирования, напр. «Москва». */
+  city?: string;
+  /** Год основания, напр. 2018. */
+  founded?: number;
 };
 
 export type Category = {

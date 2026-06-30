@@ -5,7 +5,9 @@
 export type ArticleBlock =
   | { type: 'p'; text: string }
   | { type: 'h2'; text: string }
-  | { type: 'ul'; items: string[] };
+  | { type: 'ul'; items: string[] }
+  | { type: 'quote'; text: string }
+  | { type: 'figure'; src: string; caption?: string };
 
 export type Article = {
   slug: string;
@@ -50,6 +52,15 @@ export const ARTICLES: Article[] = [
       {
         type: 'p',
         text: 'Когда вещи объединены общей палитрой и простым кроем, они легко комбинируются. Это и есть база: из 8–12 предметов получается несколько десятков образов.',
+      },
+      {
+        type: 'quote',
+        text: 'Хорошая база — это не минимум вещей, а максимум сочетаний из небольшого числа.',
+      },
+      {
+        type: 'figure',
+        src: '/img/p10.jpg',
+        caption: 'Палитра выпуска № 01 — семь приглушённых тонов',
       },
     ],
   },

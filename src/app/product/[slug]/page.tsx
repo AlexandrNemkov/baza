@@ -88,8 +88,10 @@ export default async function ProductPage({
           },
         ]
       : []),
-    { name: p.title, href: '/product/' + p.slug },
   ];
+  // Название товара дублирует H1 и тесно переносится в крошках на мобиле —
+  // не рисуем его как пункт, но оставляем в JSON-LD (seoLeaf).
+  const breadcrumbLeaf = { name: p.title, href: '/product/' + p.slug };
 
   // Brand image for brandblk
   const brandImgSrc = asset(`/img/p${String(((brandHref.length % 16) + 1)).padStart(2, '0')}.jpg`);
@@ -97,7 +99,7 @@ export default async function ProductPage({
   return (
     <>
       {/* Хлебные крошки */}
-      <Breadcrumbs items={breadcrumbItems} />
+      <Breadcrumbs items={breadcrumbItems} seoLeaf={breadcrumbLeaf} />
 
       {/* PDP: 1.5fr / 1fr grid */}
       <section className={styles.pdp}>

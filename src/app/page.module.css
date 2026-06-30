@@ -200,6 +200,7 @@
 
 .fieldInput {
   flex: 1;
+  min-width: 0;
   border: 0;
   background: transparent;
   color: #efe9dc;
@@ -213,6 +214,8 @@
 }
 
 .fieldBtn {
+  flex-shrink: 0;
+  white-space: nowrap;
   border: 0;
   background: var(--fill);
   color: var(--on-accent);

@@ -10,10 +10,20 @@ type Crumb = { name: string; href: string };
  * последний пункт цветом --accent.
  *
  * Страницы передают `items` с относительными путями приложения.
- * JSON-LD BreadcrumbList не изменён — данные/структура сохранены.
+ * `seoLeaf` (опц.) — конечный пункт (напр. название товара), который НЕ
+ * рисуется визуально (дублирует H1 и тесно переносится на мобиле), но
+ * добавляется в JSON-LD BreadcrumbList ради полноты разметки для нейропоиска.
  */
-export default function Breadcrumbs({ items }: { items: Crumb[] }) {
+export default function Breadcrumbs({
+  items,
+  seoLeaf,
+}: {
+  items: Crumb[];
+  seoLeaf?: Crumb;
+}) {
   if (items.length === 0) return null;
+
+  const jsonLdItems = seoLeaf ? [...items, seoLeaf] : items;
 
   return (
     <>
@@ -42,7 +52,7 @@ export default function Breadcrumbs({ items }: { items: Crumb[] }) {
           })}
         </ol>
       </nav>
-      <JsonLd data={breadcrumb(items)} />
+      <JsonLd data={breadcrumb(jsonLdItems)} />
     </>
   );
 }

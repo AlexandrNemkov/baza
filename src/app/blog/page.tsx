@@ -75,21 +75,25 @@ export default function BlogPage() {
       {/* lead article */}
       {lead && (
         <section className={styles.leadart}>
-          <div className={styles.leadImg}>
+          <Link href={`/blog/${lead.slug}`} className={styles.leadImg}>
             <img
               src={asset(leadImg)}
               alt={lead.title}
               className={styles.leadPhoto}
             />
             <span className={`mono ${styles.leadIdx}`}>№ 01 / ОБЛОЖКА · FW26</span>
-          </div>
+          </Link>
           <div className={styles.leadTxt}>
             <div className={styles.leadTags}>
               {lead.rubric && <span className={styles.leadTagAccent}>{lead.rubric}</span>}
               {lead.readMin && <span>{lead.readMin} мин чтения</span>}
               <span>{fmtDateShort(lead.date)}</span>
             </div>
-            <h2 className={styles.leadH2}>{lead.title}</h2>
+            <h2 className={styles.leadH2}>
+              <Link href={`/blog/${lead.slug}`} className={styles.leadTitleLink}>
+                {lead.title}
+              </Link>
+            </h2>
             <p className={styles.leadExcerpt}>{lead.excerpt}</p>
             <Link href={`/blog/${lead.slug}`} className={styles.leadMore}>
               Читать материал →

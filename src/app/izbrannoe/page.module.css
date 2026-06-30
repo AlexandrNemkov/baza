@@ -38,3 +38,17 @@
   max-width: 42ch;
   margin: 0 auto 22px;
 }
+
+/* ── Мобайл: заголовок и счётчик в столбик, как на странице брендов ── */
+@media (max-width: 760px) {
+  .titlebarInner {
+    padding: 24px var(--pad) 18px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .meta {
+    text-align: left;
+  }
+}

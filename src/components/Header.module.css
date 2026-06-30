@@ -226,14 +226,9 @@
     display: inline-flex;
   }
 
-  .hrow {
-    grid-template-columns: auto 1fr auto;
-    padding-inline: var(--pad-mobile);
-  }
-
-  .utilWrap {
-    padding-inline: var(--pad-mobile);
-  }
+  /* Грид НЕ меняем: остаётся 1fr auto 1fr (равные боковые колонки →
+     лого строго по центру). Бургер в левой 1fr, действия в правой 1fr.
+     Инсет --pad на мобиле уже = 18px (см. tokens.css). */
 
   .hnav {
     gap: 18px;

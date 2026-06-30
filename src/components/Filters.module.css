@@ -75,7 +75,7 @@
 .body {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 8px 24px 32px;
+  padding: 14px 24px 32px;
 }
 
 /* Группа фасетов */
@@ -85,7 +85,7 @@
   /* Больше воздуха над заголовком (от разделителя), заголовок вплотную к
      контенту. Низ компенсирует ~13px центрирования 44px-строк, чтобы
      визуально верх ≈ низ. */
-  padding: 26px 0 14px;
+  padding: 10px 0 14px;
   border-bottom: 1px solid var(--line);
 }
 

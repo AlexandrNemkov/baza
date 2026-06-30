@@ -19,15 +19,17 @@ function plateAlt(alt: string | undefined, img: GalleryImage, i: number) {
   return img.label ?? `Изображение ${i + 1}`;
 }
 
+function pad2(n: number) {
+  return n < 10 ? '0' + n : String(n);
+}
+
 /**
  * Responsive product gallery.
  *
- * Desktop (≥1024px): a quiet vertical stack of full-width 4/5 plates that
- * scrolls naturally inside the editorial left column.
+ * Desktop (≥981px): vertical stack of full-width 4/5 plates with --line borders.
  *
- * Mobile (<1024px): the familiar full-bleed horizontal scroll-snap carousel
- * with dot indicators. The two presentations render the same art-directed
- * plates; CSS toggles which container is shown so markup stays a11y-clean.
+ * Mobile (<981px): horizontal scroll-snap carousel with .galbar panel
+ * (счётчик NN/NN, кнопки ‹/›).
  */
 export default function ProductGallery({
   images,
@@ -38,6 +40,8 @@ export default function ProductGallery({
   const [active, setActive] = useState(0);
 
   if (images.length === 0) return null;
+
+  const total = images.length;
 
   const onScroll = () => {
     const track = trackRef.current;
@@ -52,9 +56,12 @@ export default function ProductGallery({
     track.scrollTo({ left: index * track.clientWidth, behavior: 'smooth' });
   };
 
+  const goPrev = () => goTo(Math.max(0, active - 1));
+  const goNext = () => goTo(Math.min(total - 1, active + 1));
+
   return (
     <div className={styles.gallery}>
-      {/* Desktop: vertical stack */}
+      {/* Desktop: vertical stack with border separators */}
       <div className={styles.stack} aria-hidden={undefined}>
         {images.map((img, i) => (
           <Placeholder
@@ -70,7 +77,7 @@ export default function ProductGallery({
         ))}
       </div>
 
-      {/* Mobile: swipeable carousel */}
+      {/* Mobile: swipeable carousel + galbar */}
       <div className={styles.carousel}>
         <div
           ref={trackRef}
@@ -91,18 +98,31 @@ export default function ProductGallery({
           ))}
         </div>
 
-        {images.length > 1 && (
-          <div className={styles.dots}>
-            {images.map((_, i) => (
+        {total > 1 && (
+          <div className={styles.galbar}>
+            <span className={styles.counter}>
+              {pad2(active + 1)} / {pad2(total)}
+            </span>
+            <div className={styles.arrows}>
               <button
-                key={i}
                 type="button"
-                className={`${styles.dot} ${i === active ? styles.dotActive : ''}`}
-                aria-label={`Перейти к изображению ${i + 1}`}
-                aria-current={i === active}
-                onClick={() => goTo(i)}
-              />
-            ))}
+                className={styles.arrowBtn}
+                onClick={goPrev}
+                disabled={active === 0}
+                aria-label="Предыдущее фото"
+              >
+                ‹
+              </button>
+              <button
+                type="button"
+                className={styles.arrowBtn}
+                onClick={goNext}
+                disabled={active === total - 1}
+                aria-label="Следующее фото"
+              >
+                ›
+              </button>
+            </div>
           </div>
         )}
       </div>

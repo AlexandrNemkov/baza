@@ -1,15 +1,15 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import Breadcrumbs from '@/components/Breadcrumbs';
 import ProductGallery from '@/components/ProductGallery';
 import { brandInitial } from '@/components/Placeholder';
+import Placeholder from '@/components/Placeholder';
 import ProductBuyPanel from '@/components/ProductBuyPanel';
 import ProductGrid from '@/components/ProductGrid';
-import Reveal from '@/components/Reveal';
-import SectionHeading from '@/components/SectionHeading';
 import FaqBlock from '@/components/FaqBlock';
 import JsonLd from '@/components/JsonLd';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import { sampleImage } from '@/lib/sampleImage';
+import { asset } from '@/lib/basePath';
 import {
   getAllProducts,
   getProduct,
@@ -52,7 +52,7 @@ function SizeChart({ chart }: { chart: SizeChartRow[] | string }) {
       <tbody>
         {chart.map((row) => (
           <tr key={row.label}>
-            <th scope="row">{row.label}</th>
+            <td>{row.label}</td>
             <td>{row.value}</td>
           </tr>
         ))}
@@ -75,6 +75,8 @@ export default async function ProductPage({
   const subcategory = p.subcategory ? getCategory(p.subcategory) : undefined;
   const related = relatedProducts(p, 4);
 
+  const brandHref = '/brands/' + p.brandSlug;
+
   const breadcrumbItems = [
     { name: 'Главная', href: '/' },
     ...(category ? [{ name: category.name, href: '/' + category.slug }] : []),
@@ -89,17 +91,18 @@ export default async function ProductPage({
     { name: p.title, href: '/product/' + p.slug },
   ];
 
-  const brandHref = '/brands/' + p.brandSlug;
+  // Brand image for brandblk
+  const brandImgSrc = asset(`/img/p${String(((brandHref.length % 16) + 1)).padStart(2, '0')}.jpg`);
 
   return (
-    <div className={`container ${styles.page}`}>
+    <>
+      {/* Хлебные крошки */}
       <Breadcrumbs items={breadcrumbItems} />
 
-      <div className={styles.layout}>
-        {/* Left: gallery column (scrolls naturally on desktop).
-            Not wrapped in Reveal — the main product image must be visible
-            immediately, never fade in. */}
-        <div className={styles.galleryCol}>
+      {/* PDP: 1.5fr / 1fr grid */}
+      <section className={styles.pdp}>
+        {/* Левая колонка: галерея */}
+        <div className={styles.galwrap}>
           <ProductGallery
             images={p.images.map((img, i) => ({
               ...img,
@@ -110,18 +113,27 @@ export default async function ProductPage({
           />
         </div>
 
-        {/* Right: sticky info column */}
-        <div className={styles.infoCol}>
-          <div className={styles.info}>
-            {brand && (
-              <Link href={brandHref} className={`micro ${styles.brand} link-underline`}>
-                {brand.name}
-              </Link>
-            )}
-            <h1 className={styles.title}>{p.title}</h1>
+        {/* Правая колонка: инфо (sticky) */}
+        <div className={styles.info}>
+          <div className={styles.infoIn}>
+            {/* Бренд */}
+            <div className={styles.br}>
+              {brand ? (
+                <Link href={brandHref} className={styles.brLink}>
+                  {brand.name}
+                </Link>
+              ) : (
+                <span>{p.brandSlug}</span>
+              )}
+            </div>
 
+            {/* Название */}
+            <h1 className={styles.h1}>{p.title}</h1>
+
+            {/* Лид */}
             <p className={styles.lead}>{p.description}</p>
 
+            {/* Панель покупки */}
             <ProductBuyPanel
               price={p.price}
               sizes={p.sizes}
@@ -135,30 +147,54 @@ export default async function ProductPage({
             />
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Below the fold (full width) */}
+      {/* О бренде */}
       {brand && (
-        <section className={styles.brandBlock}>
-          <p className="micro">О бренде</p>
-          <h2 className={styles.brandName}>{brand.name}</h2>
-          <p className={styles.brandText}>{brand.description}</p>
-          <Link href={brandHref} className={`link-underline ${styles.brandCta}`}>
-            Все вещи бренда
-          </Link>
+        <section className={styles.brandblk}>
+          <div className={styles.brandText}>
+            <div className={styles.brandNo}>№ 04 — О бренде</div>
+            <h3 className={styles.brandName}>{brand.name}</h3>
+            <p className={styles.brandDesc}>{brand.description}</p>
+            <Link href={brandHref} className={styles.brandCta}>
+              Все вещи бренда →
+            </Link>
+          </div>
+          <div className={styles.brandImg}>
+            <Placeholder
+              src={brandImgSrc}
+              mark={brandInitial(brand.name)}
+              alt={`${brand.name} — фото`}
+              ratio="4 / 3"
+              className={styles.brandPh}
+            />
+          </div>
         </section>
       )}
 
+      {/* FAQ */}
       <FaqBlock items={p.faq} />
 
+      {/* Похожие вещи */}
       {related.length > 0 && (
-        <Reveal as="section" className={styles.related}>
-          <SectionHeading index="04" title="Похожие вещи" />
-          <ProductGrid products={related} />
-        </Reveal>
+        <>
+          <div className={styles.sbar}>
+            <div className={styles.sbarTitle}>
+              <span className={styles.sbarNo}>05</span>
+              <h2 className={styles.sbarH}>Похожие вещи</h2>
+            </div>
+            <Link href="/catalog" className={styles.sbarCta}>
+              В каталог →
+            </Link>
+          </div>
+          <div className={styles.relatedGrid}>
+            <ProductGrid products={related} />
+          </div>
+        </>
       )}
 
+      {/* JSON-LD Product */}
       <JsonLd data={productJsonLd(p)} />
-    </div>
+    </>
   );
 }

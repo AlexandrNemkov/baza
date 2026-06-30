@@ -23,7 +23,7 @@ const SIZE_CHART_ID = 'pdp-size-chart';
  * StickyBuyBar. Also owns the open state of the Размеры accordion so the inline
  * "Таблица размеров" link can expand + scroll to it.
  *
- * Visual only — no cart logic. Price is shown with weight 500.
+ * Visual only — no cart logic. Price is shown mono weight 600.
  */
 export default function ProductBuyPanel({
   price,
@@ -45,20 +45,27 @@ export default function ProductBuyPanel({
     });
   };
 
+  const priceFormatted = price.toLocaleString('ru-RU');
+
   return (
     <div className={styles.panel}>
-      <p className={styles.price}>{price.toLocaleString('ru-RU')} ₽</p>
+      {/* Price */}
+      <p className={styles.price}>{priceFormatted} ₽</p>
 
+      {/* В наличии */}
+      <p className={styles.metaline}>В наличии · Отгрузка 1–2 дня</p>
+
+      {/* Size selector */}
       {sizes.length > 0 && (
         <div className={styles.sizes}>
           <div className={styles.sizeRow}>
-            <p className={`micro ${styles.label}`}>Размер</p>
+            <span className={`cap ${styles.label}`}>Размер</span>
             <button
               type="button"
-              className={`link-underline ${styles.chartLink}`}
+              className={styles.chartLink}
               onClick={openSizeChart}
             >
-              Таблица размеров
+              Таблица размеров →
             </button>
           </div>
           <div className={styles.chips} role="group" aria-label="Размер">
@@ -80,16 +87,21 @@ export default function ProductBuyPanel({
         </div>
       )}
 
-      <button type="button" className={`btn ${styles.cta}`}>
-        В корзину
+      {/* CTA — В корзину с ценой (скрыт на мобайл, там StickyBuyBar) */}
+      <button type="button" className={styles.buy}>
+        В корзину — {priceFormatted} ₽
       </button>
 
-      <p className={styles.meta}>
+      {/* Meta delivery line */}
+      <p className={styles.metaline}>
         Доставка по РФ · Возврат 14 дней · Оплата картой и СБП
       </p>
 
-      <div className={styles.accordions}>
-        <Accordion title="Состав и уход">{careContent}</Accordion>
+      {/* Accordion block */}
+      <div className={styles.acc}>
+        <Accordion title="Состав и уход" defaultOpen>
+          {careContent}
+        </Accordion>
         <div ref={chartRef}>
           <Accordion
             title="Размеры"
@@ -100,11 +112,10 @@ export default function ProductBuyPanel({
             {sizeChart}
           </Accordion>
         </div>
-        <Accordion title="Доставка">
+        <Accordion title="Доставка и возврат">
           <p className={styles.text}>
-            Доставляем по всей России курьерскими службами и почтой. Сроки и
-            стоимость рассчитываются при оформлении заказа. Возврат — в течение
-            14 дней при сохранении товарного вида.
+            СДЭК, Почта России и курьер по Москве. Бесплатно от 10 000 ₽.
+            Возврат в течение 14 дней по ЗоЗПП.
           </p>
         </Accordion>
       </div>

@@ -1,25 +1,8 @@
 'use client';
 
-import { useId, useState } from 'react';
+import { useState } from 'react';
 import type { ReactNode } from 'react';
 import styles from './Accordion.module.css';
-
-function PlusIcon() {
-  return (
-    <svg className={styles.icon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-      <line x1="12" y1="5" x2="12" y2="19" />
-      <line x1="5" y1="12" x2="19" y2="12" />
-    </svg>
-  );
-}
-
-function MinusIcon() {
-  return (
-    <svg className={styles.icon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-      <line x1="5" y1="12" x2="19" y2="12" />
-    </svg>
-  );
-}
 
 type AccordionProps = {
   title: string;
@@ -36,7 +19,11 @@ type AccordionProps = {
   id?: string;
 };
 
-/** Single hairline-bordered collapsible row with a uppercase micro title. */
+/**
+ * Single collapsible row using native <details>/<summary>.
+ * Icon: + when closed, − when open (via CSS ::after on summary).
+ * Supports both uncontrolled (defaultOpen) and controlled (open + onToggle) modes.
+ */
 export default function Accordion({
   title,
   children,
@@ -48,31 +35,26 @@ export default function Accordion({
   const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen);
   const isControlled = controlledOpen !== undefined;
   const open = isControlled ? controlledOpen : uncontrolledOpen;
-  const panelId = useId();
 
-  const toggle = () => {
-    const next = !open;
+  const handleToggle = (e: React.SyntheticEvent<HTMLDetailsElement>) => {
+    const next = (e.currentTarget as HTMLDetailsElement).open;
     if (!isControlled) setUncontrolledOpen(next);
     onToggle?.(next);
   };
 
   return (
-    <div className={styles.item} id={id}>
-      <button
-        type="button"
-        className={styles.header}
-        aria-expanded={open}
-        aria-controls={panelId}
-        onClick={toggle}
-      >
-        <span className={`micro ${styles.title}`}>{title}</span>
-        {open ? <MinusIcon /> : <PlusIcon />}
-      </button>
-      {open && (
-        <div id={panelId} className={styles.panel}>
-          {children}
-        </div>
-      )}
-    </div>
+    <details
+      className={styles.item}
+      id={id}
+      open={open}
+      onToggle={handleToggle}
+    >
+      <summary className={styles.summary}>
+        <span className={styles.title}>{title}</span>
+      </summary>
+      <div className={styles.panel}>
+        {children}
+      </div>
+    </details>
   );
 }

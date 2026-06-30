@@ -1,136 +1,225 @@
-.page {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
-  /* Clears the fixed mobile StickyBuyBar; trimmed on desktop where it's hidden. */
-  padding-bottom: 96px;
+/* ===== PDP: 1.5fr / 1fr editorial grid ===== */
+.pdp {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  border-bottom: 1px solid var(--rule);
 }
 
-/* ---- Two-column editorial layout ---- */
-.layout {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-5);
+/* Левая: галерея */
+.galwrap {
+  border-right: 1px solid var(--rule);
 }
 
+/* Правая: инфо */
 .info {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
+  position: relative;
 }
 
-.brand {
-  align-self: flex-start;
-  color: var(--text-muted);
+.infoIn {
+  position: sticky;
+  top: var(--header-h);
+  padding: 40px var(--pad) 44px;
 }
 
-.title {
-  font-size: clamp(26px, 4vw, 38px);
-  letter-spacing: -0.02em;
-  line-height: 1.06;
+/* Бренд — mono, accent */
+.br {
+  font-family: var(--font-mono), monospace;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 0;
 }
 
+.brLink {
+  color: var(--accent);
+  transition: color 0.15s;
+}
+
+.brLink:hover {
+  color: var(--accent-d);
+}
+
+/* Название */
+.h1 {
+  font-size: clamp(30px, 3.4vw, 44px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  margin: 12px 0 16px;
+}
+
+/* Лид */
 .lead {
-  color: var(--text-muted);
-  font-size: 15px;
-  line-height: 1.65;
-  max-width: 46ch;
+  color: var(--muted);
+  font-size: 15.5px;
+  max-width: 42ch;
+  line-height: 1.55;
+  margin-bottom: 0;
 }
 
-@media (min-width: 1024px) {
-  .layout {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: var(--space-8);
-  }
-
-  .galleryCol {
-    flex: 1 1 60%;
-    min-width: 0;
-  }
-
-  .infoCol {
-    flex: 1 1 40%;
-    min-width: 0;
-    align-self: stretch;
-  }
-
-  .info {
-    position: sticky;
-    top: calc(var(--header-h) + var(--space-4));
-    gap: var(--space-5);
-  }
-}
-
-/* ---- Shared text bits (used by SizeChart + accordion content) ---- */
+/* Текст внутри аккордеона (размеры, состав) */
 .text {
-  color: var(--text-muted);
+  color: var(--muted);
   font-size: 14px;
+  line-height: 1.6;
 }
 
 .text + .text {
-  margin-top: var(--space-3);
+  margin-top: 12px;
 }
 
+/* Таблица размеров внутри аккордеона */
 .sizeTable {
   width: 100%;
   border-collapse: collapse;
-  font-size: 14px;
-}
-
-.sizeTable th,
-.sizeTable td {
-  text-align: left;
-  padding: var(--space-3) 0;
-  border-bottom: 1px solid var(--line);
-}
-
-.sizeTable th {
-  color: var(--text-muted);
-  font-weight: 400;
+  font-size: 13px;
 }
 
 .sizeTable td {
-  color: var(--text);
-}
-
-/* ---- "О бренде" mini-block ---- */
-.brandBlock {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  padding: var(--space-6) 0;
+  padding: 7px 0;
   border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  color: var(--ink);
 }
 
-.brandName {
-  font-size: clamp(22px, 3vw, 28px);
+.sizeTable td:last-child {
+  text-align: right;
+  font-family: var(--font-mono), monospace;
+}
+
+/* ===== Блок О бренде ===== */
+.brandblk {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--rule);
 }
 
 .brandText {
-  color: var(--text-muted);
+  padding: 42px var(--pad);
+  border-right: 1px solid var(--rule);
+}
+
+.brandNo {
+  font-family: var(--font-mono), monospace;
+  color: var(--accent);
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.brandName {
+  font-size: clamp(26px, 3.4vw, 40px);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  margin-bottom: 14px;
+}
+
+.brandDesc {
+  color: var(--muted);
+  max-width: 42ch;
+  margin-bottom: 20px;
   font-size: 15px;
-  line-height: 1.65;
-  max-width: 60ch;
+  line-height: 1.55;
 }
 
 .brandCta {
-  align-self: flex-start;
-  font-size: 13px;
-  margin-top: var(--space-2);
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  transition: color 0.15s;
 }
 
-/* ---- Related ---- */
-.related {
+.brandCta:hover {
+  color: var(--accent-d);
+}
+
+.brandImg {
+  background: var(--paper);
+  min-height: 300px;
+}
+
+.brandPh {
+  width: 100%;
+  height: 100%;
+}
+
+/* ===== .sbar: заголовок «Похожие вещи» ===== */
+.sbar {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-5);
-  padding-top: var(--space-4);
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px var(--pad);
+  border-bottom: 1px solid var(--rule);
 }
 
-@media (min-width: 1024px) {
-  .page {
-    padding-bottom: var(--space-10);
+.sbarTitle {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.sbarNo {
+  font-family: var(--font-mono), monospace;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.sbarH {
+  font-size: 23px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1;
+}
+
+.sbarCta {
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  transition: color 0.15s;
+}
+
+.sbarCta:hover {
+  color: var(--accent-d);
+}
+
+.relatedGrid {
+  border-bottom: 1px solid var(--rule);
+}
+
+/* ===== Адаптив ≤980px ===== */
+@media (max-width: 980px) {
+  .pdp {
+    grid-template-columns: 1fr;
+  }
+
+  .galwrap {
+    border-right: 0;
+  }
+
+  .infoIn {
+    position: static;
+  }
+
+  .brandblk {
+    grid-template-columns: 1fr;
+  }
+
+  .brandText {
+    border-right: 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .brandImg {
+    min-height: 240px;
+  }
+}
+
+/* Отступ снизу для StickyBuyBar на мобайле */
+@media (max-width: 980px) {
+  .relatedGrid {
+    padding-bottom: 80px;
   }
 }

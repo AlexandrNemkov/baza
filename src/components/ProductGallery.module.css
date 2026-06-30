@@ -9,13 +9,17 @@
 
 .plate {
   width: 100%;
+  border-bottom: 1px solid var(--line);
 }
 
-/* ---- Mobile: swipeable carousel ---- */
+.plate:last-child {
+  border-bottom: 0;
+}
+
+/* ---- Mobile: swipeable carousel + galbar ---- */
 .carousel {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
 }
 
 .track {
@@ -35,30 +39,56 @@
   scroll-snap-align: start;
 }
 
-.dots {
+/* galbar: счётчик + стрелки — как в product.html */
+.galbar {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px var(--pad);
+  border-bottom: 1px solid var(--line);
+}
+
+.counter {
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.arrows {
+  display: flex;
+  gap: 6px;
+}
+
+.arrowBtn {
+  width: 40px;
+  height: 36px;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  gap: var(--space-2);
-}
-
-.dot {
-  width: 6px;
-  height: 6px;
-  padding: 0;
-  border: 0;
-  background: var(--line-strong);
+  border: 1px solid var(--rule);
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-mono), monospace;
+  font-size: 16px;
+  line-height: 1;
   cursor: pointer;
+  transition: background 0.15s, color 0.15s;
 }
 
-.dotActive {
-  background: var(--accent);
+.arrowBtn:active {
+  background: var(--ink);
+  color: var(--paper);
 }
 
-@media (min-width: 1024px) {
+.arrowBtn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+@media (min-width: 981px) {
   .stack {
     display: flex;
     flex-direction: column;
-    gap: var(--space-4);
   }
 
   .carousel {

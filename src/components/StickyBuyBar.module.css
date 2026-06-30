@@ -4,12 +4,12 @@
   left: 0;
   right: 0;
   z-index: 60;
-  border-top: 1px solid var(--line);
+  background: var(--bg);
+  border-top: 1px solid var(--rule);
 }
 
-/* Mobile-only: the desktop info column is sticky with its own inline CTA, so
-   the fixed bar would be redundant ≥1024px. */
-@media (min-width: 1024px) {
+/* Mobile-only: hidden ≥981px where desktop inline CTA is visible */
+@media (min-width: 981px) {
   .bar {
     display: none;
   }
@@ -32,10 +32,17 @@
 
 .size {
   /* uses .micro */
+  color: var(--muted);
 }
 
 .price {
+  font-family: var(--font-mono), monospace;
   font-size: 16px;
   font-weight: 600;
-  color: var(--text);
+  color: var(--ink);
+}
+
+.cta {
+  /* uses .btn */
+  flex-shrink: 0;
 }
